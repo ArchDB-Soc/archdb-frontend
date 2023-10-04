@@ -1,23 +1,25 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ContextCard from '../../components/ContextCard/ContextCard'
 import { getAllContexts } from '../../api/calls'
 
-const Home = () => {
+const Contexts = () => {
 
   const [contexts, setContexts] = useState([{}])
 
+  useEffect(() => {
+    getAllContexts(setContexts)
+  }, [])
+  // getAllContexts(setContexts)
   // const handleClick = () => {
   //   getAllContexts(setContexts)
   // }
 
 
   return (
-    <div className="home">
-      <p>Click below.</p>
-      <button onClick={() => (getAllContexts(setContexts))}>Get Contexts</button>
+    <div className="contexts">
       {contexts?.map((context, index) => <ContextCard key={index} context={context} />)}
     </div>
   )
 }
 
-export default Home
+export default Contexts
