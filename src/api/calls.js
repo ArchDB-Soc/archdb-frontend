@@ -14,3 +14,23 @@ export const addContext = (data) => {
         console.error('Error:', error);
       })
 }
+
+export const getAllContexts = async (contextSetter) => {
+  const BACKEND_URL = "https://iadb-backend.onrender.com/api/contexts"
+  try {
+    const data = await fetch(BACKEND_URL, {
+      method: "GET",
+      headers: {
+        // Authorization: `Bearer ${token}`
+      }
+    })
+    const dataToJson = await data.json()
+    // const updatedContexts = [...contexts, dataToJson.data[0]]
+    console.log("The API has been called")
+    contextSetter(dataToJson.data)
+
+
+  } catch (error) {
+    console.log("error:", error)
+  }
+}
