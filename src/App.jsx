@@ -11,8 +11,8 @@ function App() {
       <header>
         <h1>The IADB ⛏️</h1>
         <nav>
-          <Link to="/">Home</Link>
-          <Link to="/add-context">Add context</Link>
+          <Link to="/">Get Contexts</Link>
+          <Link to="/add-context">Add Context</Link>
         </nav>
       </header>
       <Routes>

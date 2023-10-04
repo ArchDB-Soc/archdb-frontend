@@ -1,3 +1,5 @@
+import { addContext } from "../../api/calls";
+
 const AddContext = () => {
 
   const postData = (e) => {
@@ -6,20 +8,21 @@ const AddContext = () => {
       description: e.target.elements[0].value
     };
 
-    fetch("http://localhost:4001/api/contexts", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-      .then(response => response.json())
-      .then(response => {
-        console.log("Saved:", JSON.stringify(response));
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+    addContext(data)
+    // fetch("https://iadb-backend.onrender.com/api/contexts", {
+    //   method: "POST",
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(data)
+    // })
+    //   .then(response => response.json())
+    //   .then(response => {
+    //     console.log("Saved:", JSON.stringify(response));
+    //   })
+    //   .catch(error => {
+    //     console.error('Error:', error);
+    //   });
   }
 
 
