@@ -38,21 +38,17 @@ export const getAllContextsFromDb = async (contextSetter) => {
 };
 
 export const authenticationRequest = async (email, password) => {
-  console.log("checkpoint1")
-  console.log(email,password)
   try {
     const response = await fetch(`${apiURL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials: true,
       body: JSON.stringify({ email: email, password: password }),
     });
-    console.log("checkpoint2")
     const status = response.status
-    console.log(status)
     const res = await response.json();
-    console.log(res)
     return res, status
   } catch (error) {
     console.error("Error:", error);
