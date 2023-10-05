@@ -9,15 +9,12 @@ const Contexts = () => {
   useEffect(() => {
     getAllContexts(setContexts)
   }, [])
-  // getAllContexts(setContexts)
-  // const handleClick = () => {
-  //   getAllContexts(setContexts)
-  // }
-
 
   return (
     <div className="contexts">
-      {contexts?.map((context, index) => <ContextCard key={index} context={context} />)}
+      {contexts?.map((context, index) =>
+        <ContextCard key={index} context={context} />
+      )}
     </div>
   )
 }
