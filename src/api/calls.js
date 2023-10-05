@@ -1,4 +1,4 @@
-export const addContext = (data) => {
+export const addContextToDb = (data) => {
   console.log("hello");
   fetch("https://iadb-backend.onrender.com/api/contexts", {
     method: "POST",
@@ -16,7 +16,7 @@ export const addContext = (data) => {
     });
 };
 
-export const getAllContexts = async (contextSetter) => {
+export const getAllContextsFromDb = async (contextSetter) => {
   const BACKEND_URL = "https://iadb-backend.onrender.com/api/contexts";
   try {
     const data = await fetch(BACKEND_URL, {

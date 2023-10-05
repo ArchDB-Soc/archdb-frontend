@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import ContextCard from '../../components/ContextCard/ContextCard'
-import { getAllContexts } from '../../api/calls'
+import { getAllContextsFromDb } from '../../api/calls'
 
 const Contexts = () => {
 
   const [contexts, setContexts] = useState([{}])
 
   useEffect(() => {
-    getAllContexts(setContexts)
+    getAllContextsFromDb(setContexts)
   }, [])
 
   return (
