@@ -40,7 +40,7 @@ export const getAllContextsFromDb = async (contextSetter) => {
 export const authenticationRequest = async (email, password) => {
   console.log("checkpoint1")
   try {
-    const response = await fetch(`${apiURL}/login`, {
+    const response = await fetch(`${apiURL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
