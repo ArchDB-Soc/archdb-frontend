@@ -44,7 +44,7 @@ export const authenticationRequest = async (email, password) => {
       headers: {
         "Content-Type": "application/json",
       },
-      withCredentials: true,
+      credentials: "include",
       body: JSON.stringify({ email: email, password: password }),
     });
     const status = response.status
