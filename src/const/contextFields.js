@@ -26,6 +26,8 @@ export const contextFields = [
   { id: "dimensions", type: "text", required: "false" },
 ];
 
+export const apiURL = "https://iadb-backend.onrender.com/api";
+
 /* 
   sieved: { type: Boolean, required: false },
   completed: { type: Boolean, required: false },

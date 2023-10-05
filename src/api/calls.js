@@ -1,8 +1,12 @@
+import { apiURL } from "../const/contextFields";
+import Cookies from 'js-cookie'
+
 export const addContextToDb = (data) => {
-  console.log("hello");
-  fetch("https://iadb-backend.onrender.com/api/contexts", {
+  const token = Cookies.get('access_token')
+  fetch(`${apiURL}/contexts`, {
     method: "POST",
     headers: {
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
@@ -17,9 +21,8 @@ export const addContextToDb = (data) => {
 };
 
 export const getAllContextsFromDb = async (contextSetter) => {
-  const BACKEND_URL = "https://iadb-backend.onrender.com/api/contexts";
   try {
-    const data = await fetch(BACKEND_URL, {
+    const data = await fetch(`${apiURL}/contexts`, {
       method: "GET",
       headers: {
         // Authorization: `Bearer ${token}`
@@ -31,5 +34,25 @@ export const getAllContextsFromDb = async (contextSetter) => {
     contextSetter(dataToJson.data);
   } catch (error) {
     console.log("error:", error);
+  }
+};
+
+export const authenticationRequest = async (email, password) => {
+  try {
+    const response = await fetch(`${apiURL}/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: email, password: password }),
+    });
+
+    const status = response.status
+    const res = await response.json();
+    console.log(res)
+    return res, status
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
   }
 };
