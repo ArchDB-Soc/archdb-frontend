@@ -9,6 +9,7 @@ const Login = () => {
     e.preventDefault();
     const email = e.target.elements[0].value
     const password = e.target.elements[1].value
+    console.log("checkpoint0", email, password)
     const response = await authenticationRequest(email, password)
 
     if (response === 200) {
