@@ -4,6 +4,7 @@ import Contexts from './pages/Contexts/Contexts'
 import AddContext from './pages/AddContext/AddContext'
 import Login from './pages/Login/Login'
 import Profile from './pages/Profile/Profile'
+import React from 'react'
 
 function App() {
 
@@ -24,10 +25,18 @@ function App() {
         </nav>
       </header>
       <Routes>
-        <Route path="/" element={<Contexts />} />
-        <Route path="/add-context" element={<AddContext />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/" element={
+          <React.Suspense fallback={<h2>Loading...</h2>}><Contexts /></React.Suspense>
+        } />
+        <Route path="/add-context" element={
+          <React.Suspense fallback={<h2>Loading...</h2>}><AddContext /></React.Suspense>
+        } />
+        <Route path="/login" element={
+          <React.Suspense fallback={<h2>Loading...</h2>}><Login /></React.Suspense>
+        } />
+        <Route path="/profile" element={
+          <React.Suspense fallback={<h2>Loading...</h2>}><Profile /></React.Suspense>
+        } />
       </Routes>
 
     </>
