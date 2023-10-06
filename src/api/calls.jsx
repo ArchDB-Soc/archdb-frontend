@@ -1,12 +1,13 @@
 import { apiURL } from "../const/contextFields";
-import Cookies from 'js-cookie'
+// import Cookies from 'js-cookie'
 
 export const addContextToDb = (data) => {
-  const token = Cookies.get('access_token')
+  // const token = Cookies.get('access_token')
+  const userStored = JSON.parse(localStorage.getItem('userStored'))
   fetch(`${apiURL}/contexts`, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${userStored?.token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
@@ -37,21 +38,34 @@ export const getAllContextsFromDb = async (contextSetter) => {
   }
 };
 
-export const authenticationRequest = async (email, password) => {
+export const authenticationRequest = async (email, password, setError, setIsLoggedIn) => {
   try {
     const response = await fetch(`${apiURL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
+      // credentials: "include",
       body: JSON.stringify({ email: email, password: password }),
     });
-    const status = response.status
-    const res = await response.json();
-    return res, status
+
+    const resToJson = await response.json()
+
+    console.log(resToJson.data)
+
+    if (resToJson.message) {
+      setError(resToJson.message);
+    } else {
+      setError('');
+      console.log(resToJson.data.user.email)
+      const userStored = {
+        email: resToJson.data.user.email,
+        token: resToJson.data.token,
+      };
+      localStorage.setItem('userStored', JSON.stringify(userStored));
+      setIsLoggedIn(true);
+    }
   } catch (error) {
-    console.error("Error:", error);
-    throw error;
+    console.error('Error:', error);
   }
-};
+}
