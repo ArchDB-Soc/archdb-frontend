@@ -1,9 +1,10 @@
 import { apiURL } from "../const/contextFields";
+const userStored = JSON.parse(localStorage.getItem('userStored'))
 // import Cookies from 'js-cookie'
 
 export const addContextToDb = (data) => {
   // const token = Cookies.get('access_token')
-  const userStored = JSON.parse(localStorage.getItem('userStored'))
+
   fetch(`${apiURL}/contexts`, {
     method: "POST",
     headers: {
@@ -31,14 +32,31 @@ export const getAllContextsFromDb = async (contextSetter) => {
     });
     const dataToJson = await data.json();
     // const updatedContexts = [...contexts, dataToJson.data[0]]
-    console.log("The API has been called");
+    console.log("Context retrieved from API");
     contextSetter(dataToJson.data);
   } catch (error) {
     console.log("error:", error);
   }
 };
 
-export const authenticationRequest = async (email, password, setError, setIsLoggedIn) => {
+export const getUserFromDbById = async (id, userSetter) => {
+  try {
+    const data = await fetch(`${apiURL}/users/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${userStored?.token}`,
+      },
+    });
+    const dataToJson = await data.json();
+    // const updatedContexts = [...contexts, dataToJson.data[0]]
+    console.log("User retrieved from API");
+    userSetter(dataToJson)
+  } catch (error) {
+    console.log("error:", error);
+  }
+}
+
+export const authenticationRequest = async (email, password, navigate, setError, setIsLoggedIn) => {
   try {
     const response = await fetch(`${apiURL}/auth/login`, {
       method: "POST",
@@ -51,19 +69,19 @@ export const authenticationRequest = async (email, password, setError, setIsLogg
 
     const resToJson = await response.json()
 
-    console.log(resToJson.data)
-
     if (resToJson.message) {
       setError(resToJson.message);
     } else {
       setError('');
-      console.log(resToJson.data.user.email)
       const userStored = {
         email: resToJson.data.user.email,
         token: resToJson.data.token,
       };
       localStorage.setItem('userStored', JSON.stringify(userStored));
       setIsLoggedIn(true);
+      navigate('/profile')
+      location.reload()
+
     }
   } catch (error) {
     console.error('Error:', error);

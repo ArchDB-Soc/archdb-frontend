@@ -12,6 +12,11 @@ const Contexts = () => {
 
   return (
     <div className="contexts">
+      <div>
+        <h3>Welcome to the Integrated Archeological Database!</h3>
+        <p>This project keeps records of different archeological digs.</p>
+        <p>Here is a list of all the archeological contexts (records) that have been uploaded to the IADB so far.</p>
+      </div>
       {contexts?.map((context, index) =>
         <ContextCard key={index} context={context} />
       )}
