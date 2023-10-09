@@ -1,7 +1,6 @@
-import "./ContextCard.css"
 import {
   Tr,
-  Td,
+  Td
 } from '@chakra-ui/react'
 
 const ContextCard = ({ context }) => {
