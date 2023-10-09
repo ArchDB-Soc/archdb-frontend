@@ -5,6 +5,7 @@ import AddContext from './pages/AddContext/AddContext'
 import Login from './pages/Login/Login'
 import Profile from './pages/Profile/Profile'
 import React from 'react'
+import { Tabs, TabList, Tab } from '@chakra-ui/react'
 
 function App() {
 
@@ -20,8 +21,12 @@ function App() {
         </nav>
         <h1>The IADB ⛏️</h1>
         <nav>
-          <NavLink to="/">Contexts</NavLink>
-          {userStored ? <NavLink to="/add-context">Add Context</NavLink> : null}
+          <Tabs variant='enclosed'>
+            <TabList>
+              <Tab><NavLink to="/">Contexts</NavLink></Tab>
+              <Tab>{userStored ? <NavLink to="/add-context">Add Context</NavLink> : null}</Tab>
+            </TabList>
+          </Tabs>
         </nav>
       </header>
       <Routes>

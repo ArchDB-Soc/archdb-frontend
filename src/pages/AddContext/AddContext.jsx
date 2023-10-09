@@ -1,5 +1,6 @@
 import { addContextToDb } from "../../api/calls";
 import { contextFields } from "../../const/contextFields";
+import { Input, Stack } from '@chakra-ui/react'
 
 const AddContext = () => {
 
@@ -24,19 +25,19 @@ const AddContext = () => {
   }
 
   return (
-    <div className='form-container'>
+    <Stack m={5} className='form-container'>
       <form onSubmit={postData} id="context-form">
         {contextFields.map((field, index) => (
           <div key={index}>
-            <label htmlFor={field.id}>{field.id}</label>
-            <input id={field.id} type={field.type} />
+            <label htmlFor={field.id}>{field.id}:</label>
+            <Input id={field.id} type={field.type} />
           </div>
         )
         )}
 
         <button type="submit" >Submit</button>
       </form>
-    </div>
+    </Stack>
   )
 }
 

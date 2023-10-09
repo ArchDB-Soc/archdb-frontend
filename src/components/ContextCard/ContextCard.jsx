@@ -1,14 +1,18 @@
 import "./ContextCard.css"
+import {
+  Tr,
+  Td,
+} from '@chakra-ui/react'
 
 const ContextCard = ({ context }) => {
   return (
-    <div className="card">
-      <h4>ID: {context._id}</h4>
-      <p>{context.description}</p>
-      <p>{context.eastings}</p>
-      <p>{context.checkedBy}</p>
-      <p>{context.notes}</p>
-    </div>
+    <Tr className="card">
+      <Td>ID: {context._id}</Td>
+      <Td>{context.description}</Td>
+      <Td>{context.eastings}</Td>
+      <Td>{context.checkedBy}</Td>
+      <Td>{context.notes}</Td>
+    </Tr>
   )
 }
 

@@ -1,6 +1,14 @@
 import { useEffect, useState } from 'react'
 import ContextCard from '../../components/ContextCard/ContextCard'
 import { getAllContextsFromDb } from '../../api/calls'
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Stack
+} from '@chakra-ui/react'
 
 const Contexts = () => {
 
@@ -11,16 +19,27 @@ const Contexts = () => {
   }, [])
 
   return (
-    <div className="contexts">
+    <Stack spacing={5} m={5} className="contexts">
       <div>
-        <h3>Welcome to the Integrated Archeological Database!</h3>
-        <p>This project keeps records of different archeological digs.</p>
-        <p>Here is a list of all the archeological contexts (records) that have been uploaded to the IADB so far.</p>
+        <p>All archeological contexts (records) uploaded to the IADB so far.</p>
       </div>
-      {contexts?.map((context, index) =>
-        <ContextCard key={index} context={context} />
-      )}
-    </div>
+      <Table variant='striped'>
+        <Thead>
+          <Tr>
+            <Th>Id</Th>
+            <Th>Description</Th>
+            <Th>Eastings</Th>
+            <Th>Checked By</Th>
+            <Th>Notes</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {contexts?.map((context, index) =>
+            <ContextCard key={index} context={context} />
+          )}
+        </Tbody>
+      </Table>
+    </Stack>
   )
 }
 
