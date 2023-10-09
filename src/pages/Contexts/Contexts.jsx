@@ -21,7 +21,7 @@ const Contexts = () => {
   return (
     <Stack spacing={5} m={5} className="contexts">
       <div>
-        <p>All archeological contexts (records) uploaded to the IADB so far.</p>
+        <p>Archeological contexts (records) uploaded to the IADB so far.</p>
       </div>
       <Table variant='striped'>
         <Thead>
