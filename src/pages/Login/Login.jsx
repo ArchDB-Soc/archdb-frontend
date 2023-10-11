@@ -13,14 +13,6 @@ const Login = () => {
     const email = e.target.elements[0].value
     const password = e.target.elements[1].value
     authenticationRequest(email, password, navigate, setError, setLogin)
-
-    // if (response === 200) {
-    //   setLogin("Successfully logged in.")
-    // } else if (response === 401) {
-    //   setLogin("That email and password combination is incorrect")
-    // } else {
-    //   setLogin("We couldn't log this user in")
-    // }
   }
 
   return (

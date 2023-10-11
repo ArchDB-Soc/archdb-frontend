@@ -6,6 +6,8 @@ import Login from './pages/Login/Login'
 import Profile from './pages/Profile/Profile'
 import React from 'react'
 import { Tabs, TabList, Tab } from '@chakra-ui/react'
+import { Heading } from '@chakra-ui/react'
+import { Grid, GridItem } from '@chakra-ui/react'
 
 function App() {
 
@@ -16,10 +18,12 @@ function App() {
     <>
       <header>
         <nav className="login">
-          {userStored ? <NavLink to="/profile">Profile 🙋🏻‍♀️</NavLink> : null}
-          <NavLink to="/login">Login 🔐</NavLink>
+          <Grid>
+            <GridItem><NavLink to="/login">Login 🔐</NavLink></GridItem>
+            <GridItem>{userStored ? <NavLink to="/profile">Profile 🙋🏻‍♀️</NavLink> : null}</GridItem>
+          </Grid>
         </nav>
-        <h1>The IADB ⛏️</h1>
+        <Heading as="h1" size="2xl">The IADB</Heading>
         <nav>
           <Tabs variant='enclosed'>
             <TabList>

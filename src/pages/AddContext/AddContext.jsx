@@ -1,19 +1,9 @@
 import { addContextToDb } from "../../api/calls";
 import { contextFields } from "../../const/contextFields";
 import { Input, Stack } from '@chakra-ui/react'
+import buildObjectFromForm from "../../utils/utils";
 
 const AddContext = () => {
-
-
-  const buildObjectFromForm = (keys, values) => {
-    const object = {};
-    for (let i = 0; i < keys.length && i < values.length; i++) {
-      const key = keys[i];
-      const value = values[i];
-      object[key] = value;
-    }
-    return object
-  }
 
   const postData = (e) => {
     e.preventDefault();

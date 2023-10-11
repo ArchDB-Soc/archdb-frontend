@@ -1,4 +1,8 @@
+// This list of fields is used dynamically throughout various parts of the app.
+
 export const contextFields = [
+  { id: "records", type: "text", required: "false" },
+  { id: "site", type: "text", required: "false" },
   { id: "checkedBy", type: "text", required: "false" },
   { id: "enteredBy", type: "text", required: "false" },
   { id: "eastings", type: "number", required: "false" },
@@ -26,7 +30,9 @@ export const contextFields = [
   { id: "dimensions", type: "text", required: "false" },
 ];
 
- export const apiURL = "https://iadb-backend.onrender.com/api";
+
+
+export const apiURL = "https://iadb-backend.onrender.com/api";
 // export const apiURL = "http://localhost:4001/api";
 
 /* 

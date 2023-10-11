@@ -7,7 +7,8 @@ import {
   Tbody,
   Tr,
   Th,
-  Stack
+  Stack,
+  Heading
 } from '@chakra-ui/react'
 
 const Contexts = () => {
@@ -21,16 +22,17 @@ const Contexts = () => {
   return (
     <Stack spacing={5} m={5} className="contexts">
       <div>
-        <p>Archeological contexts (records) uploaded to the IADB so far.</p>
+        <Heading as="h2" size="md" m={5}>Contexts</Heading>
+        <p>Archeological contexts (records) uploaded to the IADB.</p>
       </div>
       <Table variant='striped'>
         <Thead>
           <Tr>
             <Th>Id</Th>
             <Th>Description</Th>
-            <Th>Eastings</Th>
+            <Th>Entered By</Th>
             <Th>Checked By</Th>
-            <Th>Notes</Th>
+            <Th></Th>
           </Tr>
         </Thead>
         <Tbody>

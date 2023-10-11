@@ -2,7 +2,7 @@ import { apiURL } from "../const/contextFields";
 const userStored = JSON.parse(localStorage.getItem('userStored'))
 // import Cookies from 'js-cookie'
 
-export const addContextToDb = (data) => {
+export const addContextToDb = (context) => {
   // const token = Cookies.get('access_token')
 
   fetch(`${apiURL}/contexts`, {
@@ -11,7 +11,7 @@ export const addContextToDb = (data) => {
       Authorization: `Bearer ${userStored?.token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(context),
   })
     .then((response) => response.json())
     .then((response) => {
@@ -36,6 +36,29 @@ export const getAllContextsFromDb = async (contextSetter) => {
     contextSetter(dataToJson.data);
   } catch (error) {
     console.log("error:", error);
+  }
+};
+
+export const updateContextInDb = async (updatedContext) => {
+  try {
+    const response = await fetch(`${apiURL}/contexts/${updatedContext._id}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${userStored?.token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedContext),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Context updated:", JSON.stringify(data));
+
+  } catch (error) {
+    console.error("Error:", error);
   }
 };
 
