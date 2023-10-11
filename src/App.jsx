@@ -3,9 +3,9 @@ import { Routes, Route } from 'react-router-dom'
 import Contexts from './pages/Contexts/Contexts'
 import AddContext from './pages/AddContext/AddContext'
 import Login from './pages/Login/Login'
-import Profile from './pages/Profile/Profile'
+// import Profile from './pages/Profile/Profile'
 import React, { createContext, useState } from 'react'
-import Header from './components/Header/Header'
+// import Header from './components/Header/Header'
 import Layout from './components/Layout'
 
 
@@ -48,11 +48,11 @@ function App() {
               <React.Suspense fallback={<h2>Loading...</h2>}><Login /></React.Suspense>
             </Layout>
           } />
-          <Route path="/profile" element={
+          {/* <Route path="/profile" element={
             <Layout showHeader={isLoggedIn}>
               <React.Suspense fallback={<h2>Loading...</h2>}><Profile /></React.Suspense>
             </Layout>
-          } />
+          } /> */}
         </Routes>
       </UserContext.Provider>
     </>

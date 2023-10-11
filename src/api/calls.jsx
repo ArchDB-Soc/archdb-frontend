@@ -84,7 +84,7 @@ export const getUserFromDbById = async (id, userSetter) => {
   }
 }
 
-export const authenticationRequest = async (email, password, navigate, setError, setIsLoggedIn) => {
+export const authenticationRequest = async (email, password, setError, setIsLoggedIn) => {
   try {
     const response = await fetch(`${apiURL}/auth/login`, {
       method: "POST",
@@ -108,7 +108,6 @@ export const authenticationRequest = async (email, password, navigate, setError,
       localStorage.setItem('userStored', JSON.stringify(userStored));
       setIsLoggedIn(true);
       console.log(setIsLoggedIn)
-      navigate('/profile')
       location.reload()
 
     }

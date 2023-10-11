@@ -1,6 +1,5 @@
 import { useState, useContext } from "react"
 import { authenticationRequest } from "../../api/calls";
-import { useNavigate } from "react-router-dom";
 import { UserContext } from '../../App';
 import { Box, Button, Heading, Input, Stack } from "@chakra-ui/react";
 
@@ -8,7 +7,6 @@ import { Box, Button, Heading, Input, Stack } from "@chakra-ui/react";
 const Login = () => {
 
   const [error, setError] = useState("")
-  const navigate = useNavigate();
   const { isLoggedIn, setIsLoggedIn } = useContext(UserContext)
 
 
@@ -18,20 +16,18 @@ const Login = () => {
     e.preventDefault();
     const email = e.target.elements[0].value
     const password = e.target.elements[1].value
-    authenticationRequest(email, password, navigate, setError, setIsLoggedIn)
+    authenticationRequest(email, password, setError, setIsLoggedIn)
     console.log(isLoggedIn)
   }
 
   const outerBoxStyles = {
     p: '40',
     background:
-      // 'url(/images/stonehenge) center/cover no-repeat',
       'url(https://images.pexels.com/photos/8070354/pexels-photo-8070354.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2) center/cover no-repeat',
     display: 'flex',
     flexDirection: "column",
     alignItems: 'center',
     justifyContent: 'center',
-    // textAlign: 'center',
   }
 
   const innerBoxStyles = {
@@ -39,7 +35,6 @@ const Login = () => {
     display: 'flex',
     flexDirection: "column",
     justifyContent: 'center',
-    // boxSize: 'full',
     color: 'white',
     textShadow: '0 0 20px black',
     fontWeight: 'bold',
