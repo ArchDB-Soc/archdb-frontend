@@ -1,5 +1,9 @@
 import { apiURL } from "../const/contextFields";
+// import { AuthContext } from '../../context/AuthContext'
+
+
 const userStored = JSON.parse(localStorage.getItem('userStored'))
+
 // import Cookies from 'js-cookie'
 
 export const addContextToDb = (context) => {
@@ -103,6 +107,7 @@ export const authenticationRequest = async (email, password, navigate, setError,
       };
       localStorage.setItem('userStored', JSON.stringify(userStored));
       setIsLoggedIn(true);
+      console.log(setIsLoggedIn)
       navigate('/profile')
       location.reload()
 

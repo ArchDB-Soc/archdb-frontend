@@ -20,7 +20,6 @@ const ContextCard = ({ context }) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [updatedContext, setUpdatedContext] = useState(context)
-  // const reloadCount = Number(sessionStorage.getItem('reloadCount')) || 0;
   const isInitialRender = useRef(true)
 
 
@@ -42,20 +41,12 @@ const ContextCard = ({ context }) => {
     onClose()
 
   }
-  // location.reload()
 
   useEffect(() => {
-    console.log(isInitialRender.current)
-
+    // isInitialRender ensures reload in updateContextInDb() doesn't trigger infinite loop
     if (!isInitialRender.current) {
       updateContextInDb(updatedContext)
-      // location.reload()
     }
-    // sessionStorage.setItem('reloadCount', String(reloadCount + 1));
-    // window.location.reload();
-    // } else {
-    //   sessionStorage.removeItem('reloadCount');
-    // }
 
   }, [updatedContext])
 
