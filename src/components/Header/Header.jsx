@@ -1,4 +1,4 @@
-import { Heading, Tabs, TabList, Tab, Button } from "@chakra-ui/react"
+import { Heading, Tabs, TabList, Tab, Button, Spacer, Flex } from "@chakra-ui/react"
 import { NavLink } from "react-router-dom"
 import { UserContext } from '../../App';
 import { useContext } from "react";
@@ -8,13 +8,13 @@ const Header = () => {
 
   return (
     <header>
-      <nav className="login">
-
-        <Button><NavLink to="/login">Login</NavLink></Button>
-        {/* <GridItem>{isLoggedIn ? <NavLink to="/profile">Profile 🙋🏻‍♀️</NavLink> : null}</GridItem> */}
-
+      <nav>
+        <Flex m={5}>
+          <Heading as="h1" size="2xl">The IADB</Heading>
+          <Spacer />
+          <Button><NavLink to="/login">Logout</NavLink></Button>
+        </Flex>
       </nav>
-      <Heading as="h1" size="2xl">The IADB</Heading>
       <nav>
         <Tabs variant='enclosed'>
           <TabList>
