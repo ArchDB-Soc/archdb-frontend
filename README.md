@@ -6,6 +6,8 @@ The Berkshire Archæological Society, the University of Reading and the York Arc
 
 This project is to help them explore options for developing a new IADB from scratch. It uses sample data only.
 
+Find the backend here: https://github.com/plabram/iadb
+
 * It uses React. Vanilla JavaScript might be even easier to maintain, but it would have been more difficult to generate a quick proof of concept.
 * Likewise, it uses Chakra. The additional tradeoff for fast upfront development time here is possible slow performance. However, given that all users are "internal", some lag is acceptable.
 * Performance is improved as it is an SPA. React Router is used to manage routes.
