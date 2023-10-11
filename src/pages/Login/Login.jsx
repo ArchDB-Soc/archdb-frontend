@@ -9,15 +9,11 @@ const Login = () => {
   const [error, setError] = useState("")
   const { isLoggedIn, setIsLoggedIn } = useContext(UserContext)
 
-
-
   const authenticate = async (e) => {
-    console.log(isLoggedIn)
     e.preventDefault();
     const email = e.target.elements[0].value
     const password = e.target.elements[1].value
     authenticationRequest(email, password, setError, setIsLoggedIn)
-    console.log(isLoggedIn)
   }
 
   const outerBoxStyles = {

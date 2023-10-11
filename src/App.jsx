@@ -1,11 +1,6 @@
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
-// import Contexts from './pages/Contexts/Contexts'
-// import AddContext from './pages/AddContext/AddContext'
-// import Login from './pages/Login/Login'
-// import Profile from './pages/Profile/Profile'
 import React, { createContext, lazy, useState } from 'react'
-// import Header from './components/Header/Header'
 import Layout from './components/Layout'
 
 
@@ -17,7 +12,6 @@ const Login = lazy(() => import('./pages/Login/Login'))
 
 
 function App() {
-
 
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     if (localStorage.getItem('userStored')) {

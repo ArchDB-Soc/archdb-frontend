@@ -1,10 +1,18 @@
 import { Heading, Tabs, TabList, Tab, Button, Spacer, Flex } from "@chakra-ui/react"
 import { NavLink } from "react-router-dom"
 import { UserContext } from '../../App';
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 const Header = () => {
-  const { isLoggedIn } = useContext(UserContext)
+  const { isLoggedIn, setIsLoggedIn } = useContext(UserContext)
+
+  const logout = () => {
+    setIsLoggedIn(false)
+    console.log("User logged out")
+  }
+
+  useState(() => {
+  }, [])
 
   return (
     <header>
@@ -12,7 +20,7 @@ const Header = () => {
         <Flex m={5}>
           <Heading as="h1" size="2xl">The IADB</Heading>
           <Spacer />
-          <Button><NavLink to="/login">Logout</NavLink></Button>
+          <Button onClick={logout}>Log Out </Button>
         </Flex>
       </nav>
       <nav>
