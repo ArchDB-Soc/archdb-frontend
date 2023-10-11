@@ -69,7 +69,6 @@ const Login = () => {
         </form>
       </Box>
       <Stack>
-        <p>{isLoggedIn ? "Successfully logged in. Redirecting to Profile." : ""}</p>
         <p>{error ? `${error}` : ""}</p>
       </Stack>
 

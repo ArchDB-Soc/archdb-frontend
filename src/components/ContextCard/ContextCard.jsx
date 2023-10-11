@@ -22,14 +22,12 @@ const ContextCard = ({ context }) => {
   const [updatedContext, setUpdatedContext] = useState(context)
   const isInitialRender = useRef(true)
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     isInitialRender.current = false
     const fields = Array.from(e.target.elements).map(element => element.id)
     const responses = Array.from(e.target.elements).map(element => element.value)
     const fieldsAndResponsesAsObject = buildObjectFromForm(fields, responses)
-
     const newContext = Object.fromEntries(
       Object.entries(fieldsAndResponsesAsObject).filter(([key, value]) => value !== '')
     )
@@ -38,8 +36,7 @@ const ContextCard = ({ context }) => {
       ...newContext,
       _id: context._id
     })
-    onClose()
-
+    onClose()✏️
   }
 
   useEffect(() => {
@@ -50,16 +47,14 @@ const ContextCard = ({ context }) => {
 
   }, [updatedContext])
 
-
-
-
   return (
     <Tr className="card">
-      <Td>{context._id}</Td>
+      {/* <Td>{context._id}</Td> */}
       <Td>{context.description}</Td>
       <Td>{context.enteredBy}</Td>
       <Td>{context.checkedBy}</Td>
-      <Td><Button onClick={onOpen}>...</Button>
+      <Td>{context.excavatedOn}</Td>
+      <Td><Button onClick={onOpen}>Edit ✏️</Button>
         <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
           <ModalOverlay />
           <ModalContent>
