@@ -1,6 +1,6 @@
 import { addContextToDb } from "../../api/calls";
 import { contextFields } from "../../const/contextFields";
-import { Input, Stack } from '@chakra-ui/react'
+import { Button, Input, Stack } from '@chakra-ui/react'
 import buildObjectFromForm from "../../utils/utils";
 
 const AddContext = () => {
@@ -25,7 +25,7 @@ const AddContext = () => {
         )
         )}
 
-        <button type="submit" >Submit</button>
+        <Button type="submit" >Submit</Button>
       </form>
     </Stack>
   )

@@ -21,10 +21,7 @@ const Contexts = () => {
 
   return (
     <Stack spacing={5} m={5} className="contexts">
-      <div>
-        <Heading as="h2" size="md" m={5}>Contexts</Heading>
-        <p>Archeological contexts (records) uploaded to the IADB.</p>
-      </div>
+      <Heading as="h2" size="md" m={5}>Contexts</Heading>
       <Table variant='striped'>
         <Thead>
           <Tr>

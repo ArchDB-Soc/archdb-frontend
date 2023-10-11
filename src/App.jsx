@@ -6,6 +6,7 @@ import Login from './pages/Login/Login'
 import Profile from './pages/Profile/Profile'
 import React, { createContext, useState } from 'react'
 import Header from './components/Header/Header'
+import Layout from './components/Layout'
 
 
 export const UserContext = createContext();
@@ -27,23 +28,30 @@ function App() {
         value={{
           setIsLoggedIn: setIsLoggedIn,
           isLoggedIn: isLoggedIn
-        }}
-      >
-        <Header />
+        }}>
+
         <Routes>
           <Route path="/" element={
-            <React.Suspense fallback={<h2>Loading...</h2>}>
-              {isLoggedIn ? <Contexts /> : <Login />}
-            </React.Suspense>
+            <Layout showHeader={isLoggedIn}>
+              <React.Suspense fallback={<h2>Loading...</h2>}>
+                {isLoggedIn ? <Contexts /> : <Login />}
+              </React.Suspense>
+            </Layout>
           } />
           <Route path="/add-context" element={
-            <React.Suspense fallback={<h2>Loading...</h2>}><AddContext /></React.Suspense>
+            <Layout showHeader={isLoggedIn}>
+              <React.Suspense fallback={<h2>Loading...</h2>}><AddContext /></React.Suspense>
+            </Layout>
           } />
           <Route path="/login" element={
-            <React.Suspense fallback={<h2>Loading...</h2>}><Login /></React.Suspense>
+            <Layout showHeader={isLoggedIn}>
+              <React.Suspense fallback={<h2>Loading...</h2>}><Login /></React.Suspense>
+            </Layout>
           } />
           <Route path="/profile" element={
-            <React.Suspense fallback={<h2>Loading...</h2>}><Profile /></React.Suspense>
+            <Layout showHeader={isLoggedIn}>
+              <React.Suspense fallback={<h2>Loading...</h2>}><Profile /></React.Suspense>
+            </Layout>
           } />
         </Routes>
       </UserContext.Provider>
