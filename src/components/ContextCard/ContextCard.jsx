@@ -21,11 +21,12 @@ const ContextCard = ({ context }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [updatedContext, setUpdatedContext] = useState(context)
   // const reloadCount = Number(sessionStorage.getItem('reloadCount')) || 0;
-
+  const isInitialRender = useRef(true)
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    isInitialRender.current = false
     const fields = Array.from(e.target.elements).map(element => element.id)
     const responses = Array.from(e.target.elements).map(element => element.value)
     const fieldsAndResponsesAsObject = buildObjectFromForm(fields, responses)
@@ -39,17 +40,19 @@ const ContextCard = ({ context }) => {
       _id: context._id
     })
     onClose()
+
   }
   // location.reload()
 
   useEffect(() => {
-    updateContextInDb(updatedContext)
+    console.log(isInitialRender.current)
 
-
-    // console.log(reloadCount)
-    // if (reloadCount != 0) {
-    //   sessionStorage.setItem('reloadCount', String(reloadCount + 1));
-    //   window.location.reload();
+    if (!isInitialRender.current) {
+      updateContextInDb(updatedContext)
+      // location.reload()
+    }
+    // sessionStorage.setItem('reloadCount', String(reloadCount + 1));
+    // window.location.reload();
     // } else {
     //   sessionStorage.removeItem('reloadCount');
     // }
