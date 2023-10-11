@@ -32,7 +32,9 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={
-            <React.Suspense fallback={<h2>Loading...</h2>}><Contexts /></React.Suspense>
+            <React.Suspense fallback={<h2>Loading...</h2>}>
+              {isLoggedIn ? <Contexts /> : <Login />}
+            </React.Suspense>
           } />
           <Route path="/add-context" element={
             <React.Suspense fallback={<h2>Loading...</h2>}><AddContext /></React.Suspense>
