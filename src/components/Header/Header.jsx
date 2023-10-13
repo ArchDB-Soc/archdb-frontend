@@ -27,7 +27,6 @@ const Header = () => {
         <Tabs variant='enclosed'>
           <TabList>
             <Tab><NavLink to="/">Contexts</NavLink></Tab>
-            <Tab>{isLoggedIn ? <NavLink to="/add-context">Add Context</NavLink> : null}</Tab>
           </TabList>
         </Tabs>
       </nav>

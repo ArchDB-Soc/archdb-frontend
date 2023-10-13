@@ -1,8 +1,8 @@
 import { addContextToDb } from "../../api/calls";
 import { contextFields } from "../../const/contextFields";
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Button, HStack, Input, Stack, Text } from '@chakra-ui/react'
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Input, Stack, Text } from '@chakra-ui/react'
 import buildObjectFromForm, { capitaliseFirstLetter } from "../../utils/utils";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 // import ChakraAccordionItem from "../../components/Accordion/Accordion";
 
 const AddContext = () => {
@@ -30,6 +30,18 @@ const AddContext = () => {
 
   return (
     <Stack m={5} className='form-container'>
+      <Breadcrumb separator='-'>
+        <BreadcrumbItem>
+          <BreadcrumbLink as={NavLink} to='/'>
+            Contexts
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbLink as={NavLink} to='/add-context'>
+            Add Context
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
       <form onSubmit={submitForm} id="context-form">
         <Accordion allowToggle>
           {(createCategoriesArray(contextFields)).map((category, index) => (

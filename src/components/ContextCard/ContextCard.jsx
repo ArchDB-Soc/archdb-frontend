@@ -53,7 +53,6 @@ const ContextCard = ({ context }) => {
 
   return (
     <Tr className="card">
-      {/* <Td>{context._id}</Td> */}
       <Td>{context.description}</Td>
       <Td>{context.enteredBy}</Td>
       <Td>{context.checkedBy}</Td>
