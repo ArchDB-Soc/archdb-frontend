@@ -25,10 +25,11 @@ const Contexts = () => {
       <Table variant='striped'>
         <Thead>
           <Tr>
-            <Th>Id</Th>
+
             <Th>Description</Th>
             <Th>Entered By</Th>
             <Th>Checked By</Th>
+            <Th>Excavated On</Th>
             <Th></Th>
           </Tr>
         </Thead>

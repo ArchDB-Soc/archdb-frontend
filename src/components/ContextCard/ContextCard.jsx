@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react'
 import ModalEntry from '../ModalEntry/ModalEntry'
 import { useState, useEffect, useRef } from 'react'
-import { updateContextInDb } from '../../api/calls'
+import { deleteContextFromDb, updateContextInDb } from '../../api/calls'
 import buildObjectFromForm from '../../utils/utils'
 
 const ContextCard = ({ context }) => {
@@ -21,6 +21,13 @@ const ContextCard = ({ context }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [updatedContext, setUpdatedContext] = useState(context)
   const isInitialRender = useRef(true)
+
+  useEffect(() => {
+    // isInitialRender ensures reload in updateContextInDb() doesn't trigger infinite loop
+    if (!isInitialRender.current) {
+      updateContextInDb(updatedContext)
+    }
+  }, [updatedContext])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,16 +43,13 @@ const ContextCard = ({ context }) => {
       ...newContext,
       _id: context._id
     })
-    onClose()✏️
+    onClose()
   }
 
-  useEffect(() => {
-    // isInitialRender ensures reload in updateContextInDb() doesn't trigger infinite loop
-    if (!isInitialRender.current) {
-      updateContextInDb(updatedContext)
-    }
+  const deleteContext = () => {
+    deleteContextFromDb(context._id)
+  }
 
-  }, [updatedContext])
 
   return (
     <Tr className="card">
@@ -58,7 +62,7 @@ const ContextCard = ({ context }) => {
         <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Context {context._id}</ModalHeader>
+            <ModalHeader>Edit context {context._id}</ModalHeader>
             <ModalCloseButton />
             <form onSubmit={(e) => handleSubmit(e)} id="update-context-form">
               <ModalBody>
@@ -74,6 +78,7 @@ const ContextCard = ({ context }) => {
           </ModalContent>
         </Modal>
       </Td>
+      <Td><Button color="red" onClick={deleteContext}>Delete</Button></Td>
     </Tr >
   )
 }

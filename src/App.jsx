@@ -47,11 +47,6 @@ function App() {
               <React.Suspense fallback={<h2>Loading...</h2>}><Login /></React.Suspense>
             </Layout>
           } />
-          {/* <Route path="/profile" element={
-            <Layout showHeader={isLoggedIn}>
-              <React.Suspense fallback={<h2>Loading...</h2>}><Profile /></React.Suspense>
-            </Layout>
-          } /> */}
         </Routes>
       </UserContext.Provider>
     </>

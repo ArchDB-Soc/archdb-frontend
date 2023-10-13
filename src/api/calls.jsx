@@ -67,6 +67,23 @@ export const updateContextInDb = async (updatedContext) => {
   }
 };
 
+export const deleteContextFromDb = async (contextid) => {
+  try {
+    await fetch(`${apiURL}/contexts/${contextid}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${userStored?.token}`,
+        "Content-Type": "application/json",
+      },
+      // body: JSON.stringify(updatedContext),
+    })
+
+    location.reload()
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
 export const getUserFromDbById = async (id, userSetter) => {
   try {
     const data = await fetch(`${apiURL}/users/${id}`, {
