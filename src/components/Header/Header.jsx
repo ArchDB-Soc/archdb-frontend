@@ -27,6 +27,7 @@ const Header = () => {
         <Tabs variant='enclosed'>
           <TabList>
             <Tab><NavLink to="/">Contexts</NavLink></Tab>
+            <Tab><NavLink to="/records">Records</NavLink></Tab>
           </TabList>
         </Tabs>
       </nav>

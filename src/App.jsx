@@ -3,12 +3,12 @@ import { Routes, Route } from 'react-router-dom'
 import React, { createContext, lazy, useState } from 'react'
 import Layout from './components/Layout'
 
-
 export const UserContext = createContext();
 
 const Contexts = lazy(() => import('./pages/Contexts/Contexts'))
 const AddContext = lazy(() => import('./pages/AddContext/AddContext'))
 const Login = lazy(() => import('./pages/Login/Login'))
+const Records = lazy(() => import('./pages/Records/Records'))
 
 
 function App() {
@@ -45,6 +45,11 @@ function App() {
           <Route path="/login" element={
             <Layout showHeader={isLoggedIn}>
               <React.Suspense fallback={<h2>Loading...</h2>}><Login /></React.Suspense>
+            </Layout>
+          } />
+          <Route path="/records" element={
+            <Layout showHeader={isLoggedIn}>
+              <React.Suspense fallback={<h2>Loading...</h2>}><Records /></React.Suspense>
             </Layout>
           } />
         </Routes>
