@@ -58,7 +58,7 @@ const ContextCard = ({ context }) => {
       <Td>{context.enteredBy}</Td>
       <Td>{context.checkedBy}</Td>
       <Td>{context.excavatedOn}</Td>
-      <Td><Button onClick={onOpen}>More/Edit</Button>
+      <Td><Button onClick={onOpen}>Edit</Button>
         <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
           <ModalOverlay />
           <ModalContent>

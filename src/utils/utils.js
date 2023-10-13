@@ -1,4 +1,4 @@
-const buildObjectFromForm = (keys, values) => {
+export const buildObjectFromForm = (keys, values) => {
 
     const object = {};
     for (let i = 0; i < keys.length && i < values.length; i++) {
@@ -9,5 +9,8 @@ const buildObjectFromForm = (keys, values) => {
     return object
   }
 
+export const capitaliseFirstLetter = (str) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
 export default buildObjectFromForm

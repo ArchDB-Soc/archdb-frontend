@@ -75,7 +75,6 @@ export const deleteContextFromDb = async (contextid) => {
         Authorization: `Bearer ${userStored?.token}`,
         "Content-Type": "application/json",
       },
-      // body: JSON.stringify(updatedContext),
     })
 
     location.reload()
