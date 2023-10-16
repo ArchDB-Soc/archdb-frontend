@@ -29,7 +29,7 @@ const ContextCard = ({ context }) => {
     }
   }, [updatedContext])
 
-  const handleSubmit = (e) => {
+  const handleUpdateFormSubmit = (e) => {
     e.preventDefault();
     isInitialRender.current = false
     const fields = Array.from(e.target.elements).map(element => element.id)
@@ -50,20 +50,22 @@ const ContextCard = ({ context }) => {
     deleteContextFromDb(context._id)
   }
 
-
   return (
     <Tr className="card">
       <Td>{context.description}</Td>
       <Td>{context.enteredBy}</Td>
       <Td>{context.checkedBy}</Td>
       <Td>{context.excavatedOn}</Td>
-      <Td><Button onClick={onOpen}>Edit</Button>
+      <Td
+        w="100px"
+        p="10px"
+      ><Button onClick={onOpen}>Edit</Button>
         <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>Edit context {context._id}</ModalHeader>
             <ModalCloseButton />
-            <form onSubmit={(e) => handleSubmit(e)} id="update-context-form">
+            <form onSubmit={(e) => handleUpdateFormSubmit(e)} id="update-context-form">
               <ModalBody>
                 <ModalEntry context={context} />
               </ModalBody>
@@ -77,7 +79,10 @@ const ContextCard = ({ context }) => {
           </ModalContent>
         </Modal>
       </Td>
-      <Td><Button color="red" onClick={deleteContext}>Delete</Button></Td>
+      <Td
+        w="100px"
+        p="10px"
+      ><Button color="red" onClick={deleteContext}>Delete</Button></Td>
     </Tr >
   )
 }
