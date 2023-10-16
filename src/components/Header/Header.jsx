@@ -1,14 +1,16 @@
 import { Heading, Tabs, TabList, Tab, Button, Spacer, Flex } from "@chakra-ui/react"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { UserContext } from '../../App';
 import { useContext, useState } from "react";
 
 const Header = () => {
-  const { isLoggedIn, setIsLoggedIn } = useContext(UserContext)
+  const { setIsLoggedIn } = useContext(UserContext)
+  const navigate = useNavigate()
 
   const logout = () => {
     setIsLoggedIn(false)
     console.log("User logged out")
+    navigate("/")
   }
 
   useState(() => {
@@ -26,8 +28,9 @@ const Header = () => {
       <nav>
         <Tabs variant='enclosed'>
           <TabList>
-            <Tab><NavLink to="/">Contexts</NavLink></Tab>
-            <Tab><NavLink to="/records">Records</NavLink></Tab>
+            <Tab><NavLink to="/">Sites</NavLink></Tab>
+            <Tab><NavLink to="/contexts">Contexts</NavLink></Tab>
+            {/* <Tab><NavLink to="/records">Records</NavLink></Tab> */}
           </TabList>
         </Tabs>
       </nav>

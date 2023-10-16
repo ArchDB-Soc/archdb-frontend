@@ -5,10 +5,12 @@ import Layout from './components/Layout'
 
 export const UserContext = createContext();
 
+const Sites = lazy(() => import('./pages/Sites/Sites'))
+const AddSite = lazy(() => import('./pages/AddSite/AddSite'))
 const Contexts = lazy(() => import('./pages/Contexts/Contexts'))
 const AddContext = lazy(() => import('./pages/AddContext/AddContext'))
 const Login = lazy(() => import('./pages/Login/Login'))
-const Records = lazy(() => import('./pages/Records/Records'))
+// const Records = lazy(() => import('./pages/Records/Records'))
 
 
 function App() {
@@ -32,6 +34,16 @@ function App() {
         <Routes>
           <Route path="/" element={
             <Layout showHeader={isLoggedIn}>
+              <React.Suspense fallback={<h2>Loading...</h2>}><Sites /></React.Suspense>
+            </Layout>
+          } />
+          <Route path="/add-site" element={
+            <Layout showHeader={isLoggedIn}>
+              <React.Suspense fallback={<h2>Loading...</h2>}><AddSite /></React.Suspense>
+            </Layout>
+          } />
+          <Route path="/contexts" element={
+            <Layout showHeader={isLoggedIn}>
               <React.Suspense fallback={<h2>Loading...</h2>}>
                 {isLoggedIn ? <Contexts /> : <Login />}
               </React.Suspense>
@@ -47,11 +59,12 @@ function App() {
               <React.Suspense fallback={<h2>Loading...</h2>}><Login /></React.Suspense>
             </Layout>
           } />
-          <Route path="/records" element={
+          {/* Remove Sites while working on backend */}
+          {/* <Route path="/records" element={
             <Layout showHeader={isLoggedIn}>
               <React.Suspense fallback={<h2>Loading...</h2>}><Records /></React.Suspense>
             </Layout>
-          } />
+          } /> */}
         </Routes>
       </UserContext.Provider>
     </>

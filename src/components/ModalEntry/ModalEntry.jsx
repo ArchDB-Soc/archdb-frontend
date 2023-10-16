@@ -5,11 +5,11 @@ import {
 } from "@chakra-ui/react";
 
 
-const ModalEntry = ({ context }) => {
+const ModalEntry = ({ data }) => {
 
   return (
     <Stack>
-      {Object.entries(context).map(([key, value]) => (
+      {Object.entries(data).map(([key, value]) => (
         (key !== "_id") ?
           <div key={key}>
             <label htmlFor={key}>{key}:</label>

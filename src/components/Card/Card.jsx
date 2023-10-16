@@ -16,18 +16,29 @@ import { useState, useEffect, useRef } from 'react'
 import { deleteContextFromDb, updateContextInDb } from '../../api/calls'
 import buildObjectFromForm from '../../utils/utils'
 
-const ContextCard = ({ context }) => {
-
+const Card = ({ data, keyInfo }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [updatedContext, setUpdatedContext] = useState(context)
+  const [updatedData, setUpdatedData] = useState(data)
   const isInitialRender = useRef(true)
+
+  // filter out key values from data to show in the card 
+  const createArrayOfKeyValues = (keyFields, dataObject) =>
+    keyFields.map(key => key.id)
+      .reduce((result, field) => {
+        if (dataObject.hasOwnProperty(field)) {
+          result.push({ [field]: dataObject[field] });
+        }
+        return result;
+      }, [])
+      .map(obj => Object.values(obj))
+  const keyValues = createArrayOfKeyValues(keyInfo, data)
 
   useEffect(() => {
     // isInitialRender ensures reload in updateContextInDb() doesn't trigger infinite loop
     if (!isInitialRender.current) {
-      updateContextInDb(updatedContext)
+      updateContextInDb(updatedData)
     }
-  }, [updatedContext])
+  }, [updatedData])
 
   const handleUpdateFormSubmit = (e) => {
     e.preventDefault();
@@ -35,27 +46,27 @@ const ContextCard = ({ context }) => {
     const fields = Array.from(e.target.elements).map(element => element.id)
     const responses = Array.from(e.target.elements).map(element => element.value)
     const fieldsAndResponsesAsObject = buildObjectFromForm(fields, responses)
-    const newContext = Object.fromEntries(
+    const newData = Object.fromEntries(
       Object.entries(fieldsAndResponsesAsObject).filter(([key, value]) => value !== '')
     )
 
-    setUpdatedContext({
-      ...newContext,
-      _id: context._id
+    setUpdatedData({
+      ...newData,
+      _id: data._id
     })
     onClose()
   }
 
   const deleteContext = () => {
-    deleteContextFromDb(context._id)
+    deleteContextFromDb(data._id)
   }
 
   return (
     <Tr className="card">
-      <Td>{context.description}</Td>
-      <Td>{context.enteredBy}</Td>
-      <Td>{context.checkedBy}</Td>
-      <Td>{context.excavatedOn}</Td>
+      {<Td>{keyValues[0]}</Td>}
+      {<Td>{keyValues[1]}</Td>}
+      {<Td>{keyValues[2]}</Td>}
+      {<Td>{keyValues[3]}</Td>}
       <Td
         w="100px"
         p="10px"
@@ -63,11 +74,11 @@ const ContextCard = ({ context }) => {
         <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Edit context {context._id}</ModalHeader>
+            <ModalHeader>Edit data {data._id}</ModalHeader>
             <ModalCloseButton />
-            <form onSubmit={(e) => handleUpdateFormSubmit(e)} id="update-context-form">
+            <form onSubmit={(e) => handleUpdateFormSubmit(e)} id="update-data-form">
               <ModalBody>
-                <ModalEntry context={context} />
+                <ModalEntry data={data} />
               </ModalBody>
               <ModalFooter>
                 <Button colorScheme='blue' mr={3} onClick={onClose}>
@@ -87,4 +98,4 @@ const ContextCard = ({ context }) => {
   )
 }
 
-export default ContextCard
+export default Card

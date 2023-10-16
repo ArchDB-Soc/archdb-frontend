@@ -8,7 +8,6 @@ const userStored = JSON.parse(localStorage.getItem('userStored'))
 
 export const addContextToDb = (context) => {
   // const token = Cookies.get('access_token')
-
   fetch(`${apiURL}/contexts`, {
     method: "POST",
     headers: {
@@ -35,12 +34,46 @@ export const getAllContextsFromDb = async (contextSetter) => {
       },
     });
     const dataToJson = await data.json();
-    // const updatedContexts = [...contexts, dataToJson.data[0]]
-    console.log("Context retrieved from API");
+    console.log("Contexts retrieved from API");
     contextSetter(dataToJson.data);
   } catch (error) {
     console.log("error:", error);
   }
+};
+
+export const getAllSitesFromDb = async (siteSetter) => {
+  try {
+    const data = await fetch(`${apiURL}/sites`, {
+      method: "GET",
+      headers: {
+        // Authorization: `Bearer ${token}`
+      },
+    });
+    const dataToJson = await data.json();
+    console.log("Sites retrieved from API");
+    siteSetter(dataToJson.data);
+  } catch (error) {
+    console.log("error:", error);
+  }
+};
+
+export const addSiteToDb = (context) => {
+  // const token = Cookies.get('access_token')
+  fetch(`${apiURL}/sites`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${userStored?.token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(context),
+  })
+    .then((response) => response.json())
+    .then((response) => {
+      console.log("Saved:", JSON.stringify(response));
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 };
 
 export const updateContextInDb = async (updatedContext) => {

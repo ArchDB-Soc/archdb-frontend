@@ -1,51 +1,45 @@
 import { useEffect, useState, useContext } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import Card from '../../components/Card/Card'
-import { getAllContextsFromDb } from '../../api/calls'
+import { getAllSitesFromDb } from '../../api/calls'
 import { Table, Thead, Tbody, Tr, Th, Stack, Heading, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button } from '@chakra-ui/react'
 import { UserContext } from '../../App'
-import { contextFields } from '../../const/contextFields'
+import { siteFields } from '../../const/contextFields'
 
-const Contexts = () => {
+const Sites = () => {
 
-  const [contexts, setContexts] = useState([{}])
+  const [sites, setSites] = useState([{}])
   const { isLoggedIn } = useContext(UserContext)
-  const keyInfo = contextFields.filter(field => field.keyInfo === true)
-
+  const keyInfo = siteFields.filter(field => field.keyInfo === true)
 
   useEffect(() => {
-    getAllContextsFromDb(setContexts)
+    getAllSitesFromDb(setSites)
   }, [])
 
   return (
-    <Stack spacing={5} m={5} className="contexts">
+    <Stack spacing={5} m={5} className="sites">
       <Breadcrumb separator='-'>
         <BreadcrumbItem isCurrentPage>
           <BreadcrumbLink as={NavLink} to='/'>
-            Contexts
+            Sites
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
-      <Heading as="h2" size="md" m={5}>Contexts</Heading>
+      <Heading as="h2" size="md" m={5}>Sites</Heading>
       {isLoggedIn ?
-        <Link to="/add-context">
-          <Button>Add Context</Button>
+        <Link to="/add-site">
+          <Button>Add Site</Button>
         </Link>
         : null}
       <Table variant='striped'>
         <Thead>
           <Tr>
             {keyInfo.map((info) => <Th key={info.id}>{info.name}</Th>)}
-            {/* <Th>Description</Th>
-            <Th>Entered By</Th>
-            <Th>Checked By</Th>
-            <Th>Excavated On</Th>
-            <Th></Th> */}
           </Tr>
         </Thead>
         <Tbody>
-          {contexts?.map((context, index) =>
-            <Card key={index} data={context} keyInfo={keyInfo} />
+          {sites?.map((site, index) =>
+            <Card key={index} data={site} keyInfo={keyInfo} />
           )}
         </Tbody>
       </Table>
@@ -53,4 +47,4 @@ const Contexts = () => {
   )
 }
 
-export default Contexts
+export default Sites
