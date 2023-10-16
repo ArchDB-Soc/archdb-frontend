@@ -4,7 +4,7 @@ import Card from '../../components/Card/Card'
 import { getAllContextsFromDb } from '../../api/calls'
 import { Table, Thead, Tbody, Tr, Th, Stack, Heading, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button } from '@chakra-ui/react'
 import { UserContext } from '../../App'
-import { contextFields } from '../../const/contextFields'
+import { contextFields } from '../../const/dataFields'
 
 const Contexts = () => {
 

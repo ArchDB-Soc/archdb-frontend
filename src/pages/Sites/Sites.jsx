@@ -4,7 +4,7 @@ import Card from '../../components/Card/Card'
 import { getAllSitesFromDb } from '../../api/calls'
 import { Table, Thead, Tbody, Tr, Th, Stack, Heading, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button } from '@chakra-ui/react'
 import { UserContext } from '../../App'
-import { siteFields } from '../../const/contextFields'
+import { siteFields } from '../../const/dataFields'
 
 const Sites = () => {
 

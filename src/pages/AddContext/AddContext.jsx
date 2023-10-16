@@ -1,5 +1,5 @@
 import { addContextToDb } from "../../api/calls";
-import { contextFields } from "../../const/contextFields";
+import { contextFields } from "../../const/dataFields";
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Input, Stack, Text } from '@chakra-ui/react'
 import buildObjectFromForm, { capitaliseFirstLetter } from "../../utils/utils";
 import { NavLink, useNavigate } from "react-router-dom";
