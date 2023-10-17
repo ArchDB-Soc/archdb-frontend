@@ -1,6 +1,6 @@
 // This list of fields is used dynamically throughout various parts of the app.
 
-export const contextFields = [
+export const recordFields = [
   { id: "checkedBy", name: "Checked by", type: "text", required: "false", category: "people" },
   { id: "enteredBy", name: "Entered by", type: "text", required: "false", category: "people", keyInfo: true },
   { id: "recorder", name: "Recorder", type: "text", required: "false", category: "people" },
@@ -16,7 +16,7 @@ export const contextFields = [
   { id: "spotX", name: "Spot X", type: "number", required: "false", category: "position" },
   { id: "spotY", name: "Spot Y", type: "number", required: "false", category: "position" },
   { id: "composition", name: "Composition", type: "text", required: "false", category: "description" },
-  { id: "contextType", name: "Context type", type: "text", required: "false", category: "description" },
+  { id: "recordType", name: "Record type", type: "text", required: "false", category: "description" },
   { id: "dimensions", name: "Dimensions", type: "text", required: "false", category: "description" },
   { id: "setNum", name: "Set Num", type: "number", required: "false", category: "description" },
   { id: "thickness", name: "Thickness", type: "number", required: "false", category: "description" },

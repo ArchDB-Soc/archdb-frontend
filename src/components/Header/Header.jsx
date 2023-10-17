@@ -26,10 +26,10 @@ const Header = () => {
         </Flex>
       </nav>
       <nav>
-        <Tabs variant='enclosed'>
+        <Tabs variant='enclosed' isLazy>
           <TabList>
-            <Tab><NavLink to="/">Sites</NavLink></Tab>
-            <Tab><NavLink to="/contexts">Contexts</NavLink></Tab>
+            <Tab ><NavLink to="/">Sites</NavLink></Tab>
+            <Tab><NavLink to="/records">Records</NavLink></Tab>
           </TabList>
         </Tabs>
       </nav>

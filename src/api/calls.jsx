@@ -56,7 +56,7 @@ export const updateDataInDb = async (updatedData, route) => {
     }
 
     const data = await response.json();
-    console.log("Context updated:", JSON.stringify(data));
+    console.log("Record updated:", JSON.stringify(data));
     location.reload()
 
   } catch (error) {
@@ -64,11 +64,11 @@ export const updateDataInDb = async (updatedData, route) => {
   }
 };
 
-export const addContextToSite = async (updatedData, siteid) => {
+export const addRecordToSite = async (updatedData, siteid) => {
   try {
     console.log(siteid)
     console.log(updatedData)
-    const response = await fetch(`${apiURL}/sites/${siteid}/contexts`, {
+    const response = await fetch(`${apiURL}/sites/${siteid}/records`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${userStored?.token}`,
@@ -95,8 +95,8 @@ export const deleteDataFromDb = async (type, id, parentid) => { //parentid is op
     if (type === "sites") {
       const fullApiURL = `${baseURL}/sites/${id}`
       return fullApiURL
-    } else if (type === "contexts") {
-      const fullApiURL = `${baseURL}/sites/${parentid}/contexts/${id}`
+    } else if (type === "records") {
+      const fullApiURL = `${baseURL}/sites/${parentid}/records/${id}`
       return fullApiURL
     } else {
       console.log("no element found with that id or parent id")
@@ -128,7 +128,7 @@ export const getUserFromDbById = async (id, userSetter) => {
       },
     });
     const dataToJson = await data.json();
-    // const updatedContexts = [...contexts, dataToJson.data[0]]
+    // const updatedRecords = [...records, dataToJson.data[0]]
     console.log("User retrieved from API");
     userSetter(dataToJson)
   } catch (error) {

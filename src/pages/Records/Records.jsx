@@ -4,33 +4,33 @@ import Card from '../../components/Card/Card'
 import { getAllDataFromDb } from '../../api/calls'
 import { Table, Thead, Tbody, Tr, Th, Stack, Heading, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button } from '@chakra-ui/react'
 import { UserContext } from '../../App'
-import { contextFields } from '../../const/dataFields'
+import { recordFields } from '../../const/dataFields'
 
-const Contexts = () => {
+const Records = () => {
 
-  const [contexts, setContexts] = useState([{}])
+  const [records, setRecords] = useState([{}])
   const { isLoggedIn } = useContext(UserContext)
-  const keyInfo = contextFields.filter(field => field.keyInfo === true)
+  const keyInfo = recordFields.filter(field => field.keyInfo === true)
 
 
 
   useEffect(() => {
-    getAllDataFromDb(setContexts, "contexts")
+    getAllDataFromDb(setRecords, "records")
   }, [])
 
   return (
-    <Stack spacing={5} m={5} className="contexts">
+    <Stack spacing={5} m={5} className="records">
       <Breadcrumb separator='-'>
         <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink as={NavLink} to='/contexts'>
-            Contexts
+          <BreadcrumbLink as={NavLink} to='/records'>
+            Records
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
-      <Heading as="h2" size="md" m={5}>Contexts</Heading>
+      <Heading as="h2" size="md" m={5}>Records</Heading>
       {isLoggedIn ?
-        <Link to="/add-context">
-          <Button>Add Context</Button>
+        <Link to="/add-record">
+          <Button>Add Record</Button>
         </Link>
         : null}
       <Table variant='striped'>
@@ -40,8 +40,8 @@ const Contexts = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {contexts?.map((context, index) =>
-            <Card key={index} data={context} type="contexts" keyInfo={keyInfo} />
+          {records?.map((record, index) =>
+            <Card key={index} data={record} type="records" keyInfo={keyInfo} />
           )}
         </Tbody>
       </Table>
@@ -49,4 +49,4 @@ const Contexts = () => {
   )
 }
 
-export default Contexts
+export default Records

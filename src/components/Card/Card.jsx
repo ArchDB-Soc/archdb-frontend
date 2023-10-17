@@ -24,7 +24,7 @@ const Card = ({ data, keyInfo, type }) => {
   console.log(summaryValues)
 
   useEffect(() => {
-    if (!isInitialRender.current) { // ensure updateContextInDb() doesn't trigger an infinite loop
+    if (!isInitialRender.current) { // ensure updateDataInDb() doesn't trigger an infinite loop
       updateDataInDb(updatedData, type)
     }
   }, [updatedData])

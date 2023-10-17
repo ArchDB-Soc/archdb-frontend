@@ -7,8 +7,8 @@ export const UserContext = createContext();
 
 const Sites = lazy(() => import('./pages/Sites/Sites'))
 const AddSite = lazy(() => import('./pages/AddSite/AddSite'))
-const Contexts = lazy(() => import('./pages/Contexts/Contexts'))
-const AddContext = lazy(() => import('./pages/AddContext/AddContext'))
+const Records = lazy(() => import('./pages/Records/Records'))
+const AddRecord = lazy(() => import('./pages/AddRecord/AddRecord'))
 const Login = lazy(() => import('./pages/Login/Login'))
 
 
@@ -41,16 +41,16 @@ function App() {
               <React.Suspense fallback={<h2>Loading...</h2>}><AddSite /></React.Suspense>
             </Layout>
           } />
-          <Route path="/contexts" element={
+          <Route path="/records" element={
             <Layout showHeader={isLoggedIn}>
               <React.Suspense fallback={<h2>Loading...</h2>}>
-                {isLoggedIn ? <Contexts /> : <Login />}
+                {isLoggedIn ? <Records /> : <Login />}
               </React.Suspense>
             </Layout>
           } />
-          <Route path="/add-context" element={
+          <Route path="/add-record" element={
             <Layout showHeader={isLoggedIn}>
-              <React.Suspense fallback={<h2>Loading...</h2>}><AddContext /></React.Suspense>
+              <React.Suspense fallback={<h2>Loading...</h2>}><AddRecord /></React.Suspense>
             </Layout>
           } />
           <Route path="/login" element={

@@ -1,12 +1,12 @@
-import { addContextToSite, getAllDataFromDb } from "../../api/calls";
-import { contextFields } from "../../const/dataFields";
+import { addRecordToSite, getAllDataFromDb } from "../../api/calls";
+import { recordFields } from "../../const/dataFields";
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, FormControl, FormErrorMessage, FormLabel, HStack, Input, Select, Stack, Text } from '@chakra-ui/react'
 import buildObjectFromForm, { capitaliseFirstLetter } from "../../utils/utils";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 // import ChakraAccordionItem from "../../components/Accordion/Accordion";
 
-const AddContext = () => {
+const AddRecord = () => {
 
   const navigate = useNavigate()
   const [sites, setSites] = useState([{}])
@@ -21,13 +21,13 @@ const AddContext = () => {
     const chosenSite = sites.find(obj => obj._id === data._site)
     console.log(chosenSite.name)
     data.siteName = chosenSite.name
-    addContextToSite(data, data._site)
-    document.getElementById("context-form").reset()
-    navigate("/contexts")
+    addRecordToSite(data, data._site)
+    document.getElementById("record-form").reset()
+    navigate("/records")
   }
 
-  const createCategoriesArray = (contextArr) => {
-    const typesArr = [...new Set(contextArr.map((context) => context.category))]
+  const createCategoriesArray = (recordArr) => {
+    const typesArr = [...new Set(recordArr.map((record) => record.category))]
     const typesArrWithoutSite = typesArr.filter(item => item !== 'site')
     return typesArrWithoutSite
   }
@@ -48,17 +48,17 @@ const AddContext = () => {
     <Stack m={5} className='form-container'>
       <Breadcrumb separator='-'>
         <BreadcrumbItem>
-          <BreadcrumbLink as={NavLink} to='/contexts'>
-            Contexts
+          <BreadcrumbLink as={NavLink} to='/records'>
+            Records
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink as={NavLink} to='/add-context'>
-            Add Context
+          <BreadcrumbLink as={NavLink} to='/add-record'>
+            Add Record
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
-      <form onSubmit={submitForm} id="context-form">
+      <form onSubmit={submitForm} id="record-form">
         <Accordion allowToggle>
           <Box textAlign={"left"} padding={5}>
             <h2>Site *</h2>
@@ -70,7 +70,7 @@ const AddContext = () => {
               </Select>
             </Box>
           </Box>
-          {(createCategoriesArray(contextFields)).map((category, index) => (
+          {(createCategoriesArray(recordFields)).map((category, index) => (
             <AccordionItem key={index}>
               <h2>
                 <AccordionButton type="button">
@@ -80,7 +80,7 @@ const AddContext = () => {
               </h2>
               <AccordionPanel>
                 {
-                  findAllFieldsFromCategory(contextFields, category).map(item => (
+                  findAllFieldsFromCategory(recordFields, category).map(item => (
                     <HStack key={item.id}>
                       <Text minW="100px" maxW="150px" w="25%">{item.name}:</Text>
                       <Input
@@ -120,4 +120,4 @@ const AddContext = () => {
   )
 }
 
-export default AddContext
+export default AddRecord
