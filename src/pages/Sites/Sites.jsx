@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import Card from '../../components/Card/Card'
-import { getAllSitesFromDb } from '../../api/calls'
+import { getAllDataFromDb } from '../../api/calls'
 import { Table, Thead, Tbody, Tr, Th, Stack, Heading, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button } from '@chakra-ui/react'
 import { UserContext } from '../../App'
 import { siteFields } from '../../const/dataFields'
@@ -13,7 +13,7 @@ const Sites = () => {
   const keyInfo = siteFields.filter(field => field.keyInfo === true)
 
   useEffect(() => {
-    getAllSitesFromDb(setSites)
+    getAllDataFromDb(setSites, "sites")
   }, [])
 
   return (
@@ -39,7 +39,7 @@ const Sites = () => {
         </Thead>
         <Tbody>
           {sites?.map((site, index) =>
-            <Card key={index} data={site} keyInfo={keyInfo} />
+            <Card key={index} data={site} type="sites" keyInfo={keyInfo} />
           )}
         </Tbody>
       </Table>

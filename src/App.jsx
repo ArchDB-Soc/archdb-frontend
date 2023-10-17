@@ -10,7 +10,6 @@ const AddSite = lazy(() => import('./pages/AddSite/AddSite'))
 const Contexts = lazy(() => import('./pages/Contexts/Contexts'))
 const AddContext = lazy(() => import('./pages/AddContext/AddContext'))
 const Login = lazy(() => import('./pages/Login/Login'))
-// const Records = lazy(() => import('./pages/Records/Records'))
 
 
 function App() {
@@ -59,12 +58,6 @@ function App() {
               <React.Suspense fallback={<h2>Loading...</h2>}><Login /></React.Suspense>
             </Layout>
           } />
-          {/* Remove Sites while working on backend */}
-          {/* <Route path="/records" element={
-            <Layout showHeader={isLoggedIn}>
-              <React.Suspense fallback={<h2>Loading...</h2>}><Records /></React.Suspense>
-            </Layout>
-          } /> */}
         </Routes>
       </UserContext.Provider>
     </>

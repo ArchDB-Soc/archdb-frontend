@@ -1,29 +1,18 @@
 import {
-  Tr,
-  Td,
-  Button,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
+  Tr, Td, Button, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton,
 } from '@chakra-ui/react'
 import ModalEntry from '../ModalEntry/ModalEntry'
 import { useState, useEffect, useRef } from 'react'
-import { deleteContextFromDb, updateContextInDb } from '../../api/calls'
+import { deleteDataFromDb, updateDataInDb } from '../../api/calls'
 import buildObjectFromForm from '../../utils/utils'
 
-const Card = ({ data, keyInfo }) => {
+const Card = ({ data, keyInfo, type }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [updatedData, setUpdatedData] = useState(data)
   const isInitialRender = useRef(true)
 
-  // filter out key values from data to show in the card 
-  const createArrayOfKeyValues = (keyFields, dataObject) =>
-    keyFields.map(key => key.id)
+  const createArrayOfSummaryValues = (summaryFields, dataObject) =>
+    summaryFields.map(key => key.id)
       .reduce((result, field) => {
         if (dataObject.hasOwnProperty(field)) {
           result.push({ [field]: dataObject[field] });
@@ -31,12 +20,11 @@ const Card = ({ data, keyInfo }) => {
         return result;
       }, [])
       .map(obj => Object.values(obj))
-  const keyValues = createArrayOfKeyValues(keyInfo, data)
+  const summaryValues = createArrayOfSummaryValues(keyInfo, data)
 
   useEffect(() => {
-    // isInitialRender ensures reload in updateContextInDb() doesn't trigger infinite loop
-    if (!isInitialRender.current) {
-      updateContextInDb(updatedData)
+    if (!isInitialRender.current) { // ensure updateContextInDb() doesn't trigger an infinite loop
+      updateDataInDb(updatedData, type)
     }
   }, [updatedData])
 
@@ -49,32 +37,26 @@ const Card = ({ data, keyInfo }) => {
     const newData = Object.fromEntries(
       Object.entries(fieldsAndResponsesAsObject).filter(([key, value]) => value !== '')
     )
-
-    setUpdatedData({
-      ...newData,
-      _id: data._id
-    })
+    setUpdatedData({ ...newData, _id: data._id })
     onClose()
   }
 
-  const deleteContext = () => {
-    deleteContextFromDb(data._id)
+  const deleteData = () => {
+    deleteDataFromDb(data._id, type)
   }
 
   return (
     <Tr className="card">
-      {<Td>{keyValues[0]}</Td>}
-      {<Td>{keyValues[1]}</Td>}
-      {<Td>{keyValues[2]}</Td>}
-      {<Td>{keyValues[3]}</Td>}
-      <Td
-        w="100px"
-        p="10px"
-      ><Button onClick={onOpen}>Edit</Button>
+      {/* Key information for each entry */}
+      {summaryValues.map((value, index) => <Td key={index}>{value}</Td>)}
+      <Td w="100px" p="10px">
+
+        {/* Edit button and modal that displays when it is opened */}
+        <Button onClick={onOpen}>Edit</Button>
         <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Edit data {data._id}</ModalHeader>
+            <ModalHeader>Edit {data._id}</ModalHeader>
             <ModalCloseButton />
             <form onSubmit={(e) => handleUpdateFormSubmit(e)} id="update-data-form">
               <ModalBody>
@@ -90,10 +72,10 @@ const Card = ({ data, keyInfo }) => {
           </ModalContent>
         </Modal>
       </Td>
-      <Td
-        w="100px"
-        p="10px"
-      ><Button color="red" onClick={deleteContext}>Delete</Button></Td>
+      {/* Delete button for each entry*/}
+      <Td w="100px" p="10px">
+        <Button color="red" onClick={deleteData}>Delete</Button>
+      </Td>
     </Tr >
   )
 }

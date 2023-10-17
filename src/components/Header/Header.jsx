@@ -10,7 +10,7 @@ const Header = () => {
   const logout = () => {
     setIsLoggedIn(false)
     console.log("User logged out")
-    navigate("/")
+    navigate("/login")
   }
 
   useState(() => {
@@ -30,7 +30,6 @@ const Header = () => {
           <TabList>
             <Tab><NavLink to="/">Sites</NavLink></Tab>
             <Tab><NavLink to="/contexts">Contexts</NavLink></Tab>
-            {/* <Tab><NavLink to="/records">Records</NavLink></Tab> */}
           </TabList>
         </Tabs>
       </nav>

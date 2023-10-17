@@ -6,15 +6,15 @@ const userStored = JSON.parse(localStorage.getItem('userStored'))
 
 // import Cookies from 'js-cookie'
 
-export const addContextToDb = (context) => {
+export const addDataToDb = (data, route) => {
   // const token = Cookies.get('access_token')
-  fetch(`${apiURL}/contexts`, {
+  fetch(`${apiURL}/${route}`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${userStored?.token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(context),
+    body: JSON.stringify(data),
   })
     .then((response) => response.json())
     .then((response) => {
@@ -25,66 +25,30 @@ export const addContextToDb = (context) => {
     });
 };
 
-export const getAllContextsFromDb = async (contextSetter) => {
+export const getAllDataFromDb = async (setter, route) => {
   try {
-    const data = await fetch(`${apiURL}/contexts`, {
+    const data = await fetch(`${apiURL}/${route}`, {
       method: "GET",
       headers: {
         // Authorization: `Bearer ${token}`
       },
     });
     const dataToJson = await data.json();
-    console.log("Contexts retrieved from API");
-    contextSetter(dataToJson.data);
+    setter(dataToJson.data);
   } catch (error) {
     console.log("error:", error);
   }
 };
 
-export const getAllSitesFromDb = async (siteSetter) => {
+export const updateDataInDb = async (updatedData, route) => {
   try {
-    const data = await fetch(`${apiURL}/sites`, {
-      method: "GET",
-      headers: {
-        // Authorization: `Bearer ${token}`
-      },
-    });
-    const dataToJson = await data.json();
-    console.log("Sites retrieved from API");
-    siteSetter(dataToJson.data);
-  } catch (error) {
-    console.log("error:", error);
-  }
-};
-
-export const addSiteToDb = (context) => {
-  // const token = Cookies.get('access_token')
-  fetch(`${apiURL}/sites`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${userStored?.token}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(context),
-  })
-    .then((response) => response.json())
-    .then((response) => {
-      console.log("Saved:", JSON.stringify(response));
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-};
-
-export const updateContextInDb = async (updatedContext) => {
-  try {
-    const response = await fetch(`${apiURL}/contexts/${updatedContext._id}`, {
+    const response = await fetch(`${apiURL}/${route}/${updatedData._id}`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${userStored?.token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedContext),
+      body: JSON.stringify(updatedData),
     });
 
     if (!response.ok) {
@@ -100,9 +64,35 @@ export const updateContextInDb = async (updatedContext) => {
   }
 };
 
-export const deleteContextFromDb = async (contextid) => {
+export const addContextToSite = async (updatedData, siteid) => {
   try {
-    await fetch(`${apiURL}/contexts/${contextid}`, {
+    console.log(siteid)
+    console.log(updatedData)
+    const response = await fetch(`${apiURL}/sites/${siteid}/contexts`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${userStored?.token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Site updated:", JSON.stringify(data));
+    location.reload()
+
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
+export const deleteDataFromDb = async (id, route) => {
+  try {
+    await fetch(`${apiURL}/${route}/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${userStored?.token}`,

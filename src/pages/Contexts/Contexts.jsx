@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import Card from '../../components/Card/Card'
-import { getAllContextsFromDb } from '../../api/calls'
+import { getAllDataFromDb } from '../../api/calls'
 import { Table, Thead, Tbody, Tr, Th, Stack, Heading, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button } from '@chakra-ui/react'
 import { UserContext } from '../../App'
 import { contextFields } from '../../const/dataFields'
@@ -14,7 +14,7 @@ const Contexts = () => {
 
 
   useEffect(() => {
-    getAllContextsFromDb(setContexts)
+    getAllDataFromDb(setContexts, "contexts")
   }, [])
 
   return (
@@ -45,7 +45,7 @@ const Contexts = () => {
         </Thead>
         <Tbody>
           {contexts?.map((context, index) =>
-            <Card key={index} data={context} keyInfo={keyInfo} />
+            <Card key={index} data={context} type="contexts" keyInfo={keyInfo} />
           )}
         </Tbody>
       </Table>
