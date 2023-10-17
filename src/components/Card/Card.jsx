@@ -43,7 +43,9 @@ const Card = ({ data, keyInfo, type }) => {
   }
 
   const deleteData = () => {
-    deleteDataFromDb(data._id, type)
+    const parentid = ((data._site) ? data._site : undefined)
+    console.log(parentid)
+    deleteDataFromDb(type, data._id, parentid)
   }
 
   return (

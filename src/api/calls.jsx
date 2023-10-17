@@ -90,9 +90,22 @@ export const addContextToSite = async (updatedData, siteid) => {
   }
 };
 
-export const deleteDataFromDb = async (id, route) => {
+export const deleteDataFromDb = async (type, id, parentid) => { //parentid is optional and not available for Sites
+  const urlCreator = (baseURL, type, id, parentid) => {
+    if (type === "sites") {
+      const fullApiURL = `${baseURL}/sites/${id}`
+      return fullApiURL
+    } else if (type === "contexts") {
+      const fullApiURL = `${baseURL}/sites/${parentid}/contexts/${id}`
+      return fullApiURL
+    } else {
+      console.log("no element found with that id or parent id")
+      return `${baseURL}/404`
+    }
+  }
+  const url = urlCreator(apiURL, type, id, parentid)
   try {
-    await fetch(`${apiURL}/${route}/${id}`, {
+    await fetch(`${url}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${userStored?.token}`,
