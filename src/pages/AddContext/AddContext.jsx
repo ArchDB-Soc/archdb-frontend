@@ -1,6 +1,6 @@
-import { addContextToSite, addDataToDb, getAllDataFromDb } from "../../api/calls";
+import { addContextToSite, getAllDataFromDb } from "../../api/calls";
 import { contextFields } from "../../const/dataFields";
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Input, Select, Stack, Text } from '@chakra-ui/react'
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, FormControl, FormErrorMessage, FormLabel, HStack, Input, Select, Stack, Text } from '@chakra-ui/react'
 import buildObjectFromForm, { capitaliseFirstLetter } from "../../utils/utils";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -10,23 +10,23 @@ const AddContext = () => {
 
   const navigate = useNavigate()
   const [sites, setSites] = useState([{}])
-  const [openSites, setOpenSites] = useState(false)
+  // const [openSites, setOpenSites] = useState(false)
 
   const submitForm = (e) => {
     e.preventDefault();
     const fields = Array.from(e.target.elements).map(element => element.id)
     const responses = Array.from(e.target.elements).map(element => element.value)
     const data = buildObjectFromForm(fields, responses)
-    console.log(data.site)
-    // addDataToDb(data, "contexts")
-    addContextToSite(data, data.site)
+    console.log(data._site)
+    addContextToSite(data, data._site)
     document.getElementById("context-form").reset()
     navigate("/contexts")
   }
 
   const createCategoriesArray = (contextArr) => {
     const typesArr = [...new Set(contextArr.map((context) => context.category))]
-    return typesArr
+    const typesArrWithoutSite = typesArr.filter(item => item !== 'site')
+    return typesArrWithoutSite
   }
 
   const findAllFieldsFromCategory = (fieldsArr, category) => {
@@ -34,14 +34,18 @@ const AddContext = () => {
   }
 
   useEffect(() => {
-    if (openSites) { getAllDataFromDb(setSites, "sites") } // only request site list when accordion item is open
-  }, [openSites])
+    // if (openSites) { 
+    getAllDataFromDb(setSites, "sites")
+    // }  only request site list when accordion item is open
+  }, [
+    // openSites
+  ])
 
   return (
     <Stack m={5} className='form-container'>
       <Breadcrumb separator='-'>
         <BreadcrumbItem>
-          <BreadcrumbLink as={NavLink} to='/'>
+          <BreadcrumbLink as={NavLink} to='/contexts'>
             Contexts
           </BreadcrumbLink>
         </BreadcrumbItem>
@@ -53,10 +57,20 @@ const AddContext = () => {
       </Breadcrumb>
       <form onSubmit={submitForm} id="context-form">
         <Accordion allowToggle>
+          <Box textAlign={"left"} padding={5}>
+            <h2>Site *</h2>
+            <Box paddingTop={3} paddingBottom={3}>
+              <Select placeholder='Select Site' id="_site" required>
+                {sites.map((site, index) => (
+                  <option value={site._id} key={index}>{site.name}</option>
+                ))}
+              </Select>
+            </Box>
+          </Box>
           {(createCategoriesArray(contextFields)).map((category, index) => (
             <AccordionItem key={index}>
               <h2>
-                <AccordionButton>
+                <AccordionButton type="button">
                   <AccordionIcon />
                   {capitaliseFirstLetter(category)}
                 </AccordionButton>
@@ -76,21 +90,26 @@ const AddContext = () => {
               </AccordionPanel>
             </AccordionItem>
           ))}
-          <AccordionItem>
+          {/* <AccordionItem>
+
             <h2>
-              <AccordionButton onClick={() => setOpenSites(!openSites)}>
+              <AccordionButton onClick={() => setOpenSites(!openSites)} type="button">
                 <AccordionIcon />
                 Site
               </AccordionButton>
             </h2>
+
             <AccordionPanel>
-              <Select placeholder='Select Site' id="site">
+
+              <Select placeholder='Select Site' id="site" >
                 {sites.map((site, index) => (
                   <option value={site._id} key={index}>{site.name}</option>
                 ))}
               </Select>
+
             </AccordionPanel>
-          </AccordionItem>
+
+          </AccordionItem> */}
         </Accordion>
         <Button type="submit" m={5}>Submit</Button>
       </form>

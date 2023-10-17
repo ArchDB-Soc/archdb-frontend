@@ -13,6 +13,7 @@ const Contexts = () => {
   const keyInfo = contextFields.filter(field => field.keyInfo === true)
 
 
+
   useEffect(() => {
     getAllDataFromDb(setContexts, "contexts")
   }, [])
@@ -21,7 +22,7 @@ const Contexts = () => {
     <Stack spacing={5} m={5} className="contexts">
       <Breadcrumb separator='-'>
         <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink as={NavLink} to='/'>
+          <BreadcrumbLink as={NavLink} to='/contexts'>
             Contexts
           </BreadcrumbLink>
         </BreadcrumbItem>
@@ -36,11 +37,6 @@ const Contexts = () => {
         <Thead>
           <Tr>
             {keyInfo.map((info) => <Th key={info.id}>{info.name}</Th>)}
-            {/* <Th>Description</Th>
-            <Th>Entered By</Th>
-            <Th>Checked By</Th>
-            <Th>Excavated On</Th>
-            <Th></Th> */}
           </Tr>
         </Thead>
         <Tbody>

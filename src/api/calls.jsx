@@ -83,7 +83,7 @@ export const addContextToSite = async (updatedData, siteid) => {
 
     const data = await response.json();
     console.log("Site updated:", JSON.stringify(data));
-    location.reload()
+    // location.reload()
 
   } catch (error) {
     console.error("Error:", error);

@@ -14,13 +14,14 @@ const Card = ({ data, keyInfo, type }) => {
   const createArrayOfSummaryValues = (summaryFields, dataObject) =>
     summaryFields.map(key => key.id)
       .reduce((result, field) => {
-        if (dataObject.hasOwnProperty(field)) {
-          result.push({ [field]: dataObject[field] });
-        }
+        // if (dataObject.hasOwnProperty(field)) {
+        result.push({ [field]: dataObject[field] });
+        // }
         return result;
       }, [])
       .map(obj => Object.values(obj))
   const summaryValues = createArrayOfSummaryValues(keyInfo, data)
+  console.log(summaryValues)
 
   useEffect(() => {
     if (!isInitialRender.current) { // ensure updateContextInDb() doesn't trigger an infinite loop

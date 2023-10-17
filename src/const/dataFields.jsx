@@ -1,15 +1,15 @@
 // This list of fields is used dynamically throughout various parts of the app.
 
 export const contextFields = [
-  { id: "checkedBy", name: "Checked by", type: "text", required: "false", category: "people", keyInfo: true },
+  { id: "checkedBy", name: "Checked by", type: "text", required: "false", category: "people" },
   { id: "enteredBy", name: "Entered by", type: "text", required: "false", category: "people", keyInfo: true },
   { id: "recorder", name: "Recorder", type: "text", required: "false", category: "people" },
   { id: "excavator", name: "Excavator", type: "text", required: "false", category: "people" },
-  // { id: "site", name: "Site", type: "text", required: "false", category: "site" },
-  // { id: "siteArea", name: "Site area", type: "text", required: "false", category: "site" },
-  // { id: "excavatedOn", name: "Excavated on", type: "text", required: "false", category: "site", keyInfo: true },
-  // { id: "excavationMethod", name: "Excavation method", type: "text", required: "false", category: "site" },
-  // { id: "excavationEnd", name: "Excavation end", type: "datetime-local", required: "false", category: "site" },
+  { id: "_site", name: "Site", type: "text", required: "false", category: "site", keyInfo: true },
+  { id: "siteArea", name: "Site area", type: "text", required: "false", category: "site" },
+  { id: "excavatedOn", name: "Excavated on", type: "text", required: "false", category: "site", keyInfo: true },
+  { id: "excavationMethod", name: "Excavation method", type: "text", required: "false", category: "site" },
+  { id: "excavationEnd", name: "Excavation end", type: "datetime-local", required: "false", category: "site" },
   { id: "eastings", name: "Eastings", type: "number", required: "false", category: "position" },
   { id: "northings", name: "Northings", type: "number", required: "false", category: "position" },
   { id: "spotX", name: "Spot X", type: "number", required: "false", category: "position" },
