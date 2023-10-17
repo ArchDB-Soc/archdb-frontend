@@ -14,10 +14,13 @@ const AddContext = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
+
     const fields = Array.from(e.target.elements).map(element => element.id)
     const responses = Array.from(e.target.elements).map(element => element.value)
     const data = buildObjectFromForm(fields, responses)
-    console.log(data._site)
+    const chosenSite = sites.find(obj => obj._id === data._site)
+    console.log(chosenSite.name)
+    data.siteName = chosenSite.name
     addContextToSite(data, data._site)
     document.getElementById("context-form").reset()
     navigate("/contexts")
