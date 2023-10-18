@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from 'react'
 import { deleteDataFromDb, updateDataInDb } from '../../api/calls'
 import buildObjectFromForm from '../../utils/utils'
 
-const Card = ({ data, keyInfo, type }) => {
+const Card = ({ data, columns, type }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [updatedData, setUpdatedData] = useState(data)
   const isInitialRender = useRef(true)
@@ -20,8 +20,7 @@ const Card = ({ data, keyInfo, type }) => {
         return result;
       }, [])
       .map(obj => Object.values(obj))
-  const summaryValues = createArrayOfSummaryValues(keyInfo, data)
-  console.log(summaryValues)
+  const summaryValues = createArrayOfSummaryValues(columns, data)
 
   useEffect(() => {
     if (!isInitialRender.current) { // ensure updateDataInDb() doesn't trigger an infinite loop

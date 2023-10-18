@@ -11,7 +11,7 @@ const SummaryTable = ({ columns, data, dataType }) => {
       </Thead>
       <Tbody>
         {data?.map((item, index) =>
-          <Card key={index} data={item} type={dataType} keyInfo={columns} />
+          <Card key={index} data={item} type={dataType} columns={columns} />
         )}
       </Tbody>
     </Table>
