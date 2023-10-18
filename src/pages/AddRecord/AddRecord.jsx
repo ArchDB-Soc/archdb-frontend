@@ -4,7 +4,7 @@ import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPane
 import buildObjectFromForm, { capitaliseFirstLetter } from "../../utils/utils";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-// import ChakraAccordionItem from "../../components/Accordion/Accordion";
+import CustomInput from "../../components/CustomInput/CustomInput";
 
 const AddRecord = () => {
 
@@ -58,6 +58,7 @@ const AddRecord = () => {
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
+
       <form onSubmit={submitForm} id="record-form">
         <Accordion allowToggle>
           <Box textAlign={"left"} padding={5}>
@@ -80,39 +81,12 @@ const AddRecord = () => {
               </h2>
               <AccordionPanel>
                 {
-                  findAllFieldsFromCategory(recordFields, category).map(item => (
-                    <HStack key={item.id}>
-                      <Text minW="100px" maxW="150px" w="25%">{item.name}:</Text>
-                      <Input
-                        type={item.type}
-                        id={item.id}
-                        required={item.required === "true"}
-                      />
-                    </HStack>
+                  findAllFieldsFromCategory(recordFields, category).map((item, index) => (
+                    <CustomInput item={item} key={index} />
                   ))}
               </AccordionPanel>
             </AccordionItem>
           ))}
-          {/* <AccordionItem>
-
-            <h2>
-              <AccordionButton onClick={() => setOpenSites(!openSites)} type="button">
-                <AccordionIcon />
-                Site
-              </AccordionButton>
-            </h2>
-
-            <AccordionPanel>
-
-              <Select placeholder='Select Site' id="site" >
-                {sites.map((site, index) => (
-                  <option value={site._id} key={index}>{site.name}</option>
-                ))}
-              </Select>
-
-            </AccordionPanel>
-
-          </AccordionItem> */}
         </Accordion>
         <Button type="submit" m={5}>Submit</Button>
       </form>

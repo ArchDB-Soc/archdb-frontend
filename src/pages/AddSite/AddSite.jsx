@@ -1,9 +1,9 @@
 import { addDataToDb } from "../../api/calls";
 import { siteFields } from "../../const/dataFields";
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, Input, Stack, Text } from '@chakra-ui/react'
-import buildObjectFromForm, { capitaliseFirstLetter } from "../../utils/utils";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Stack } from '@chakra-ui/react'
+import buildObjectFromForm from "../../utils/utils";
 import { NavLink, useNavigate } from "react-router-dom";
-// import ChakraAccordionItem from "../../components/Accordion/Accordion";
+import CustomInput from "../../components/CustomInput/CustomInput";
 
 const AddSite = () => {
 
@@ -19,14 +19,6 @@ const AddSite = () => {
     navigate("/")
   }
 
-  const createCategoriesArray = (siteArr) => {
-    const typesArr = [...new Set(siteArr.map((site) => site.category))]
-    return typesArr
-  }
-
-  const findAllFieldsFromCategory = (fieldsArr, category) => {
-    return fieldsArr.filter(item => item.category === category)
-  }
 
   return (
     <Stack m={5} className='form-container'>
@@ -43,31 +35,9 @@ const AddSite = () => {
         </BreadcrumbItem>
       </Breadcrumb>
       <form onSubmit={submitForm} id="site-form">
-        <Accordion allowToggle>
-          {(createCategoriesArray(siteFields)).map((category, index) => (
-            <AccordionItem key={index}>
-              <h2>
-                <AccordionButton>
-                  <AccordionIcon />
-                  {capitaliseFirstLetter(category)}
-                </AccordionButton>
-              </h2>
-              <AccordionPanel>
-                {
-                  findAllFieldsFromCategory(siteFields, category).map(item => (
-                    <HStack key={item.id}>
-                      <Text minW="100px" maxW="150px" w="25%">{item.name}:</Text>
-                      <Input
-                        type={item.type}
-                        id={item.id}
-                        required={item.required === "true"}
-                      />
-                    </HStack>
-                  ))}
-              </AccordionPanel>
-            </AccordionItem>
-          ))}
-        </Accordion>
+        {siteFields.map((field, index) => (
+          <CustomInput item={field} key={index} />
+        ))}
         <Button type="submit" m={5}>Submit</Button>
       </form>
     </Stack>
