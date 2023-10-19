@@ -65,7 +65,7 @@ const AddRecord = () => {
       <form onSubmit={submitForm} id="record-form">
         <Accordion allowToggle>
           <Box textAlign={"left"} padding={5}>
-            <h2>Set</h2>
+            <h2>Site *</h2>
             <Box paddingTop={3} paddingBottom={3}>
               <Select placeholder='Select Site' id="_site" required>
                 {sites.map((site, index) => (
@@ -75,7 +75,7 @@ const AddRecord = () => {
             </Box>
           </Box>
           <Box textAlign={"left"} padding={5}>
-            <h2>Site *</h2>
+            <h2>Set</h2>
             <Box paddingTop={3} paddingBottom={3}>
               <Select placeholder='Select Set' id="_set">
                 {sets.map((set, index) => (
