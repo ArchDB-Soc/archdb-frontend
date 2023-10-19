@@ -1,7 +1,6 @@
 import { apiURL } from "../const/api";
 // import { AuthContext } from '../../context/AuthContext'
 
-
 const userStored = JSON.parse(localStorage.getItem('userStored'))
 
 // import Cookies from 'js-cookie'
@@ -65,9 +64,9 @@ export const updateDataInDb = async (updatedData, route) => {
 };
 
 export const addRecordToSite = async (updatedData, siteid) => {
+
+  console.log(updatedData._set)
   try {
-    console.log(siteid)
-    console.log(updatedData)
     const response = await fetch(`${apiURL}/sites/${siteid}/records`, {
       method: "PUT",
       headers: {
@@ -82,8 +81,70 @@ export const addRecordToSite = async (updatedData, siteid) => {
     }
 
     const data = await response.json();
-    console.log("Site updated:", JSON.stringify(data));
+    console.log("Site updated with new Record:", JSON.stringify(data));
+
+    try {
+      console.log("check1")
+      addExistingRecordToSet(data._id, updatedData._set)
+    } catch (error) {
+      console.error("Error:", error);
+    }
+
     // location.reload()
+
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
+const addExistingRecordToSet = async (recordId, setId) => {
+  try {
+    // const record = { id: `${recordId}` }
+    console.log("check2", recordId, setId)
+    const response = await fetch(`${apiURL}/sets/${setId}/records/${recordId}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${userStored?.token}`,
+        "Content-Type": "application/json",
+      },
+      // body: JSON.stringify(record),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("check3", data)
+    console.log("Set updated with Record ID:", JSON.stringify(data));
+
+
+
+    // location.reload()
+
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+export const addSetToSite = async (updatedData, siteid) => {
+  try {
+    const response = await fetch(`${apiURL}/sites/${siteid}/sets`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${userStored?.token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Data added:", JSON.stringify(data));
+    location.reload()
 
   } catch (error) {
     console.error("Error:", error);
@@ -98,12 +159,16 @@ export const deleteDataFromDb = async (type, id, parentid) => { //parentid is op
     } else if (type === "records") {
       const fullApiURL = `${baseURL}/sites/${parentid}/records/${id}`
       return fullApiURL
+    } else if (type === "sets") {
+      const fullApiURL = `${baseURL}/sites/${parentid}/sets/${id}`
+      return fullApiURL
     } else {
       console.log("no element found with that id or parent id")
       return `${baseURL}/404`
     }
   }
   const url = urlCreator(apiURL, type, id, parentid)
+  console.log(url)
   try {
     await fetch(`${url}`, {
       method: "DELETE",
@@ -117,7 +182,7 @@ export const deleteDataFromDb = async (type, id, parentid) => { //parentid is op
   } catch (error) {
     console.error("Error:", error);
   }
-}
+};
 
 export const getUserFromDbById = async (id, userSetter) => {
   try {
@@ -134,7 +199,7 @@ export const getUserFromDbById = async (id, userSetter) => {
   } catch (error) {
     console.log("error:", error);
   }
-}
+};
 
 export const authenticationRequest = async (email, password, setError, setIsLoggedIn) => {
   try {
@@ -166,4 +231,4 @@ export const authenticationRequest = async (email, password, setError, setIsLogg
   } catch (error) {
     console.error('Error:', error);
   }
-}
+};

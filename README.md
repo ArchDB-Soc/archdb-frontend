@@ -13,3 +13,4 @@ Find the backend here: https://github.com/plabram/iadb
 * Performance is improved as it is an SPA. React Router is used to manage routes.
 * Bearer tokens are stored to local storage. This isn't the most secure approach and would need to move to a cookie as use of the service scales.
 * While every effort has been taken to use systems that respond to a variety of use cases, mobile is technically not supported as of yet.
+* There are 3 main objects in the data model: Sites (grandparent), Sets (parent) and Records (child). The relationship between Sets and Records is flexible and the two can exist independently, however the relationship between Sites and other entities is strongly protected. As such, it's obligatory to add a Site to other records, and deleting a Site will delete all related records. This goes for front and backend.

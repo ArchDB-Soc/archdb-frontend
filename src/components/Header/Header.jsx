@@ -28,7 +28,8 @@ const Header = () => {
       <nav>
         <Tabs variant='enclosed' isLazy>
           <TabList>
-            <Tab ><NavLink to="/">Sites</NavLink></Tab>
+            <Tab><NavLink to="/">Sites</NavLink></Tab>
+            <Tab><NavLink to="/sets">Sets</NavLink></Tab>
             <Tab><NavLink to="/records">Records</NavLink></Tab>
           </TabList>
         </Tabs>

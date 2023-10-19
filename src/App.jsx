@@ -7,6 +7,8 @@ export const UserContext = createContext();
 
 const Sites = lazy(() => import('./pages/Sites/Sites'))
 const AddSite = lazy(() => import('./pages/AddSite/AddSite'))
+const Sets = lazy(() => import('./pages/Sets/Sets'))
+const AddSet = lazy(() => import('./pages/AddSet/AddSet'))
 const Records = lazy(() => import('./pages/Records/Records'))
 const AddRecord = lazy(() => import('./pages/AddRecord/AddRecord'))
 const Login = lazy(() => import('./pages/Login/Login'))
@@ -39,6 +41,16 @@ function App() {
           <Route path="/add-site" element={
             <Layout showHeader={isLoggedIn}>
               <React.Suspense fallback={<h2>Loading...</h2>}><AddSite /></React.Suspense>
+            </Layout>
+          } />
+          <Route path="/sets" element={
+            <Layout showHeader={isLoggedIn}>
+              <React.Suspense fallback={<h2>Loading...</h2>}><Sets /></React.Suspense>
+            </Layout>
+          } />
+          <Route path="/add-set" element={
+            <Layout showHeader={isLoggedIn}>
+              <React.Suspense fallback={<h2>Loading...</h2>}><AddSet /></React.Suspense>
             </Layout>
           } />
           <Route path="/records" element={

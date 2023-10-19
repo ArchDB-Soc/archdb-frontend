@@ -9,6 +9,9 @@ const AddSite = () => {
 
   const navigate = useNavigate()
 
+  const siteInputs = siteFields.filter(field => (field.id !== "records"));
+
+
   const submitForm = (e) => {
     e.preventDefault();
     const fields = Array.from(e.target.elements).map(element => element.id)
@@ -35,7 +38,7 @@ const AddSite = () => {
         </BreadcrumbItem>
       </Breadcrumb>
       <form onSubmit={submitForm} id="site-form">
-        {siteFields.map((field, index) => (
+        {siteInputs.map((field, index) => (
           <CustomInput item={field} key={index} />
         ))}
         <Button type="submit" m={5}>Submit</Button>

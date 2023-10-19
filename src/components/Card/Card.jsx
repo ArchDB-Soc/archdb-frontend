@@ -14,12 +14,11 @@ const Card = ({ data, columns, type }) => {
   const createArrayOfSummaryValues = (summaryFields, dataObject) =>
     summaryFields.map(key => key.id)
       .reduce((result, field) => {
-        // if (dataObject.hasOwnProperty(field)) {
         result.push({ [field]: dataObject[field] });
-        // }
         return result;
       }, [])
       .map(obj => Object.values(obj))
+
   const summaryValues = createArrayOfSummaryValues(columns, data)
 
   useEffect(() => {
@@ -43,7 +42,6 @@ const Card = ({ data, columns, type }) => {
 
   const deleteData = () => {
     const parentid = ((data._site) ? data._site : undefined)
-    console.log(parentid)
     deleteDataFromDb(type, data._id, parentid)
   }
 

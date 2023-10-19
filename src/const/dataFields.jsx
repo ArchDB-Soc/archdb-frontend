@@ -1,12 +1,13 @@
-// This list of fields is used dynamically throughout various parts of the app.
+// List out the different fields for each data object so the API doesn't have to be called every time they're needed.
 
 export const recordFields = [
+  { id: "friendlyId", name: "ID", type: "text", required: "false", category: "internal", keyInfo: true },
   { id: "checkedBy", name: "Checked by", type: "text", required: "false", category: "people" },
-  { id: "enteredBy", name: "Entered by", type: "text", required: "false", category: "people", keyInfo: true },
+  { id: "enteredBy", name: "Entered by", type: "text", required: "false", category: "people" },
   { id: "recorder", name: "Recorder", type: "text", required: "false", category: "people" },
   { id: "excavator", name: "Excavator", type: "text", required: "false", category: "people" },
-  { id: "siteName", name: "Site name", type: "text", required: "false", category: "site", keyInfo: true },
-  { id: "_site", name: "Site", type: "text", required: "false", category: "site" },
+  { id: "siteName", name: "Site name", type: "text", required: "true", category: "site", keyInfo: true },
+  { id: "_site", name: "Site", type: "text", required: "true", category: "site" },
   { id: "siteArea", name: "Site area", type: "text", required: "false", category: "site" },
   { id: "excavatedOn", name: "Excavated on", type: "text", required: "false", category: "site", keyInfo: true },
   { id: "excavationMethod", name: "Excavation method", type: "text", required: "false", category: "site" },
@@ -18,7 +19,6 @@ export const recordFields = [
   { id: "composition", name: "Composition", type: "text", required: "false", category: "description" },
   { id: "recordType", name: "Record type", type: "text", required: "false", category: "description" },
   { id: "dimensions", name: "Dimensions", type: "text", required: "false", category: "description" },
-  { id: "setNum", name: "Set Num", type: "number", required: "false", category: "description" },
   { id: "thickness", name: "Thickness", type: "number", required: "false", category: "description" },
   { id: "fillOf", name: "Fill of", type: "number", required: "false", category: "description" },
   { id: "description", name: "Description", type: "text", required: "false", category: "description", keyInfo: true },
@@ -42,6 +42,16 @@ export const siteFields = [
   { id: "records", name: "Records", type: "text", required: "false", category: "info" },
 
 ];
+
+export const setFields = [
+  { id: "_site", name: "Site", type: "text", required: "true", category: "site" },
+  { id: "siteName", name: "Site name", type: "text", required: "true", category: "site", keyInfo: true },
+  { id: "title", name: "Title", type: "text", required: "false", category: "info", keyInfo: true },
+  { id: "period", name: "Period", type: "text", required: "false", category: "info", keyInfo: true },
+  { id: "notes", name: "Notes", type: "text", required: "false", category: "info", keyInfo: true },
+  { id: "records", name: "Records", type: "text", required: "false", category: "info" },
+]
+
 
 /* 
   sieved: { type: Boolean, required: false },
