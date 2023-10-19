@@ -65,7 +65,14 @@ export const updateDataInDb = async (updatedData, route) => {
 
 export const addRecordToSite = async (updatedData, siteid) => {
 
-  console.log(updatedData._set)
+  console.log(updatedData)
+
+  if (updatedData._set === "") {
+    delete updatedData._set
+    console.log(updatedData)
+  }
+
+
   try {
     const response = await fetch(`${apiURL}/sites/${siteid}/records`, {
       method: "PUT",
@@ -83,14 +90,15 @@ export const addRecordToSite = async (updatedData, siteid) => {
     const data = await response.json();
     console.log("Site updated with new Record:", JSON.stringify(data));
 
-    try {
-      console.log("check1")
-      addExistingRecordToSet(data._id, updatedData._set)
-    } catch (error) {
-      console.error("Error:", error);
+    if (updatedData._set !== null) {
+      try {
+        addExistingRecordToSet(data._id, updatedData._set)
+      } catch (error) {
+        console.error("Error:", error);
+      }
     }
 
-    // location.reload()
+    location.reload()
 
   } catch (error) {
     console.error("Error:", error);
@@ -99,28 +107,18 @@ export const addRecordToSite = async (updatedData, siteid) => {
 
 const addExistingRecordToSet = async (recordId, setId) => {
   try {
-    // const record = { id: `${recordId}` }
-    console.log("check2", recordId, setId)
     const response = await fetch(`${apiURL}/sets/${setId}/records/${recordId}`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${userStored?.token}`,
         "Content-Type": "application/json",
       },
-      // body: JSON.stringify(record),
     });
-
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-
     const data = await response.json();
-    console.log("check3", data)
     console.log("Set updated with Record ID:", JSON.stringify(data));
-
-
-
-    // location.reload()
 
   } catch (error) {
     console.error("Error:", error);
