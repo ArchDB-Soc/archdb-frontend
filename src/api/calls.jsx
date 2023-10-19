@@ -72,7 +72,6 @@ export const addRecordToSite = async (updatedData, siteid) => {
     console.log(updatedData)
   }
 
-
   try {
     const response = await fetch(`${apiURL}/sites/${siteid}/records`, {
       method: "PUT",

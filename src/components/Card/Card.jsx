@@ -1,10 +1,10 @@
 import {
-  Tr, Td, Button, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton,
+  Tr, Td, Button, useDisclosure
 } from '@chakra-ui/react'
-import ModalEntry from '../ModalEntry/ModalEntry'
 import { useState, useEffect, useRef } from 'react'
 import { deleteDataFromDb, updateDataInDb } from '../../api/calls'
 import buildObjectFromForm from '../../utils/utils'
+import EditModal from '../EditModal/EditModal'
 
 const Card = ({ data, columns, type }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -47,32 +47,11 @@ const Card = ({ data, columns, type }) => {
 
   return (
     <Tr className="card">
-      {/* Key information for each entry */}
       {summaryValues.map((value, index) => <Td key={index}>{value}</Td>)}
       <Td w="100px" p="10px">
-
-        {/* Edit button and modal that displays when it is opened */}
         <Button onClick={onOpen}>Edit</Button>
-        <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Edit {data._id}</ModalHeader>
-            <ModalCloseButton />
-            <form onSubmit={(e) => handleUpdateFormSubmit(e)} id="update-data-form">
-              <ModalBody>
-                <ModalEntry data={data} />
-              </ModalBody>
-              <ModalFooter>
-                <Button colorScheme='blue' mr={3} onClick={onClose}>
-                  Cancel
-                </Button>
-                <Button variant='ghost' type="submit">Update</Button>
-              </ModalFooter>
-            </form>
-          </ModalContent>
-        </Modal>
+        <EditModal isOpen={isOpen} onClose={onClose} data={data} handleSubmit={handleUpdateFormSubmit} />
       </Td>
-      {/* Delete button for each entry*/}
       <Td w="100px" p="10px">
         <Button color="red" onClick={deleteData}>Delete</Button>
       </Td>
