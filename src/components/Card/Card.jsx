@@ -50,7 +50,7 @@ const Card = ({ data, columns, type }) => {
       {summaryValues.map((value, index) => <Td key={index}>{value}</Td>)}
       <Td w="100px" p="10px">
         <Button onClick={onOpen}>Edit</Button>
-        <EditModal isOpen={isOpen} onClose={onClose} data={data} handleSubmit={handleUpdateFormSubmit} />
+        <EditModal isOpen={isOpen} onClose={onClose} data={data} handleSubmit={handleUpdateFormSubmit} type={type} />
       </Td>
       <Td w="100px" p="10px">
         <Button color="red" onClick={deleteData}>Delete</Button>
