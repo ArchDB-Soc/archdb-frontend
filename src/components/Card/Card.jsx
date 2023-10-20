@@ -6,8 +6,10 @@ import { deleteDataFromDb, updateDataInDb } from '../../api/calls'
 import buildObjectFromForm from '../../utils/utils'
 import EditModal from '../EditModal/EditModal'
 
+
 const Card = ({ data, columns, type }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+
   const [updatedData, setUpdatedData] = useState(data)
   const isInitialRender = useRef(true)
 
