@@ -1,4 +1,4 @@
-import { addSetToSite, getAllDataFromDb } from "../../api/calls";
+import { addXToY, getAllDataFromDb } from "../../api/calls";
 import { setFields } from "../../const/dataFields";
 import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Select, Stack } from '@chakra-ui/react'
 import buildObjectFromForm from "../../utils/utils";
@@ -20,8 +20,7 @@ const AddSet = () => {
     const data = buildObjectFromForm(fields, responses)
     const chosenSite = sites.find(obj => obj._id === data._site)
     data.siteName = chosenSite.name // user-friendly name to use instead of site id
-    addSetToSite(data, data._site)
-    document.getElementById("set-form").reset()
+    addXToY("set", "site", data, data._site)
     navigate("/sets")
   }
   useEffect(() => {
