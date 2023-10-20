@@ -26,7 +26,6 @@ const EditModal = ({ isOpen, onClose, data, handleSubmit, type }) => {
   } else if (type === "sites") {
     readOnlyFields._sets = updatableFields._sets
     delete updatableFields._sets
-    readOnlyFields._records = updatableFields._records
     delete updatableFields._records
   }
 
