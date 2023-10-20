@@ -52,8 +52,6 @@ export const updateDataInDb = async (updatedData, route) => {
 
     const data = await response.json();
     console.log("Record updated:", JSON.stringify(data));
-    location.reload()
-
   } catch (error) {
     console.error("Error:", error);
   }
@@ -83,7 +81,6 @@ export const addXToY = async (x, y, updatedData, yId) => {
 
   const urlBuilder = (baseUrl, x, y, yId) => `${baseUrl}/${y}s/${yId}/${x}s`
   const url = urlBuilder(apiURL, x, y, yId)
-  let data = {}
 
   try {
     const response = await fetch(`${url}`, {
@@ -99,9 +96,8 @@ export const addXToY = async (x, y, updatedData, yId) => {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    data = await response.json();
+    const data = await response.json();
     console.log(`${x} added to ${y}`, JSON.stringify(data));
-    return data
 
   } catch (error) {
     console.error("Error:", error);

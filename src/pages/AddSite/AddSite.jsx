@@ -18,7 +18,6 @@ const AddSite = () => {
     const responses = Array.from(e.target.elements).map(element => element.value)
     const data = buildObjectFromForm(fields, responses)
     addDataToDb(data, "sites")
-    document.getElementById("site-form").reset()
     navigate("/")
   }
 

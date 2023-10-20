@@ -22,7 +22,6 @@ const AddRecord = () => {
     const chosenSite = sites.find(obj => obj._id === data._site)
     data.siteName = chosenSite.name // user-friendly name to use instead of site id
     addRecordToSite(data, data._site)
-    document.getElementById("record-form").reset()
     navigate("/records")
   }
 
