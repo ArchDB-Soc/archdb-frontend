@@ -63,47 +63,6 @@ export const updateDataInDb = async (updatedData, route) => {
   }
 };
 
-export const addRecordToSite = async (updatedData, siteid) => {
-
-  console.log(updatedData)
-
-  if (updatedData._set === "") {
-    delete updatedData._set
-    console.log(updatedData)
-  }
-
-  try {
-    const response = await fetch(`${apiURL}/sites/${siteid}/records`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${userStored?.token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedData),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    console.log("Site updated with new Record:", JSON.stringify(data));
-
-    if (updatedData._set !== null) {
-      try {
-        addExistingRecordToSet(data._id, updatedData._set)
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    }
-
-    location.reload()
-
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
-
 const addExistingRecordToSet = async (recordId, setId) => {
   try {
     const response = await fetch(`${apiURL}/sets/${setId}/records/${recordId}`, {
@@ -123,6 +82,40 @@ const addExistingRecordToSet = async (recordId, setId) => {
     console.error("Error:", error);
   }
 }
+
+export const addRecordToSite = async (updatedData, siteid) => {
+  if (updatedData._set === "") {
+    delete updatedData._set
+  }
+  try {
+    const response = await fetch(`${apiURL}/sites/${siteid}/records`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${userStored?.token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Site updated with new Record:", JSON.stringify(data));
+
+    if (updatedData._set !== null) {
+      try {
+        addExistingRecordToSet(data._id, updatedData._set)
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+
+    location.reload()
+
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
 
 export const addSetToSite = async (updatedData, siteid) => {
   try {

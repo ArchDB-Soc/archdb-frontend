@@ -29,8 +29,6 @@ const EditModal = ({ isOpen, onClose, data, handleSubmit, type }) => {
     delete updatableFields._records
   }
 
-  console.log(Object.entries(readOnlyFields))
-
   return (
     <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
       <ModalOverlay />
