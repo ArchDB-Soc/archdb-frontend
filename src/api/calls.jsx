@@ -123,7 +123,6 @@ export const addRecordToSite = async (updatedData, siteid) => {
     }
     data = await response.json();
     console.log("Site updated with new Record:", JSON.stringify(data._id));
-    return data
   } catch (error) {
     console.error("Error:", error);
   }
