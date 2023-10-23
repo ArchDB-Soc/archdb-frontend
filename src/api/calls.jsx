@@ -30,7 +30,6 @@ export const getAllDataFromDb = async (setter, route) => {
     });
     const dataToJson = await data.json();
     setter(dataToJson.data);
-    // setLoading(true)
   } catch (error) {
     console.log("error:", error);
   }
@@ -137,7 +136,6 @@ export const addRecordToSite = async (updatedData, siteid) => {
     }
   }
 
-  // location.reload()
 };
 
 export const deleteDataFromDb = async (type, id, parentid) => { //parentid is optional and not available for Sites

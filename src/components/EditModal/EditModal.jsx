@@ -71,27 +71,13 @@ const EditModal = ({ isOpen, onClose, data,
                     : <Input id={key} placeholder="-" name={key}></Input>
                   }
                 </div>
-              )
-              )}
+              ))}
             </Stack>
             <Stack>
-              {/* {Object.entries(readOnlyFields).map(([key, value]) => (
-                <div key={key}>
-                  <Text>{key}:</Text>
-                  {value ?
-                    <Text p={3} color="gray">{value}</Text>
-                    : <Text>-</Text>
-                  }
-                </div>
-              )
-              )} */}
-
               {Object.entries(readOnlyFields).map(([key, value]) => (
                 <div key={key}>
                   <Text>{key}:</Text>
                   {Array.isArray(value) ? (
-
-
                     <Text p={3} color="gray">
                       {value.map((item, index) => (
                         <span key={index}>
@@ -100,15 +86,11 @@ const EditModal = ({ isOpen, onClose, data,
                         </span>
                       ))}
                     </Text>
-
-
-
                   ) : (
                     <Text p={3} color="gray">{value}</Text>
                   )}
                 </div>
               ))}
-
             </Stack>
           </ModalBody>
           <ModalFooter>
