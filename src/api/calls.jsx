@@ -139,22 +139,20 @@ export const addRecordToSite = async (updatedData, siteid) => {
 };
 
 export const deleteDataFromDb = async (type, id, parentid) => { //parentid is optional and not available for Sites
-  const urlCreator = (baseURL, type, id, parentid) => {
-    if (type === "sites") {
-      const fullApiURL = `${baseURL}/sites/${id}`
-      return fullApiURL
-    } else if (type === "records") {
-      const fullApiURL = `${baseURL}/sites/${parentid}/records/${id}`
-      return fullApiURL
-    } else if (type === "sets") {
-      const fullApiURL = `${baseURL}/sites/${parentid}/sets/${id}`
-      return fullApiURL
-    } else {
-      console.log("no element found with that id or parent id")
-      return `${baseURL}/404`
+  const urlCreator = (type, id, parentid) => {
+    switch (type) {
+      case "sites":
+        return `${apiURL}/sites/${id}`;
+      case "records":
+        return `${apiURL}/sites/${parentid}/records/${id}`;
+      case "sets":
+        return `${apiURL}/sites/${parentid}/sets/${id}`;
+      default:
+        console.log("no element found with that id or parent id");
+        return `${apiURL}/404`;
     }
   }
-  const url = urlCreator(apiURL, type, id, parentid)
+  const url = urlCreator(type, id, parentid)
   console.log(url)
   try {
     await fetch(`${url}`, {

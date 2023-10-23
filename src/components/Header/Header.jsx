@@ -18,7 +18,6 @@ const Header = () => {
 
   const handleTabsChange = (index) => {
     setTabIndex(index)
-    console.log(index)
   }
 
   const logout = () => {
@@ -26,9 +25,6 @@ const Header = () => {
     console.log("User logged out")
     navigate("/login")
   }
-
-  // useEffect(() => {
-  // }, [])
 
   return (
     <header>
