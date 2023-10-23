@@ -1,4 +1,4 @@
-import { Heading, Tabs, TabList, Tab, Button, Spacer, Flex, Link, TabPanels, TabPanel, Text, Icon } from "@chakra-ui/react"
+import { Heading, Tabs, TabList, Tab, Button, Spacer, Flex } from "@chakra-ui/react"
 import { NavLink, useNavigate } from "react-router-dom"
 import { UserContext } from '../../App';
 import { useContext, useState, useEffect } from "react";
@@ -14,10 +14,11 @@ const Header = () => {
     if (currentUrl === "http://localhost:5173/records" || currentUrl === "http://localhost:5173/add-record") { setTabIndex(2) }
     else if (currentUrl === "http://localhost:5173/sets" || currentUrl === "http://localhost:5173/add-set") { setTabIndex(1) }
     else if (currentUrl === "http://localhost:5173/sites" || currentUrl === "http://localhost:5173/add-site") { setTabIndex(0) }
-  }, [])
+  }, [tabIndex])
 
   const handleTabsChange = (index) => {
     setTabIndex(index)
+    console.log(index)
   }
 
   const logout = () => {
@@ -26,8 +27,8 @@ const Header = () => {
     navigate("/login")
   }
 
-  useState(() => {
-  }, [])
+  // useEffect(() => {
+  // }, [])
 
   return (
     <header>
