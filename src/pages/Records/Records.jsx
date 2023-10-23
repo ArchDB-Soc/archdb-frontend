@@ -11,10 +11,10 @@ const Records = () => {
   const [records, setRecords] = useState([{}])
   const { isLoggedIn } = useContext(UserContext)
   const keyInfo = recordFields.filter(field => field.keyInfo === true)
-
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    getAllDataFromDb(setRecords, "records")
+    getAllDataFromDb(setRecords, "records", setLoading)
   }, [])
 
   return (
@@ -34,7 +34,7 @@ const Records = () => {
         : null}
 
       <Suspense fallback={<h2>Loading records.</h2>}>
-        <SummaryTable columns={keyInfo} data={records} dataType="records" />
+        <SummaryTable columns={keyInfo} data={records} dataType="records" loading={loading} />
       </Suspense>
 
     </Stack>

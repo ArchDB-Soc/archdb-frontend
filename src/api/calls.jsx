@@ -20,7 +20,7 @@ export const addDataToDb = (data, route) => {
     });
 };
 
-export const getAllDataFromDb = async (setter, route) => {
+export const getAllDataFromDb = async (setter, route, setLoading) => {
   try {
     const data = await fetch(`${apiURL}/${route}`, {
       method: "GET",
@@ -30,6 +30,7 @@ export const getAllDataFromDb = async (setter, route) => {
     });
     const dataToJson = await data.json();
     setter(dataToJson.data);
+    setLoading(false)
   } catch (error) {
     console.log("error:", error);
   }

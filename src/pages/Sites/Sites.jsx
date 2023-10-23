@@ -11,9 +11,10 @@ const Sites = () => {
   const [sites, setSites] = useState([{}])
   const { isLoggedIn } = useContext(UserContext)
   const keyInfo = siteFields.filter(field => field.keyInfo === true)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    getAllDataFromDb(setSites, "sites")
+    getAllDataFromDb(setSites, "sites", setLoading)
   }, [])
 
   return (
@@ -26,14 +27,11 @@ const Sites = () => {
         </BreadcrumbItem>
       </Breadcrumb>
       <Heading as="h2" size="md" m={5}>Sites</Heading>
-      {isLoggedIn ?
-        <Link to="/add-site">
-          <Button>Add Site</Button>
-        </Link>
-        : null}
-
+      <Link to="/add-site">
+        <Button>Add Site</Button>
+      </Link>
       <Suspense fallback={<h2>Loading sites.</h2>}>
-        <SummaryTable columns={keyInfo} data={sites} dataType="sites" />
+        <SummaryTable columns={keyInfo} data={sites} dataType="sites" loading={loading} />
       </Suspense>
 
     </Stack>
