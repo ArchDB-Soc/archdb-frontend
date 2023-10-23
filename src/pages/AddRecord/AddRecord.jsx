@@ -21,7 +21,8 @@ const AddRecord = () => {
     const data = buildObjectFromForm(fields, responses)
     const chosenSite = sites.find(obj => obj._id === data._site)
     data.siteName = chosenSite.name // user-friendly name to use instead of site id
-    addRecordToSite(data, data._site)
+    const test = addRecordToSite(data, data._site)
+    console.log(test)
     navigate("/records")
   }
 

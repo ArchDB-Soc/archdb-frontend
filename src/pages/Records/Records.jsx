@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, lazy, Suspense } from 'react'
+import { useEffect, useState, useContext, lazy, Suspense, useRef } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { getAllDataFromDb } from '../../api/calls'
 import { Stack, Heading, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button } from '@chakra-ui/react'
@@ -11,10 +11,11 @@ const Records = () => {
   const [records, setRecords] = useState([{}])
   const { isLoggedIn } = useContext(UserContext)
   const keyInfo = recordFields.filter(field => field.keyInfo === true)
-  const [loading, setLoading] = useState(true)
+  const isLoading = useRef(true);
 
   useEffect(() => {
-    getAllDataFromDb(setRecords, "records", setLoading)
+    getAllDataFromDb(setRecords, "records")
+    isLoading.current = false
   }, [])
 
   return (
@@ -34,7 +35,7 @@ const Records = () => {
         : null}
 
       <Suspense fallback={<h2>Loading records.</h2>}>
-        <SummaryTable columns={keyInfo} data={records} dataType="records" loading={loading} />
+        <SummaryTable columns={keyInfo} data={records} dataType="records" loading={isLoading.current} />
       </Suspense>
 
     </Stack>

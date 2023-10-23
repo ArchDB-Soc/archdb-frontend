@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, lazy, Suspense } from 'react'
+import { useEffect, useState, useContext, lazy, Suspense, useRef } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { getAllDataFromDb } from '../../api/calls'
 import { Stack, Heading, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button } from '@chakra-ui/react'
@@ -11,10 +11,11 @@ const Sites = () => {
   const [sites, setSites] = useState([{}])
   const { isLoggedIn } = useContext(UserContext)
   const keyInfo = siteFields.filter(field => field.keyInfo === true)
-  const [loading, setLoading] = useState(true)
+  const isLoading = useRef(true);
 
   useEffect(() => {
-    getAllDataFromDb(setSites, "sites", setLoading)
+    getAllDataFromDb(setSites, "sites")
+    isLoading.current = false
   }, [])
 
   return (
@@ -31,7 +32,7 @@ const Sites = () => {
         <Button>Add Site</Button>
       </Link>
       <Suspense fallback={<h2>Loading sites.</h2>}>
-        <SummaryTable columns={keyInfo} data={sites} dataType="sites" loading={loading} />
+        <SummaryTable columns={keyInfo} data={sites} dataType="sites" loading={isLoading.current} />
       </Suspense>
 
     </Stack>

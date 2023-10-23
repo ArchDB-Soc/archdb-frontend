@@ -11,14 +11,11 @@ const SummaryTable = ({ columns, data, dataType, loading }) => {
         </Tr>
       </Thead>
       <Tbody>
-        {loading ? <p>Loading data</p> : data?.map((item, index) =>
+        {loading ? <Tr><Td>Loading data</Td></Tr> : data?.map((item, index) =>
           <Suspense key={index} fallback={<Tr><Td>Loading data.</Td></Tr>}>
             <Card key={index} data={item} type={dataType} columns={columns} />
           </Suspense>
-
         )}
-
-        {/* {} */}
       </Tbody>
     </Table>
   )

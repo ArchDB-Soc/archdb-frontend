@@ -20,7 +20,7 @@ export const addDataToDb = (data, route) => {
     });
 };
 
-export const getAllDataFromDb = async (setter, route, setLoading) => {
+export const getAllDataFromDb = async (setter, route) => {
   try {
     const data = await fetch(`${apiURL}/${route}`, {
       method: "GET",
@@ -30,7 +30,7 @@ export const getAllDataFromDb = async (setter, route, setLoading) => {
     });
     const dataToJson = await data.json();
     setter(dataToJson.data);
-    setLoading(false)
+    // setLoading(true)
   } catch (error) {
     console.log("error:", error);
   }
@@ -109,9 +109,7 @@ export const addRecordToSite = async (updatedData, siteid) => {
   if (updatedData._set === "") {
     delete updatedData._set
   }
-
   let data = {}
-
   try {
     const response = await fetch(`${apiURL}/sites/${siteid}/records`, {
       method: "PUT",
@@ -126,12 +124,10 @@ export const addRecordToSite = async (updatedData, siteid) => {
     }
     data = await response.json();
     console.log("Site updated with new Record:", JSON.stringify(data._id));
-
-  }
-  catch (error) {
+    return data
+  } catch (error) {
     console.error("Error:", error);
   }
-
 
   if (updatedData._set !== null) {
     try {
@@ -141,7 +137,7 @@ export const addRecordToSite = async (updatedData, siteid) => {
     }
   }
 
-  location.reload()
+  // location.reload()
 };
 
 export const deleteDataFromDb = async (type, id, parentid) => { //parentid is optional and not available for Sites
