@@ -1,17 +1,18 @@
 import {
   Tr, Td, Button, useDisclosure
 } from '@chakra-ui/react'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, lazy, Suspense } from 'react'
 import { deleteDataFromDb, updateDataInDb } from '../../api/calls'
 import buildObjectFromForm from '../../utils/utils'
-import EditModal from '../EditModal/EditModal'
+
+const EditModal = lazy(() => import("../EditModal/EditModal"))
 
 
 const Card = ({ data, columns, type }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const [updatedData, setUpdatedData] = useState(data)
-  const isInitialRender = useRef(true)
+  // const [updatedData, setUpdatedData] = useState(data)
+  // const isInitialRender = useRef(true)
 
   const createArrayOfSummaryValues = (summaryFields, dataObject) =>
     summaryFields.map(key => key.id)
@@ -23,24 +24,24 @@ const Card = ({ data, columns, type }) => {
 
   const summaryValues = createArrayOfSummaryValues(columns, data)
 
-  useEffect(() => {
-    if (!isInitialRender.current) { // ensure updateDataInDb() doesn't trigger an infinite loop
-      updateDataInDb(updatedData, type)
-    }
-  }, [updatedData])
+  // useEffect(() => {
+  //   if (!isInitialRender.current) { // ensure updateDataInDb() doesn't trigger an infinite loop
+  //     updateDataInDb(updatedData, type)
+  //   }
+  // }, [updatedData])
 
-  const handleUpdateFormSubmit = (e) => {
-    e.preventDefault();
-    isInitialRender.current = false
-    const fields = Array.from(e.target.elements).map(element => element.id)
-    const responses = Array.from(e.target.elements).map(element => element.value)
-    const fieldsAndResponsesAsObject = buildObjectFromForm(fields, responses)
-    const newData = Object.fromEntries(
-      Object.entries(fieldsAndResponsesAsObject).filter(([key, value]) => value !== '')
-    )
-    setUpdatedData({ ...newData, _id: data._id })
-    onClose()
-  }
+  // const handleUpdateFormSubmit = (e) => {
+  //   e.preventDefault();
+  //   isInitialRender.current = false
+  //   const fields = Array.from(e.target.elements).map(element => element.id)
+  //   const responses = Array.from(e.target.elements).map(element => element.value)
+  //   const fieldsAndResponsesAsObject = buildObjectFromForm(fields, responses)
+  //   const newData = Object.fromEntries(
+  //     Object.entries(fieldsAndResponsesAsObject).filter(([key, value]) => value !== '')
+  //   )
+  //   setUpdatedData({ ...newData, _id: data._id })
+  //   onClose()
+  // }
 
   const deleteData = () => {
     const parentid = ((data._site) ? data._site : undefined)
@@ -52,7 +53,13 @@ const Card = ({ data, columns, type }) => {
       {summaryValues.map((value, index) => <Td key={index}>{value}</Td>)}
       <Td w="100px" p="10px">
         <Button onClick={onOpen}>Edit</Button>
-        <EditModal isOpen={isOpen} onClose={onClose} data={data} handleSubmit={handleUpdateFormSubmit} type={type} />
+
+        <Suspense fallback={<h2>Loading edit button.</h2>}>
+          <EditModal isOpen={isOpen} onClose={onClose} data={data}
+            // handleSubmit={handleUpdateFormSubmit} 
+            type={type} />
+        </Suspense>
+
       </Td>
       <Td w="100px" p="10px">
         <Button color="red" onClick={deleteData}>Delete</Button>

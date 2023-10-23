@@ -1,10 +1,35 @@
-import React from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { Stack, Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Input, Text } from '@chakra-ui/react'
+import buildObjectFromForm from '../../utils/utils'
+import { updateDataInDb } from '../../api/calls'
 
-const EditModal = ({ isOpen, onClose, data, handleSubmit, type }) => {
+const EditModal = ({ isOpen, onClose, data,
+  // handleSubmit, 
+  type }) => {
 
   const updatableFields = { ...data }
   const readOnlyFields = {}
+
+  const [updatedData, setUpdatedData] = useState(data)
+  const isInitialRender = useRef(true)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    isInitialRender.current = false
+    const fields = Array.from(e.target.elements).map(element => element.id)
+    const responses = Array.from(e.target.elements).map(element => element.value)
+    const fieldsAndResponsesAsObject = buildObjectFromForm(fields, responses)
+    const newData = Object.fromEntries(
+      Object.entries(fieldsAndResponsesAsObject).filter(([key, value]) => value !== '')
+    )
+    setUpdatedData({ ...newData, _id: data._id })
+    onClose()
+  }
+
+  useEffect(() => {
+    if (!isInitialRender.current) { // ensure updateDataInDb() doesn't trigger an infinite loop
+      updateDataInDb(updatedData, type)
+    }
+  }, [updatedData])
 
   delete updatableFields._id
   delete updatableFields.__v

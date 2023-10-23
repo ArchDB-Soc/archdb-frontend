@@ -139,6 +139,8 @@ export const addRecordToSite = async (updatedData, siteid) => {
       console.error("Error:", error);
     }
   }
+
+  location.reload()
 };
 
 export const deleteDataFromDb = async (type, id, parentid) => { //parentid is optional and not available for Sites

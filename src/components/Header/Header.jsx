@@ -9,7 +9,7 @@ const Header = () => {
   const [tabIndex, setTabIndex] = useState(0)
 
 
-  useEffect(() => {
+  useEffect(() => { //ensure active tab remains active after a page reload
     const currentUrl = window.location.href
     if (currentUrl === "http://localhost:5173/records" || currentUrl === "http://localhost:5173/add-record") { setTabIndex(2) }
     else if (currentUrl === "http://localhost:5173/sets" || currentUrl === "http://localhost:5173/add-set") { setTabIndex(1) }

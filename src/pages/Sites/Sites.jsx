@@ -1,10 +1,10 @@
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState, useContext, lazy, Suspense } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { getAllDataFromDb } from '../../api/calls'
 import { Stack, Heading, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button } from '@chakra-ui/react'
 import { UserContext } from '../../App'
 import { siteFields } from '../../const/dataFields'
-import SummaryTable from '../../components/SummaryTable/SummaryTable'
+const SummaryTable = lazy(() => import("../../components/SummaryTable/SummaryTable"))
 
 const Sites = () => {
 
@@ -31,7 +31,11 @@ const Sites = () => {
           <Button>Add Site</Button>
         </Link>
         : null}
-      <SummaryTable columns={keyInfo} data={sites} dataType="sites" />
+
+      <Suspense fallback={<h2>Loading sites.</h2>}>
+        <SummaryTable columns={keyInfo} data={sites} dataType="sites" />
+      </Suspense>
+
     </Stack>
   )
 }

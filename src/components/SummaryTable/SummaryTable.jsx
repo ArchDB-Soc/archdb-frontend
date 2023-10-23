@@ -1,5 +1,6 @@
-import Card from '../Card/Card'
-import { Table, Thead, Tr, Th, Tbody } from '@chakra-ui/react'
+import { lazy, Suspense } from 'react'
+import { Table, Thead, Td, Tr, Th, Tbody } from '@chakra-ui/react'
+const Card = lazy(() => import("../../components/Card/Card"))
 
 const SummaryTable = ({ columns, data, dataType }) => {
   return (
@@ -11,7 +12,11 @@ const SummaryTable = ({ columns, data, dataType }) => {
       </Thead>
       <Tbody>
         {data?.map((item, index) =>
-          <Card key={index} data={item} type={dataType} columns={columns} />
+
+          <Suspense key={index} fallback={<Tr><Td>Loading data.</Td></Tr>}>
+            <Card key={index} data={item} type={dataType} columns={columns} />
+          </Suspense>
+
         )}
       </Tbody>
     </Table>
