@@ -43,11 +43,10 @@ export const authenticationRequest = async (email, password, setError, setIsLogg
       };
       localStorage.setItem('userStored', JSON.stringify(userStored));
       setIsLoggedIn(true);
-      console.log(setIsLoggedIn)
-      location.reload()
 
     }
   } catch (error) {
     console.error('Error:', error);
   }
+
 };
