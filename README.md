@@ -6,6 +6,8 @@ The Berkshire Archæological Society, the University of Reading and the York Arc
 
 This project is to help them explore options for developing a new IADB from scratch. Right now it uses sample data.
 
+Feedback is welcome, feel free to get in contact with suggestions.
+
 Find the backend here: https://github.com/plabram/iadb
 
 * It uses React. Vanilla JavaScript might be even easier to maintain, but it would have been more difficult to generate a quick proof of concept.
