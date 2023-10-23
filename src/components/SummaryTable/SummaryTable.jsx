@@ -13,7 +13,8 @@ const SummaryTable = ({ columns, data, dataType, loading }) => {
       <Tbody>
         {loading ? <Tr><Td>Loading data</Td></Tr> : data?.map((item, index) =>
           <Suspense key={index} fallback={<Tr><Td>Loading data.</Td></Tr>}>
-            <Card key={index} data={item} type={dataType} columns={columns} />
+            <Card
+              key={index} data={item} type={dataType} columns={columns} />
           </Suspense>
         )}
       </Tbody>

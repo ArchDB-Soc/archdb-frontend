@@ -38,7 +38,9 @@ const AddSite = () => {
       </Breadcrumb>
       <form onSubmit={submitForm} id="site-form">
         {siteInputs.map((field, index) => (
-          <CustomInput item={field} key={index} />
+          <div key={index}>
+            <CustomInput item={field} />
+          </div>
         ))}
         <Button type="submit" m={5}>Submit</Button>
       </form>

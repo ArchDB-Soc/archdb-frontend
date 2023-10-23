@@ -23,6 +23,7 @@ const AddRecord = () => {
     data.siteName = chosenSite.name // user-friendly name to use instead of site id
     addRecordToSite(data, data._site)
     navigate("/records")
+    // location.reload()
 
   }
 
@@ -42,6 +43,7 @@ const AddRecord = () => {
     // if (openSites) { 
     getAllDataFromDb(setSites, "sites")
     getAllDataFromDb(setSets, "sets")
+    console.log("reload")
     // }  only request site list when accordion item is open
   }, [
     // openSites
@@ -95,7 +97,9 @@ const AddRecord = () => {
               <AccordionPanel>
                 {
                   findAllFieldsFromCategory(recordFields, category).map((item, index) => (
-                    <CustomInput item={item} key={index} />
+                    <div key={index}>
+                      <CustomInput item={item} />
+                    </div>
                   ))}
               </AccordionPanel>
             </AccordionItem>

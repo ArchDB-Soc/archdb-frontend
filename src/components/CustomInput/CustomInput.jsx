@@ -1,10 +1,10 @@
 import { HStack, Text, Input } from "@chakra-ui/react"
 import React from "react"
 
-const CustomInput = ({ item, key }) => {
+const CustomInput = ({ item }) => {
   return (
 
-    <HStack key={key}>
+    <HStack>
       <Text minW="100px" maxW="150px" w="25%">{item.name}:</Text>
       <Input
         type={item.type}
