@@ -10,7 +10,6 @@ const AddSet = () => {
 
   const navigate = useNavigate()
   const [sites, setSites] = useState([{}])
-
   const inputsForSets = setFields.filter(field => (field.id !== "_site" && field.id !== "siteName"));
 
   const submitForm = (e) => {
@@ -23,6 +22,7 @@ const AddSet = () => {
     addXToY("set", "site", data, data._site)
     navigate("/sets")
   }
+
   useEffect(() => {
     // if (openSites) { 
     getAllDataFromDb(setSites, "sites")
@@ -30,7 +30,6 @@ const AddSet = () => {
   }, [
     // openSites
   ])
-
 
   return (
     <Stack m={5} className='form-container'>
@@ -47,7 +46,6 @@ const AddSet = () => {
         </BreadcrumbItem>
       </Breadcrumb>
       <form onSubmit={submitForm} id="set-form">
-
         <Box textAlign={"left"} padding={5}>
           <h2>Site *</h2>
           <Box paddingTop={3} paddingBottom={3}>
@@ -58,8 +56,6 @@ const AddSet = () => {
             </Select>
           </Box>
         </Box>
-
-
         {inputsForSets.map((field, index) => (
           <div key={index}>
             <CustomInput item={field} />
