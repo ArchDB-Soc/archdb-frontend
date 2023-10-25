@@ -1,4 +1,4 @@
-import { addDataToDb } from "../../api/calls";
+import { addSiteToDb } from "../../api/calls";
 import { siteFields } from "../../const/dataFields";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Stack } from '@chakra-ui/react'
 import buildObjectFromForm from "../../utils/utils";
@@ -17,7 +17,7 @@ const AddSite = () => {
     const fields = Array.from(e.target.elements).map(element => element.id)
     const responses = Array.from(e.target.elements).map(element => element.value)
     const data = buildObjectFromForm(fields, responses)
-    addDataToDb(data, "sites")
+    addSiteToDb(data)
     navigate("/")
   }
 

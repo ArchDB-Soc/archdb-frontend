@@ -1,4 +1,4 @@
-import { addRecordToSite, getAllDataFromDb } from "../../api/calls";
+import { addRecordToDb, getAllDataFromDb } from "../../api/calls";
 import { recordFields } from "../../const/dataFields";
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, FormControl, FormErrorMessage, FormLabel, HStack, Input, Select, Stack, Text } from '@chakra-ui/react'
 import buildObjectFromForm, { capitaliseFirstLetter } from "../../utils/utils";
@@ -21,7 +21,7 @@ const AddRecord = () => {
     const data = buildObjectFromForm(fields, responses)
     const chosenSite = sites.find(obj => obj._id === data._site)
     data.siteName = chosenSite.name // user-friendly name to use instead of site id
-    addRecordToSite(data, data._site)
+    addRecordToDb(data, data._site)
     navigate("/records")
     // location.reload()
 
