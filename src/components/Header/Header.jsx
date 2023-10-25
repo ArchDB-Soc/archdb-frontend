@@ -2,7 +2,7 @@ import { Heading, Tabs, TabList, Tab, Button, Spacer, Flex } from "@chakra-ui/re
 import { NavLink, useNavigate } from "react-router-dom"
 import { UserContext } from '../../App';
 import { useContext, useState, useEffect } from "react";
-import { URL } from "../../const/api";
+import { URL } from "../../const/urls";
 
 const Header = () => {
   const { loggedIn, setIsLoggedIn } = useContext(UserContext)

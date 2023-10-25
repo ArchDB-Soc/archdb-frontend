@@ -1,4 +1,4 @@
-import { apiURL } from "../const/api";
+import { apiURL } from "../const/urls";
 
 // Not currently used but might be soon
 // const userStored = JSON.parse(localStorage.getItem('userStored'))

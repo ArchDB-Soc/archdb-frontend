@@ -37,7 +37,7 @@ const EditModal = ({ isOpen, onClose, data,
   delete updatableFields.__v
 
   if (type === "records") {
-    readOnlyFields._site = updatableFields._site
+    // readOnlyFields._site = updatableFields._site
     delete updatableFields._site
     readOnlyFields.siteName = updatableFields.siteName
     delete updatableFields.siteName
@@ -60,7 +60,7 @@ const EditModal = ({ isOpen, onClose, data,
     <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Edit {data._id}</ModalHeader>
+        <ModalHeader>Edit {type}</ModalHeader>
         <ModalCloseButton />
         <form onSubmit={(e) => handleSubmit(e)} id="update-data-form">
           <ModalBody>
