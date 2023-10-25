@@ -31,7 +31,7 @@ const Header = () => {
     <header>
       <nav>
         <Flex m={5}>
-          <Heading as="h1" size="2xl">The IADB</Heading>
+          <Heading as="h1" size="2xl">ArchDB</Heading>
           <Spacer />
           <Button onClick={logout}>Log Out </Button>
         </Flex>

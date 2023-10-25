@@ -43,7 +43,6 @@ const AddRecord = () => {
     // if (openSites) { 
     getAllDataFromDb(setSites, "sites")
     getAllDataFromDb(setSets, "sets")
-    console.log("reload")
     // }  only request site list when accordion item is open
   }, [
     // openSites
