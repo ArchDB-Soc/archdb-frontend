@@ -27,6 +27,8 @@ const EditModal = ({ isOpen, onClose, data,
 
   useEffect(() => {
     if (!isInitialRender.current) { // ensure updateDataInDb() doesn't trigger an infinite loop
+      console.log("1", updatedData, type)
+
       updateDataInDb(updatedData, type)
     }
   }, [updatedData])

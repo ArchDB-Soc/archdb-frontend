@@ -31,13 +31,19 @@ function App() {
           setIsLoggedIn: setIsLoggedIn,
           isLoggedIn: isLoggedIn
         }}>
-
         <Routes>
-          <Route path="/" element={
-            <Layout showHeader={isLoggedIn}>
-              <React.Suspense fallback={<h2>Loading...</h2>}><Sites /></React.Suspense>
-            </Layout>
-          } />
+          {isLoggedIn ?
+            <Route path="/" element={
+              <Layout showHeader>
+                <React.Suspense fallback={<h2>Loading...</h2>}><Sites /></React.Suspense>
+              </Layout>
+            } /> :
+            <Route path="/" element={
+              <Layout >
+                <React.Suspense fallback={<h2>Loading...</h2>}><Login /></React.Suspense>
+              </Layout>
+            } />
+          }
           <Route path="/add-site" element={
             <Layout showHeader={isLoggedIn}>
               <React.Suspense fallback={<h2>Loading...</h2>}><AddSite /></React.Suspense>

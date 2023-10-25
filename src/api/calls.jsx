@@ -63,6 +63,7 @@ export const addXToY = async (x, y, updatedData, yId) => {
 };
 
 export const updateDataInDb = async (updatedData, route) => {
+  console.log("2")
   try {
     const response = await fetch(`${apiURL}/${route}/${updatedData._id}`, {
       method: "PUT",
@@ -81,7 +82,7 @@ export const updateDataInDb = async (updatedData, route) => {
     console.error("Error:", error);
   }
 
-  location.reload()
+  // location.reload()
 };
 
 const addExistingRecordToSet = async (recordId, setId) => {
