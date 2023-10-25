@@ -2,6 +2,7 @@ import { Heading, Tabs, TabList, Tab, Button, Spacer, Flex } from "@chakra-ui/re
 import { NavLink, useNavigate } from "react-router-dom"
 import { UserContext } from '../../App';
 import { useContext, useState, useEffect } from "react";
+import { URL } from "../../const/api";
 
 const Header = () => {
   const { loggedIn, setIsLoggedIn } = useContext(UserContext)
@@ -11,9 +12,9 @@ const Header = () => {
 
   useEffect(() => { //ensure active tab remains active after a page reload
     const currentUrl = window.location.href
-    if (currentUrl === "https://iadb.netlify.app/records" || currentUrl === "https://iadb.netlify.app/add-record") { setTabIndex(2) }
-    else if (currentUrl === "https://iadb.netlify.app/sets" || currentUrl === "https://iadb.netlify.app/add-set") { setTabIndex(1) }
-    else if (currentUrl === "https://iadb.netlify.app/sites" || currentUrl === "https://iadb.netlify.app/add-site" || currentUrl === "https://iadb.netlify.app/") { setTabIndex(0) }
+    if (currentUrl === `${URL}/records` || currentUrl === `${URL}/add-record`) { setTabIndex(2) }
+    else if (currentUrl === `${URL}/sets` || currentUrl === `${URL}/add-set`) { setTabIndex(1) }
+    else if (currentUrl === `${URL}/sites` || currentUrl === `${URL}/add-site` || currentUrl === `${URL}`) { setTabIndex(0) }
   }, [tabIndex])
 
   const handleTabsChange = (index) => {
