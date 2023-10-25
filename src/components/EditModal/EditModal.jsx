@@ -37,14 +37,12 @@ const EditModal = ({ isOpen, onClose, data,
   delete updatableFields.__v
 
   if (type === "records") {
-    // readOnlyFields._site = updatableFields._site
     delete updatableFields._site
     readOnlyFields.siteName = updatableFields.siteName
     delete updatableFields.siteName
     readOnlyFields._set = updatableFields._set
     delete updatableFields._set
   } else if (type === "sets") {
-    readOnlyFields._site = updatableFields._site
     delete updatableFields._site
     readOnlyFields.siteName = updatableFields.siteName
     delete updatableFields.siteName
