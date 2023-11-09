@@ -1,14 +1,14 @@
-# IADB frontend
+# ArchDB frontend
 
-The Integrated Archaeological Database (IADB) enables archaeologists to record details from an excavation and to develop interpretations of what they have found.
+The Archaeological Database (ArchDB) enables archaeologists to record details from an excavation and to develop interpretations of what they have found.
 
-The Berkshire Archæological Society, the University of Reading and the York Archaeological Trust have been using IADB 2017. This is likely to be deprecated by 2025.
+The Berkshire Archæological Society, the University of Reading and the York Archaeological Trust have been using a previous version of similar software. This is likely to be deprecated by 2025.
 
-This project is to help them explore options for developing a new IADB from scratch. Right now it uses sample data.
+This project is to help them explore options for developing a new product from scratch. Right now it uses sample data.
 
 Feedback is welcome, feel free to get in contact with suggestions.
 
-Find the backend here: https://github.com/plabram/iadb
+Find the backend here: https://github.com/plabram/archdb-backend
 
 * It uses React. Vanilla JavaScript might be even easier to maintain, but it would have been more difficult to generate a quick proof of concept.
 * Likewise, it uses Chakra. The additional tradeoff for fast upfront development time here is possible slow performance. However, given that all users are "internal", some lag is acceptable.
