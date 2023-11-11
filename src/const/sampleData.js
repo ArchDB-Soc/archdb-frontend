@@ -1,11 +1,11 @@
 export const sampleRecords = [
-  { friendlyId: "TAR001",
+  { friendlyId: "Tar095",
   checkedBy: "Martin",
   enteredBy: "Max",
   siteName: "Tarragona",
   description: "Part of the Roman wall"
 },
-{ friendlyId: "TAR002",
+{ friendlyId: "Tar092",
   checkedBy: "Martin",
   enteredBy: "Alvaro",
   siteName: "Tarragona",

@@ -1,9 +1,10 @@
 import { useEffect, useState, useContext, lazy, Suspense, useRef } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { getAllDataFromDb } from '../../api/calls'
-import { Stack, Heading, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button } from '@chakra-ui/react'
+import { Stack, Heading, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Box } from '@chakra-ui/react'
 import { UserContext } from '../../App'
 import { recordFields } from '../../const/dataFields'
+import { sampleRecords } from '../../const/sampleData'
 const SummaryTable = lazy(() => import("../../components/SummaryTable/SummaryTable"))
 
 const Records = () => {
@@ -34,9 +35,12 @@ const Records = () => {
         </Link>
         : null}
 
-      <Suspense fallback={<h2>Loading records.</h2>}>
-        <SummaryTable columns={keyInfo} data={records} dataType="records" loading={isLoading.current} />
-      </Suspense>
+      <Box>
+        <SummaryTable columns={keyInfo} data={sampleRecords} dataType="records" loading={false} header />
+        <Suspense fallback={<h2>Loading records.</h2>}>
+          <SummaryTable columns={keyInfo} data={records} dataType="records" loading={isLoading.current} />
+        </Suspense>
+      </Box>
 
     </Stack>
   )
