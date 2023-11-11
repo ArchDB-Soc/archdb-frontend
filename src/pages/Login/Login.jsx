@@ -69,11 +69,11 @@ const Login = () => {
             disabled={isLoggedIn}>
             Log in
           </Button>
+          <Box padding={3}>
+            <p>{error ? `${error}` : ""}</p>
+          </Box>
         </form>
       </Box>
-      <Stack>
-        <p>{error ? `${error}` : ""}</p>
-      </Stack>
 
     </Box>
   )
