@@ -21,6 +21,7 @@ const Records = () => {
   useEffect(() => {
     getPaginatedDataFromDb(setRecords, "records", 1)
     setPage(2)
+    setLoading(false)
     renderCount.current += 1;
     console.log(`Component has rendered ${renderCount.current} times`);
   }, []);
@@ -29,12 +30,11 @@ const Records = () => {
     const handleScroll = () => {
       if (
         window.scrollY > window.outerHeight
-        && page <= 100 // need to replace "100" with fetch request to calculate total pages
+        && page <= 5 // need to replace "100" with fetch request to calculate total pages
       ) {
         if (!pagesFetched.current.includes(page)) {
           getPaginatedDataFromDb(setRecords, "records", page)
           pagesFetched.current.push(page)
-          setLoading(false)
           setPage(page + 1)
         }
       }
