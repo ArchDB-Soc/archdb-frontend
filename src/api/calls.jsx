@@ -16,6 +16,32 @@ export const getAllDataFromDb = async (setData, type) => {
   }
 };
 
+export const getPaginatedDataFromDb = async (setData, type, page) => {
+
+  try {
+    const url = page ? `${apiURL}/${type}?page=${page}` : `${apiURL}/${type}`
+    const data = await fetch(url, {
+      method: "GET",
+      headers: {
+        // Authorization: `Bearer ${token}`
+      },
+    });
+    const dataToJson = await data.json();
+
+    setData(prevData => {
+      if ((Object.keys(prevData[0]).length === 0) && !prevData[1]) {
+        return dataToJson.data;
+      } else {
+        return [...prevData, ...dataToJson.data];
+      }
+    });
+
+    console.log(`Got data from page ${page ? page : 1} from the API`)
+  } catch (error) {
+    console.log("error:", error);
+  }
+};
+
 export const updateDataInDb = async (dataToUpdate, type) => {
   try {
     const response = await fetch(`${apiURL}/${type}/${dataToUpdate._id}`, {
