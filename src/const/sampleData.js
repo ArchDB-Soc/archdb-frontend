@@ -10,6 +10,72 @@ export const sampleRecords = [
   enteredBy: "Alvaro",
   siteName: "Tarragona",
   description: "Part of the bottom of the perimeter wall"
+},
+{ friendlyId: "Tar097",
+  checkedBy: "Martin",
+  enteredBy: "Alvaro",
+  siteName: "Tarragona",
+  description: "Part of the bottom of the perimeter wall"
+},
+{ friendlyId: "Tar098",
+  checkedBy: "Martin",
+  enteredBy: "Alvaro",
+  siteName: "Tarragona",
+  description: "Part of the bottom of the perimeter wall"
+},
+{ friendlyId: "Tar099",
+  checkedBy: "Martin",
+  enteredBy: "Alvaro",
+  siteName: "Tarragona",
+  description: "Part of the bottom of the perimeter wall"
+},
+{ friendlyId: "Tar100",
+  checkedBy: "Martin",
+  enteredBy: "Alvaro",
+  siteName: "Tarragona",
+  description: "Part of the bottom of the perimeter wall"
+},
+{ friendlyId: "Tar101",
+  checkedBy: "Martin",
+  enteredBy: "Alvaro",
+  siteName: "Tarragona",
+  description: "Part of the bottom of the perimeter wall"
+},
+{ friendlyId: "Tar102",
+  checkedBy: "Martin",
+  enteredBy: "Alvaro",
+  siteName: "Tarragona",
+  description: "Part of the bottom of the perimeter wall"
+},
+{ friendlyId: "Tar103",
+  checkedBy: "Martin",
+  enteredBy: "Alvaro",
+  siteName: "Tarragona",
+  description: "Part of the bottom of the perimeter wall"
+},
+{ friendlyId: "Tar104",
+  checkedBy: "Martin",
+  enteredBy: "Alvaro",
+  siteName: "Tarragona",
+  description: "Part of the bottom of the perimeter wall"
+},
+{ friendlyId: "Tar105",
+  checkedBy: "Martin",
+  enteredBy: "Alvaro",
+  siteName: "Tarragona",
+  description: "Part of the bottom of the perimeter wall"
+},
+{ friendlyId: "Tar106",
+  checkedBy: "Martin",
+  enteredBy: "Alvaro",
+  siteName: "Tarragona",
+  description: "Part of the bottom of the perimeter wall"
+},
+{ friendlyId: "Tar107",
+  checkedBy: "Martin",
+  enteredBy: "Alvaro",
+  siteName: "Tarragona",
+  description: "Part of the bottom of the perimeter wall"
 }];
 
 export const sampleSets = [

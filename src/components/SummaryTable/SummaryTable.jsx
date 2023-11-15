@@ -3,6 +3,7 @@ import { Table, Thead, Td, Tr, Th, Tbody } from '@chakra-ui/react'
 const Card = lazy(() => import("../../components/Card/Card"))
 
 const SummaryTable = ({ columns, data, dataType, loading, header }) => {
+
   return (
     <Table variant='striped'>
       {header ?
