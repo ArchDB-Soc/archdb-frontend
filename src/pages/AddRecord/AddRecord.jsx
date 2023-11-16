@@ -81,12 +81,12 @@ const AddRecord = () => {
                 {
                   (selectedSite === "") ?
                     sets.map((set, index) => (
-                      <option value={set._id} key={index}>{set._id}</option>
+                      <option value={set._id} key={index}>{set._id} ({set.siteName}) - {set.title}</option>
                     ))
                     :
                     sets.filter(set => set._site === selectedSite)
                       .map((set, index) => (
-                        <option value={set._id} key={index}>{set._id}</option>
+                        <option value={set._id} key={index}>{set._id} - {set.title}</option>
                       ))
                 }
               </Select>
