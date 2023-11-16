@@ -24,10 +24,8 @@ export const recordFields = [
   { id: "description", name: "Description", type: "text", required: "false", category: "description", keyInfo: true },
   { id: "earliestDate", name: "Earliest date", type: "datetime-local", required: "false", category: "date" },
   { id: "latestDate", name: "Latest date", type: "datetime-local", required: "false", category: "date" },
-  { id: "dateText", name: "Date text", type: "text", required: "false", category: "date" },
   { id: "period", name: "Period", type: "text", required: "false", category: "date", keyInfo: true },
   { id: "associatedWith", name: "Associated with", type: "text", required: "false", category: "associated" },
-  { id: "records", name: "Records", type: "text", required: "false", category: "associated" },
   { id: "notes", name: "Notes", type: "text", required: "false", category: "notes" },
 ];
 

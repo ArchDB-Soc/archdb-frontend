@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import React, { createContext, lazy, useState } from 'react'
 import Layout from './components/Layout'
 
-export const UserContext = createContext();
+export const UserContext = createContext({ isLoggedIn: false });
 
 const Sites = lazy(() => import('./pages/Sites/Sites'))
 const AddSite = lazy(() => import('./pages/AddSite/AddSite'))
