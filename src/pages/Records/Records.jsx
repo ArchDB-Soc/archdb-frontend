@@ -4,7 +4,6 @@ import { getPaginatedDataFromDb } from '../../api/calls'
 import { Stack, Heading, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Box } from '@chakra-ui/react'
 import { UserContext } from '../../App'
 import { recordFields } from '../../const/dataFields'
-import { sampleRecords } from '../../const/sampleData'
 const SummaryTable = lazy(() => import("../../components/SummaryTable/SummaryTable"))
 
 const Records = () => {
@@ -62,9 +61,8 @@ const Records = () => {
         : null}
 
       <Box>
-        <SummaryTable columns={keyInfo} data={sampleRecords} dataType="records" loading={false} header />
         <Suspense fallback={<h2>Loading records.</h2>}>
-          <SummaryTable columns={keyInfo} data={records} dataType="records" loading={isLoading.current} />
+          <SummaryTable columns={keyInfo} data={records} dataType="records" loading={isLoading.current} header />
         </Suspense>
       </Box>
 
