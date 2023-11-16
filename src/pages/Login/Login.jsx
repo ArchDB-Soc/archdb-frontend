@@ -44,8 +44,8 @@ const Login = () => {
   return (
     <Box sx={outerBoxStyles}>
       <Box sx={innerBoxStyles} backdropFilter='auto' backdropBlur='8px'>
-        <Heading as="h1" size="2xl">IADB</Heading>
-        <Heading as="h2" size="l">Integrated Archaeological Database</Heading>
+        <Heading as="h1" size="2xl">ArchDB</Heading>
+        <Heading as="h2" size="l">The Consolidated Archaeological Database</Heading>
         <form onSubmit={authenticate}>
           <Stack>
             <Input
