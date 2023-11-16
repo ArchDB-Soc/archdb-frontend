@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { Table, Thead, Td, Tr, Th, Tbody } from '@chakra-ui/react'
-const Card = lazy(() => import("../../components/Card/Card"))
+const Row = lazy(() => import("../Row/Row"))
 
 const SummaryTable = ({ columns, data, dataType, loading, header }) => {
 
@@ -16,7 +16,7 @@ const SummaryTable = ({ columns, data, dataType, loading, header }) => {
       <Tbody>
         {loading ? <Tr><Td>Loading data</Td></Tr> : data?.map((item, index) =>
           <Suspense key={index} fallback={<Tr><Td>Loading data.</Td></Tr>}>
-            <Card
+            <Row
               key={index} data={item} type={dataType} columns={columns} />
           </Suspense>
         )}

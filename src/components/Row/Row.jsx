@@ -7,7 +7,7 @@ import { deleteDataFromDb } from '../../api/calls'
 const EditModal = lazy(() => import("../EditModal/EditModal"))
 
 
-const Card = ({ data, columns, type }) => {
+const Row = ({ data, columns, type }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const createArrayOfSummaryValues = (summaryFields, dataObject) =>
@@ -46,4 +46,4 @@ const Card = ({ data, columns, type }) => {
   )
 }
 
-export default Card
+export default Row
