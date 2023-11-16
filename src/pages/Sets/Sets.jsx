@@ -11,11 +11,11 @@ const Sets = () => {
   const [sets, setSets] = useState([{}])
   const { isLoggedIn } = useContext(UserContext)
   const keyInfo = setFields.filter(field => field.keyInfo === true)
-  const [loading, setLoading] = useState(true);
+  const isLoading = useRef(true);
 
   useEffect(() => {
     getAllDataFromDb(setSets, "sets")
-    setLoading(false)
+    isLoading.current = false
   }, [])
 
   return (
@@ -35,7 +35,7 @@ const Sets = () => {
         : null}
 
       <Suspense fallback={<h2>Loading sets.</h2>}>
-        <SummaryTable columns={keyInfo} data={sets} dataType="sets" loading={loading} />
+        <SummaryTable columns={keyInfo} data={sets} dataType="sets" loading={isLoading.current} />
       </Suspense>
 
     </Stack>

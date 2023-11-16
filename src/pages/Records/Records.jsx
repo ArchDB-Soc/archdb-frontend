@@ -12,16 +12,16 @@ const Records = () => {
   const [records, setRecords] = useState([{}])
   const { isLoggedIn } = useContext(UserContext)
   const keyInfo = recordFields.filter(field => field.keyInfo === true)
-  const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(1)
   const pagesFetched = useRef([1])
+  const isLoading = useRef(true);
 
   const renderCount = useRef(0)
 
   useEffect(() => {
     getPaginatedDataFromDb(setRecords, "records", 1)
     setPage(2)
-    setLoading(false)
+    isLoading.current = false
     renderCount.current += 1;
     console.log(`Component has rendered ${renderCount.current} times`);
   }, []);
@@ -64,7 +64,7 @@ const Records = () => {
       <Box>
         <SummaryTable columns={keyInfo} data={sampleRecords} dataType="records" loading={false} header />
         <Suspense fallback={<h2>Loading records.</h2>}>
-          <SummaryTable columns={keyInfo} data={records} dataType="records" loading={loading} />
+          <SummaryTable columns={keyInfo} data={records} dataType="records" loading={isLoading.current} />
         </Suspense>
       </Box>
 
