@@ -23,6 +23,7 @@ const Header = () => {
 
   const logout = () => {
     setIsLoggedIn(false)
+    localStorage.removeItem('userStored');
     console.log("User logged out")
     navigate("/login")
   }
