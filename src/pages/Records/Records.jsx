@@ -31,6 +31,7 @@ const Records = () => {
         window.scrollY > window.outerHeight
         && page <= 5 // need to replace "100" with fetch request to calculate total pages
       ) {
+        console.log("scroll")
         if (!pagesFetched.current.includes(page)) {
           getPaginatedDataFromDb(setRecords, "records", page)
           pagesFetched.current.push(page)

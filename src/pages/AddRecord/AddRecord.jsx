@@ -1,6 +1,6 @@
 import { addRecordToDb, getAllDataFromDb } from "../../api/calls";
 import { recordFields } from "../../const/dataFields";
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, FormControl, FormErrorMessage, FormLabel, HStack, Input, Select, Stack, Text } from '@chakra-ui/react'
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, FormControl, FormErrorMessage, FormLabel, HStack, Input, Select, Stack, Text, filter } from '@chakra-ui/react'
 import buildObjectFromForm, { capitaliseFirstLetter } from "../../utils/utils";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -11,20 +11,25 @@ const AddRecord = () => {
   const navigate = useNavigate()
   const [sites, setSites] = useState([{}])
   const [sets, setSets] = useState([{}])
-  // const [openSites, setOpenSites] = useState(false)
+  const [selectedSite, setSelectedSite] = useState("")
+
+  const handleSiteSelectChange = (event) => {
+    setSelectedSite(event.target.value);
+    // const filteredSets = sets.map(set => set._site)
+    // console.log("filtered sets", sets.filter(set => set._site === selectedSite.current))
+    event.preventDefault();
+  };
 
   const submitForm = (e) => {
     e.preventDefault();
-
     const fields = Array.from(e.target.elements).map(element => element.id)
     const responses = Array.from(e.target.elements).map(element => element.value)
     const data = buildObjectFromForm(fields, responses)
     const chosenSite = sites.find(obj => obj._id === data._site)
-    data.siteName = chosenSite.name // user-friendly name to use instead of site id
+    data.siteName = chosenSite.name // user-friendly name instead of site id
     addRecordToDb(data, data._site)
     navigate("/records")
     location.reload()
-
   }
 
   const createCategoriesArray = (recordArr) => {
@@ -34,19 +39,13 @@ const AddRecord = () => {
   }
 
   const findAllFieldsFromCategory = (fieldsArr, category) => {
-
-
     return fieldsArr.filter(item => item.category === category)
   }
 
   useEffect(() => {
-    // if (openSites) { 
     getAllDataFromDb(setSites, "sites")
     getAllDataFromDb(setSets, "sets")
-    // }  only request site list when accordion item is open
-  }, [
-    // openSites
-  ])
+  }, [])
 
   return (
     <Stack m={5} className='form-container'>
@@ -68,7 +67,7 @@ const AddRecord = () => {
           <Box textAlign={"left"} padding={5}>
             <h2>Site *</h2>
             <Box paddingTop={3} paddingBottom={3}>
-              <Select placeholder='Select Site' id="_site" required>
+              <Select placeholder='Select Site' id="_site" onChange={handleSiteSelectChange} required>
                 {sites.map((site, index) => (
                   <option value={site._id} key={index}>{site.name}</option>
                 ))}
@@ -79,9 +78,17 @@ const AddRecord = () => {
             <h2>Set</h2>
             <Box paddingTop={3} paddingBottom={3}>
               <Select placeholder='Select Set' id="_set">
-                {sets.map((set, index) => (
-                  <option value={set._id} key={index}>{set._id}</option>
-                ))}
+                {
+                  (selectedSite === "") ?
+                    sets.map((set, index) => (
+                      <option value={set._id} key={index}>{set._id}</option>
+                    ))
+                    :
+                    sets.filter(set => set._site === selectedSite)
+                      .map((set, index) => (
+                        <option value={set._id} key={index}>{set._id}</option>
+                      ))
+                }
               </Select>
             </Box>
           </Box>
