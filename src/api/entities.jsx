@@ -1,19 +1,39 @@
 import { apiURL } from "../const/urls";
 const userStored = JSON.parse(localStorage.getItem('userStored'))
 
-export const getAllDataFromDb = async (setData, type) => {
+const simpleRequest = async (url, method) => {
   try {
-    const data = await fetch(`${apiURL}/${type}`, {
-      method: "GET",
+    const data = await fetch(url, {
+      method: method,
       headers: {
-        // Authorization: `Bearer ${token}`
       },
     });
     const dataToJson = await data.json();
-    setData(dataToJson.data);
+    console.log("data retrieved")
+    return dataToJson
   } catch (error) {
     console.log("error:", error);
   }
+}
+
+
+export const getAllDataFromDb = async (setData, type) => {
+  const url = `${apiURL}/${type}`
+  const method = "GET"
+  const data = await simpleRequest(url, method)
+  setData(data.data)
+
+  // try {
+  //   const data = await fetch(`${apiURL}/${type}`, {
+  //     method: "GET",
+  //     headers: {
+  //     },
+  //   });
+  //   const dataToJson = await data.json();
+  //   setData(dataToJson.data);
+  // } catch (error) {
+  //   console.log("error:", error);
+  // }
 };
 
 export const getPaginatedDataFromDb = async (setData, type, page) => {
@@ -23,7 +43,6 @@ export const getPaginatedDataFromDb = async (setData, type, page) => {
     const data = await fetch(url, {
       method: "GET",
       headers: {
-        // Authorization: `Bearer ${token}`
       },
     });
     const dataToJson = await data.json();
@@ -96,7 +115,6 @@ export const deleteDataFromDb = async (type, id, parentid) => { //parentid is op
 };
 
 export const addSiteToDb = (data) => {
-  // const token = Cookies.get('access_token')
   fetch(`${apiURL}/sites`, {
     method: "POST",
     headers: {
