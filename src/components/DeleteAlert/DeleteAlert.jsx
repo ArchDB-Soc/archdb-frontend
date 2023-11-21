@@ -1,6 +1,6 @@
 import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, useDisclosure } from '@chakra-ui/react'
 import React, { useRef } from 'react'
-import { deleteDataFromDb } from '../../api/calls'
+import { deleteDataFromDb } from '../../api/entities'
 
 const DeleteAlert = ({ data, type, isOpen, onOpen, onClose }) => {
 

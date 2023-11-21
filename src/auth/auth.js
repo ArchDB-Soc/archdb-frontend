@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { useContext, useState } from "react";
 import { UserContext } from '../App';
-import { verifyEmailAndPassword } from "../api/userAPI";
+import { verifyEmailAndPassword } from "../api/users";
 
 export const useLogin = () => {
   const { setIsLoggedIn } = useContext(UserContext);

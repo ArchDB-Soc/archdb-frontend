@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext, lazy, Suspense, useRef } from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import { getAllDataFromDb } from '../../api/calls'
+import { getAllDataFromDb } from '../../api/entities'
 import { Stack, Heading, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button } from '@chakra-ui/react'
 import { UserContext } from '../../App'
 import { setFields } from '../../const/dataFields'

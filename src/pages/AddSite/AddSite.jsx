@@ -1,4 +1,4 @@
-import { addSiteToDb } from "../../api/calls";
+import { addSiteToDb } from "../../api/entities";
 import { siteFields } from "../../const/dataFields";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Stack } from '@chakra-ui/react'
 import buildObjectFromForm from "../../utils/utils";

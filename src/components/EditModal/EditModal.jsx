@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { Stack, Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Input, Text } from '@chakra-ui/react'
 import buildObjectFromForm from '../../utils/utils'
-import { updateDataInDb } from '../../api/calls'
+import { updateDataInDb } from '../../api/entities'
 
 const EditModal = ({ isOpen, onClose, data,
   // handleSubmit, 

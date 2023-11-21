@@ -1,4 +1,4 @@
-import { addXToY, getAllDataFromDb } from "../../api/calls";
+import { addXToY, getAllDataFromDb } from "../../api/entities";
 import { setFields } from "../../const/dataFields";
 import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Select, Stack } from '@chakra-ui/react'
 import buildObjectFromForm from "../../utils/utils";

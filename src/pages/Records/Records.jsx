@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext, lazy, Suspense, useRef } from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import { getPaginatedDataFromDb } from '../../api/calls'
+import { getPaginatedDataFromDb } from '../../api/entities'
 import { Stack, Heading, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Box } from '@chakra-ui/react'
 import { UserContext } from '../../App'
 import { recordFields } from '../../const/dataFields'
