@@ -1,7 +1,8 @@
+
 import { apiURL } from "../const/urls";
 const userStored = JSON.parse(localStorage.getItem('userStored'))
 
-const simpleRequest = async (url, method, requestBody) => { // requestBody is optional
+const simpleRequest = async (url, method, content) => { // content is optional
   const headers = (method === "GET") ? {} : {
     Authorization: `Bearer ${userStored?.token}`,
     "Content-Type": "application/json",
@@ -11,7 +12,7 @@ const simpleRequest = async (url, method, requestBody) => { // requestBody is op
     const data = await fetch(url, {
       method: method,
       headers: headers,
-      body: requestBody ? requestBody : null,
+      body: content ? content : null,
     });
     const dataToJson = await data.json();
     console.log(`API request with method ${method} successful`)
@@ -79,114 +80,43 @@ export const addDataToDb = async (data, type) => {
 };
 
 // PUT requests
-export const updateDataInDb = async (dataToUpdate, type) => {
-  // PREPARING TO ADD THIS CODE BACK IN AFTER PUT REQUEST BUG IS FIXED
-  // const url = `${apiURL}/${type}/${dataToUpdate._id}`
-  // const method = "PUT"
-  // const body = JSON.stringify(dataToUpdate)
-  // const response = await simpleRequest(url, method, body)
-  // console.log("Record updated:", JSON.stringify(response));
-
-  try {
-    const response = await fetch(`${apiURL}/${type}/${dataToUpdate._id}`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${userStored?.token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataToUpdate),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Record updated:", JSON.stringify(data));
-  } catch (error) {
-    console.error("Error:", error);
-  }
-
+export const updateDataInDb = async (updatedData, type) => {
+  const url = `${apiURL}/${type}/${updatedData._id}`
+  const method = "PUT"
+  const body = JSON.stringify(updatedData)
+  await simpleRequest(url, method, body)
   location.reload()
 };
 
 export const addXToY = async (x, y, updatedData, yId) => {
-
   const urlBuilder = (baseUrl, x, y, yId) => `${baseUrl}/${y}s/${yId}/${x}s`
   const url = urlBuilder(apiURL, x, y, yId)
-
-  try {
-    const response = await fetch(url, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${userStored?.token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedData),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    console.log("Updated:", JSON.stringify(data));
-
-  } catch (error) {
-    console.error("Error:", error);
-  }
+  const method = "PUT"
+  const body = JSON.stringify(updatedData)
+  await simpleRequest(url, method, body)
 };
 
 const addRecordToSetInDb = async (recordId, setId) => {
-
-  const dbUrl = `${apiURL}/sets/${setId}/records/${recordId}`
-
-  try {
-    const response = await fetch(dbUrl, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${userStored?.token}`,
-        "Content-Type": "application/json",
-      },
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log("Updated:", JSON.stringify(data));
-
-  } catch (error) {
-    console.error("Error:", error);
-  }
+  const url = `${apiURL}/sets/${setId}/records/${recordId}`
+  const method = "PUT"
+  await simpleRequest(url, method)
+  console.log(`record ${recordId} added to set ${setId}`)
 };
 
 export const addRecordToDb = async (data, siteid) => {
+  console.log("check1")
   if (data._set === "") {
     delete data._set
   }
-  let responseData = {}
-  try {
-    const response = await fetch(`${apiURL}/sites/${siteid}/records`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${userStored?.token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    responseData = await response.json();
-    console.log("Site updated with new Record:", JSON.stringify(responseData._id));
-  } catch (error) {
-    console.error("Error:", error);
-  }
+  let response = {}
+  const url = `${apiURL}/sites/${siteid}/records`
+  const method = "PUT"
+  const body = JSON.stringify(data)
+  response = await simpleRequest(url, method, body)
+  console.log("Site updated with new Record:", JSON.stringify(response))
 
   if (data._set !== null) {
-    try {
-      addRecordToSetInDb(responseData._id, data._set)
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    await addRecordToSetInDb(response._id, data._set)
   }
 
 };

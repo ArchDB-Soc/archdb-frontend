@@ -29,7 +29,7 @@ const AddRecord = () => {
     data.siteName = chosenSite.name // user-friendly name instead of site id
     addRecordToDb(data, data._site)
     navigate("/records")
-    location.reload()
+    // location.reload()
   }
 
   const createCategoriesArray = (recordArr) => {

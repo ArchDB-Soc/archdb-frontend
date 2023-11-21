@@ -21,7 +21,7 @@ const AddSet = () => {
     data.siteName = chosenSite.name // user-friendly name to use instead of site id
     addXToY("set", "site", data, data._site)
     navigate("/sets")
-    location.reload()
+    // location.reload()
   }
 
   useEffect(() => {
