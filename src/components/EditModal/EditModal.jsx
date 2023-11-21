@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { Stack, Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Input, Text } from '@chakra-ui/react'
 import buildObjectFromForm from '../../utils/utils'
 import { updateDataInDb } from '../../api/entities'
+import { useNavigate } from 'react-router-dom'
 
 const EditModal = ({ isOpen, onClose, data,
   // handleSubmit, 
@@ -9,6 +10,8 @@ const EditModal = ({ isOpen, onClose, data,
 
   const updatableFields = { ...data }
   const readOnlyFields = {}
+  const navigate = useNavigate()
+
 
   const [updatedData, setUpdatedData] = useState(data)
   const isInitialRender = useRef(true)
@@ -27,9 +30,9 @@ const EditModal = ({ isOpen, onClose, data,
 
   useEffect(() => {
     if (!isInitialRender.current) { // ensure updateDataInDb() doesn't trigger an infinite loop
-      console.log("1", updatedData, type)
-
       updateDataInDb(updatedData, type)
+      navigate(`/${type}`)
+      location.reload()
     }
   }, [updatedData])
 

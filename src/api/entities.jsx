@@ -85,7 +85,6 @@ export const updateDataInDb = async (updatedData, type) => {
   const method = "PUT"
   const body = JSON.stringify(updatedData)
   await simpleRequest(url, method, body)
-  location.reload()
 };
 
 export const addXToY = async (x, y, updatedData, yId) => {
@@ -104,7 +103,6 @@ const addRecordToSetInDb = async (recordId, setId) => {
 };
 
 export const addRecordToDb = async (data, siteid) => {
-  console.log("check1")
   if (data._set === "") {
     delete data._set
   }
