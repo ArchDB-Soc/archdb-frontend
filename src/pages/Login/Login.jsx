@@ -1,26 +1,20 @@
-import { useState, useContext } from "react"
+import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
-import { authenticationRequest } from "../../api/userAPI";
 import { UserContext } from '../../App';
 import { Box, Button, Heading, Input, Stack } from "@chakra-ui/react";
 import { useLogin } from "../../auth/auth";
 
 
 const Login = () => {
-
-  // const [error, setError] = useState("")
   const { isLoggedIn, setIsLoggedIn } = useContext(UserContext)
   const navigate = useNavigate()
-  const { login, error } = useLogin()
+  const { login, errorMessage } = useLogin()
 
-  const authenticate = async (e) => {
+  const submitLoginForm = async (e) => {
     e.preventDefault();
     const email = e.target.elements[0].value
     const password = e.target.elements[1].value
     login(email, password)
-
-    // authenticationRequest(email, password, setError, setIsLoggedIn)
-
     navigate("/")
   }
 
@@ -51,7 +45,7 @@ const Login = () => {
       <Box sx={innerBoxStyles} backdropFilter='auto' backdropBlur='8px'>
         <Heading as="h1" size="2xl">ArchDB</Heading>
         <Heading as="h2" size="l">The Consolidated Archaeological Database</Heading>
-        <form onSubmit={authenticate}>
+        <form onSubmit={submitLoginForm}>
           <Stack>
             <Input
               id="email"
@@ -75,7 +69,7 @@ const Login = () => {
             Log in
           </Button>
           <Box padding={3}>
-            <p>{error ? `${error}` : ""}</p>
+            <p>{errorMessage ? `${errorMessage}` : ""}</p>
           </Box>
         </form>
       </Box>
