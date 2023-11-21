@@ -1,8 +1,6 @@
 import { apiURL } from "../const/urls";
 
-
-
-export const authenticationRequest = async (email, password, setErrorMessage) => {
+export const verifyEmailAndPassword = async (email, password, setErrorMessage) => {
 
   try {
     const response = await fetch(`${apiURL}/auth/login`, {
