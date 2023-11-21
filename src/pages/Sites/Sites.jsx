@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext, lazy, Suspense, useRef } from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import { getAllDataFromDb } from '../../api/entities'
+import { getDataFromDb } from '../../api/entities'
 import { Stack, Heading, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button } from '@chakra-ui/react'
 import { UserContext } from '../../App'
 import { siteFields } from '../../const/dataFields'
@@ -14,7 +14,7 @@ const Sites = () => {
   const isLoading = useRef(true);
 
   useEffect(() => {
-    getAllDataFromDb(setSites, "sites")
+    getDataFromDb(setSites, "sites")
     isLoading.current = false
   }, [])
 

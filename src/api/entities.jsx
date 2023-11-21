@@ -21,7 +21,7 @@ const simpleRequest = async (url, method, requestBody) => { // requestBody is op
   }
 }
 
-export const getAllDataFromDb = async (setData, type) => {
+export const getDataFromDb = async (setData, type) => {
   const url = `${apiURL}/${type}`
   const method = "GET"
   const response = await simpleRequest(url, method)

@@ -1,4 +1,4 @@
-import { addRecordToDb, getAllDataFromDb } from "../../api/entities";
+import { addRecordToDb, getDataFromDb } from "../../api/entities";
 import { recordFields } from "../../const/dataFields";
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, FormControl, FormErrorMessage, FormLabel, HStack, Input, Select, Stack, Text, filter } from '@chakra-ui/react'
 import buildObjectFromForm, { capitaliseFirstLetter } from "../../utils/utils";
@@ -43,8 +43,8 @@ const AddRecord = () => {
   }
 
   useEffect(() => {
-    getAllDataFromDb(setSites, "sites")
-    getAllDataFromDb(setSets, "sets")
+    getDataFromDb(setSites, "sites")
+    getDataFromDb(setSets, "sets")
   }, [])
 
   return (

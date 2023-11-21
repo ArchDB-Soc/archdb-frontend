@@ -1,4 +1,4 @@
-import { addXToY, getAllDataFromDb } from "../../api/entities";
+import { addXToY, getDataFromDb } from "../../api/entities";
 import { setFields } from "../../const/dataFields";
 import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Select, Stack } from '@chakra-ui/react'
 import buildObjectFromForm from "../../utils/utils";
@@ -26,7 +26,7 @@ const AddSet = () => {
 
   useEffect(() => {
     // if (openSites) { 
-    getAllDataFromDb(setSites, "sites")
+    getDataFromDb(setSites, "sites")
     // }  only request site list when accordion item is open
   }, [
     // openSites
