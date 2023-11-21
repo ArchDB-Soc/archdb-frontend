@@ -3,19 +3,24 @@ import { useNavigate } from "react-router-dom"
 import { authenticationRequest } from "../../api/userAPI";
 import { UserContext } from '../../App';
 import { Box, Button, Heading, Input, Stack } from "@chakra-ui/react";
+import { useLogin } from "../../auth/auth";
 
 
 const Login = () => {
 
-  const [error, setError] = useState("")
+  // const [error, setError] = useState("")
   const { isLoggedIn, setIsLoggedIn } = useContext(UserContext)
   const navigate = useNavigate()
+  const { login, error } = useLogin()
 
   const authenticate = async (e) => {
     e.preventDefault();
     const email = e.target.elements[0].value
     const password = e.target.elements[1].value
-    authenticationRequest(email, password, setError, setIsLoggedIn)
+    login(email, password)
+
+    // authenticationRequest(email, password, setError, setIsLoggedIn)
+
     navigate("/")
   }
 

@@ -1,6 +1,26 @@
 import { useNavigate } from "react-router-dom"
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from '../App';
+import { authenticationRequest } from "../api/userAPI";
+
+export const useLogin = () => {
+  const { setIsLoggedIn } = useContext(UserContext);
+  const [errorMessage, setErrorMessage] = useState("")
+
+  const login = async (email, password) => {
+    const res = await authenticationRequest(email, password, setErrorMessage)
+    const userStored = {
+      email: res.data.user.email,
+      token: res.data.token,
+    };
+    localStorage.setItem('userStored', JSON.stringify(userStored));
+    setIsLoggedIn(true);
+    console.log("User logged in")
+  }
+
+  return {login, errorMessage}
+
+}
 
 const useLogout = () => {
   const { setIsLoggedIn } = useContext(UserContext);

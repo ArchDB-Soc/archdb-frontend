@@ -1,6 +1,9 @@
 import { apiURL } from "../const/urls";
 
-export const authenticationRequest = async (email, password, setError, setIsLoggedIn) => {
+
+
+export const authenticationRequest = async (email, password, setErrorMessage) => {
+
   try {
     const response = await fetch(`${apiURL}/auth/login`, {
       method: "POST",
@@ -11,17 +14,12 @@ export const authenticationRequest = async (email, password, setError, setIsLogg
     });
 
     if (response.status === 401) {
-      setError("Incorrect user or password");
+      setErrorMessage("Incorrect user or password");
     } else {
       const resToJson = await response.json()
-      setError('');
-      const userStored = {
-        email: resToJson.data.user.email,
-        token: resToJson.data.token,
-      };
-      localStorage.setItem('userStored', JSON.stringify(userStored));
-      setIsLoggedIn(true);
-
+      setErrorMessage('')
+      console.log("Email and password verified")
+      return resToJson
     }
   } catch (error) {
     console.error('Error:', error);

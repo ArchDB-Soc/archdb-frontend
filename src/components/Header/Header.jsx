@@ -1,13 +1,12 @@
 import { Heading, Tabs, TabList, Tab, Button, Spacer, Flex } from "@chakra-ui/react"
-import { NavLink, useNavigate } from "react-router-dom"
-import { UserContext } from '../../App';
-import { useContext, useState, useEffect } from "react";
+import { NavLink } from "react-router-dom"
+// import { UserContext } from '../../App';
+import { useState, useEffect } from "react";
 import useLogout from "../../auth/auth.js"
 import { URL } from "../../const/urls";
 
 const Header = () => {
-  const { loggedIn, setIsLoggedIn } = useContext(UserContext)
-  const navigate = useNavigate()
+  // const { loggedIn, setIsLoggedIn } = useContext(UserContext)
   const [tabIndex, setTabIndex] = useState(0)
 
 
@@ -21,13 +20,6 @@ const Header = () => {
   const handleTabsChange = (index) => {
     setTabIndex(index)
   }
-
-  // const logout = () => {
-  //   setIsLoggedIn(false)
-  //   localStorage.removeItem('userStored');
-  //   console.log("User logged out")
-  //   navigate("/login")
-  // }
 
   const logout = useLogout();
 
