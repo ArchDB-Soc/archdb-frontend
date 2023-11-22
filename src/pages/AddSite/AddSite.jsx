@@ -18,7 +18,7 @@ const AddSite = () => {
     const responses = Array.from(e.target.elements).map(element => element.value)
     const data = buildObjectFromForm(fields, responses)
     await addDataToDb(data, "sites")
-    navigate("/")
+    // navigate("/")
   }
 
 
