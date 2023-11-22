@@ -29,11 +29,14 @@ const EditModal = ({ isOpen, onClose, data,
   }
 
   useEffect(() => {
-    if (!isInitialRender.current) { // ensure updateDataInDb() doesn't trigger an infinite loop
-      updateDataInDb(updatedData, type)
-      navigate(`/${type}`)
-      location.reload()
+    const update = async () => {
+      if (!isInitialRender.current) { // ensure updateDataInDb() doesn't trigger an infinite loop
+        await updateDataInDb(updatedData, type, updatedData._id)
+        navigate(`/${type}`)
+        location.reload()
+      }
     }
+    update()
   }, [updatedData])
 
   delete updatableFields._id

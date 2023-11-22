@@ -21,6 +21,17 @@ const simpleRequest = async (url, method, content) => { // content is optional
     console.log("error:", error);
   }
 }
+const urlBuilder = (...segments) => {
+  let url = `${apiURL}`
+  const tail = segments.join('/')
+  url = url + "/" + tail
+  console.log(url)
+  return url
+}
+
+// const buildUrl = (...segments) => {
+//   return urlBuilder(apiURL, ...segments);
+// };
 
 export const getDataFromDb = async (setData, type) => {
   const url = `${apiURL}/${type}`
@@ -79,17 +90,17 @@ export const addDataToDb = async (data, type) => {
   await simpleRequest(url, method, body)
 };
 
-// PUT requests
-export const updateDataInDb = async (updatedData, type) => {
-  const url = `${apiURL}/${type}/${updatedData._id}`
+// PUT REQUESTS - PENDING ADDITIONAL REFACTOR
+
+export const updateDataInDb = async (updatedData, type, id) => {
+  const url = urlBuilder(type, id)
   const method = "PUT"
   const body = JSON.stringify(updatedData)
   await simpleRequest(url, method, body)
 };
 
-export const addXToY = async (x, y, updatedData, yId) => {
-  const urlBuilder = (baseUrl, x, y, yId) => `${baseUrl}/${y}s/${yId}/${x}s`
-  const url = urlBuilder(apiURL, x, y, yId)
+export const addXToY = async (updatedData, x, y, yId) => {
+  const url = `${apiURL}/${y}s/${yId}/${x}s`;
   const method = "PUT"
   const body = JSON.stringify(updatedData)
   await simpleRequest(url, method, body)
