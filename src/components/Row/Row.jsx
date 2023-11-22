@@ -22,9 +22,10 @@ const Row = ({ data, columns, type }) => {
 
 
 
-  const deleteData = () => {
+  const deleteData = async () => {
     const parentid = ((data._site) ? data._site : undefined)
-    deleteDataFromDb(type, data._id, parentid)
+    await deleteDataFromDb(type, data._id, parentid)
+    location.reload()
   }
 
   return (

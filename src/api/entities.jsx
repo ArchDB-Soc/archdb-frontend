@@ -46,20 +46,18 @@ export const deleteDataFromDb = async (type, id, parentid) => { //parentid is op
   const urlCreator = (type, id, parentid) => {
     switch (type) {
       case "sites":
-        return `${apiURL}/sites/${id}`;
+        return urlBuilder("sites", `${id}`);
       case "records":
-        return `${apiURL}/sites/${parentid}/records/${id}`;
+        return urlBuilder("sites", `${parentid}`, "records", `${id}`);
       case "sets":
-        return `${apiURL}/sites/${parentid}/sets/${id}`;
+        return urlBuilder("sites", `${parentid}`, "sets", `${id}`);
       default:
         console.log("no element found with that id or parent id");
-        return `${apiURL}/404`;
+        return urlBuilder("404");
     }
   }
-  const url = urlCreator(type, id, parentid)
-  const method = "DELETE"
-  await apiRequest(url, method)
-  location.reload()
+  await apiRequest(urlCreator(type, id, parentid), "DELETE")
+  // location.reload()
 };
 
 export const addDataToDb = async (data, type) => {
