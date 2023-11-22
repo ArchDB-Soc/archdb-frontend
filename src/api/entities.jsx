@@ -2,25 +2,26 @@
 import { apiURL } from "../const/urls";
 const userStored = JSON.parse(localStorage.getItem('userStored'))
 
-const simpleRequest = async (url, method, content) => { // content is optional
+const apiRequest = async (url, method, data) => { // data is optional
   const headers = (method === "GET") ? {} : {
     Authorization: `Bearer ${userStored?.token}`,
     "Content-Type": "application/json",
-  } // currently all requests except GET require authorisation
+  } // currently GET is the only method that doesn't require authorisation
 
   try {
-    const data = await fetch(url, {
+    const responseData = await fetch(url, {
       method: method,
       headers: headers,
-      body: content ? content : null,
+      body: data ? data : null,
     });
-    const dataToJson = await data.json();
+    const responseAsJson = await responseData.json();
     console.log(`API request with method ${method} successful`)
-    return dataToJson
+    return responseAsJson
   } catch (error) {
     console.log("error:", error);
   }
 }
+
 const urlBuilder = (...segments) => {
   let url = `${apiURL}`
   const tail = segments.join('/')
@@ -29,21 +30,15 @@ const urlBuilder = (...segments) => {
   return url
 }
 
-// const buildUrl = (...segments) => {
-//   return urlBuilder(apiURL, ...segments);
-// };
-
 export const getDataFromDb = async (setData, type) => {
-  const url = `${apiURL}/${type}`
-  const method = "GET"
-  const response = await simpleRequest(url, method)
+  const response = await apiRequest(urlBuilder(type), "GET")
   setData(response.data)
 };
 
 export const getPaginatedDataFromDb = async (setData, type, page) => {
   const url = page ? `${apiURL}/${type}?page=${page}` : `${apiURL}/${type}`
   const method = "GET"
-  const response = await simpleRequest(url, method)
+  const response = await apiRequest(url, method)
   setData(prevData => {
     if ((Object.keys(prevData[0]).length === 0) && !prevData[1]) {
       return response.data;
@@ -70,59 +65,32 @@ export const deleteDataFromDb = async (type, id, parentid) => { //parentid is op
   }
   const url = urlCreator(type, id, parentid)
   const method = "DELETE"
-  await simpleRequest(url, method)
+  await apiRequest(url, method)
   location.reload()
 };
 
 export const addDataToDb = async (data, type) => {
-  const urlCreator = (type) => {
-    switch (type) {
-      case "sites":
-        return `${apiURL}/sites`;
-      default:
-        console.log("no element found with that id or parent id");
-        return `${apiURL}/404`;
-    }
-  }
-  const url = urlCreator(type)
-  const method = "POST"
-  const body = JSON.stringify(data)
-  await simpleRequest(url, method, body)
+  await apiRequest(urlBuilder(type), "POST", JSON.stringify(data))
 };
 
-// PUT REQUESTS - PENDING ADDITIONAL REFACTOR
-
 export const updateDataInDb = async (updatedData, type, id) => {
-  const url = urlBuilder(type, id)
-  const method = "PUT"
-  const body = JSON.stringify(updatedData)
-  await simpleRequest(url, method, body)
+  await apiRequest(urlBuilder(type, id), "PUT", JSON.stringify(updatedData))
 };
 
 export const addXToY = async (updatedData, x, y, yId) => {
-  const url = `${apiURL}/${y}s/${yId}/${x}s`;
-  const method = "PUT"
-  const body = JSON.stringify(updatedData)
-  await simpleRequest(url, method, body)
+  await apiRequest(urlBuilder(`${y}s`, yId, `${x}s`), "PUT", JSON.stringify(updatedData))
 };
 
 const addRecordToSetInDb = async (recordId, setId) => {
-  const url = `${apiURL}/sets/${setId}/records/${recordId}`
-  const method = "PUT"
-  await simpleRequest(url, method)
-  console.log(`record ${recordId} added to set ${setId}`)
+  await apiRequest(urlBuilder(`sets`, setId, `records`, recordId), "PUT")
 };
 
-export const addRecordToDb = async (data, siteid) => {
+export const addRecordToDb = async (data, siteId) => {
   if (data._set === "") {
     delete data._set
   }
   let response = {}
-  const url = `${apiURL}/sites/${siteid}/records`
-  const method = "PUT"
-  const body = JSON.stringify(data)
-  response = await simpleRequest(url, method, body)
-  console.log("Site updated with new Record:", JSON.stringify(response))
+  response = await apiRequest(urlBuilder(`sites`, siteId, `records`), "PUT", JSON.stringify(data))
 
   if (data._set !== null) {
     await addRecordToSetInDb(response._id, data._set)

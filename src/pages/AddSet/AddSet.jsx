@@ -19,9 +19,9 @@ const AddSet = () => {
     const data = buildObjectFromForm(fields, responses)
     const chosenSite = sites.find(obj => obj._id === data._site)
     data.siteName = chosenSite.name // user-friendly name to use instead of site id
-    addXToY("set", "site", data, data._site)
+    addXToY(data, "set", "site", data._site)
     navigate("/sets")
-    // location.reload()
+    location.reload()
   }
 
   useEffect(() => {
