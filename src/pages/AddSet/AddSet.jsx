@@ -1,4 +1,4 @@
-import { addXToY, getDataFromDb } from "../../api/entities";
+import { updateDataInDb, getDataFromDb } from "../../api/entities";
 import { setFields } from "../../const/dataFields";
 import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Select, Stack } from '@chakra-ui/react'
 import buildObjectFromForm from "../../utils/utils";
@@ -12,14 +12,14 @@ const AddSet = () => {
   const [sites, setSites] = useState([{}])
   const inputsForSets = setFields.filter(field => (field.id !== "_site" && field.id !== "siteName"));
 
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
     const fields = Array.from(e.target.elements).map(element => element.id)
     const responses = Array.from(e.target.elements).map(element => element.value)
     const data = buildObjectFromForm(fields, responses)
     const chosenSite = sites.find(obj => obj._id === data._site)
     data.siteName = chosenSite.name // user-friendly name to use instead of site id
-    addXToY(data, "set", "site", data._site)
+    await updateDataInDb(data, "site", data._site, "set", undefined)
     navigate("/sets")
     location.reload()
   }

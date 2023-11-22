@@ -20,14 +20,14 @@ const AddRecord = () => {
     event.preventDefault();
   };
 
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
     const fields = Array.from(e.target.elements).map(element => element.id)
     const responses = Array.from(e.target.elements).map(element => element.value)
     const data = buildObjectFromForm(fields, responses)
     const chosenSite = sites.find(obj => obj._id === data._site)
     data.siteName = chosenSite.name // user-friendly name instead of site id
-    addRecordToDb(data, data._site)
+    await addRecordToDb(data, data._site)
     navigate("/records")
     // location.reload()
   }
