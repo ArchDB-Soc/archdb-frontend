@@ -12,12 +12,12 @@ const AddSite = () => {
   const siteInputs = siteFields.filter(field => (field.id !== "records"));
 
 
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
     const fields = Array.from(e.target.elements).map(element => element.id)
     const responses = Array.from(e.target.elements).map(element => element.value)
     const data = buildObjectFromForm(fields, responses)
-    addDataToDb(data, "sites")
+    await addDataToDb(data, "sites")
     navigate("/")
   }
 
