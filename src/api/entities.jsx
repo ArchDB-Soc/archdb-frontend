@@ -30,15 +30,9 @@ const urlBuilder = (...segments) => {
   return url
 }
 
-export const getDataFromDb = async (setData, type) => {
-  const response = await apiRequest(urlBuilder(type), "GET")
-  setData(response.data)
-};
-
-export const getPaginatedDataFromDb = async (setData, type, page) => {
-  const url = page ? `${apiURL}/${type}?page=${page}` : `${apiURL}/${type}`
-  const method = "GET"
-  const response = await apiRequest(url, method)
+export const getDataFromDb = async (setData, type, page) => { // page is optional where the API supports pagination
+  const url = page ? urlBuilder(`${type}?page=${page}`) : urlBuilder(type)
+  const response = await apiRequest(url, "GET")
   setData(prevData => {
     if ((Object.keys(prevData[0]).length === 0) && !prevData[1]) {
       return response.data;
@@ -46,7 +40,6 @@ export const getPaginatedDataFromDb = async (setData, type, page) => {
       return [...prevData, ...response.data];
     }
   });
-  console.log(`Page ${page ? page : 1} retrieved`)
 };
 
 export const deleteDataFromDb = async (type, id, parentid) => { //parentid is optional and not available for Sites

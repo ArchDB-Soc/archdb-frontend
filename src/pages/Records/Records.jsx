@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext, lazy, Suspense, useRef } from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import { getPaginatedDataFromDb } from '../../api/entities'
+import { getDataFromDb } from '../../api/entities'
 import { Stack, Heading, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Box } from '@chakra-ui/react'
 import { UserContext } from '../../App'
 import { recordFields } from '../../const/dataFields'
@@ -18,7 +18,7 @@ const Records = () => {
   const renderCount = useRef(0)
 
   useEffect(() => {
-    getPaginatedDataFromDb(setRecords, "records", 1)
+    getDataFromDb(setRecords, "records", 1)
     setPage(2)
     isLoading.current = false
     renderCount.current += 1;
@@ -33,7 +33,7 @@ const Records = () => {
       ) {
         console.log("scroll")
         if (!pagesFetched.current.includes(page)) {
-          getPaginatedDataFromDb(setRecords, "records", page)
+          getDataFromDb(setRecords, "records", page)
           pagesFetched.current.push(page)
           setPage(page + 1)
         }
