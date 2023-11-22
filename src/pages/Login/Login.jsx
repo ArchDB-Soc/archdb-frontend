@@ -14,7 +14,7 @@ const Login = () => {
     e.preventDefault();
     const email = e.target.elements[0].value
     const password = e.target.elements[1].value
-    login(email, password)
+    await login(email, password)
     navigate("/")
   }
 
