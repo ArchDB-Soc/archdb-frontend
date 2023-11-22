@@ -26,6 +26,9 @@ const urlBuilder = (...segments) => {
   let url = `${apiURL}`
   const tail = segments.join('/')
   url = url + "/" + tail
+  if (url.endsWith('/')) {
+    url = url.slice(0, -1);
+  }
   console.log(url)
   return url
 }
@@ -57,23 +60,14 @@ export const deleteDataFromDb = async (type, id, parentid) => { //parentid is op
     }
   }
   await apiRequest(urlCreator(type, id, parentid), "DELETE")
-  // location.reload()
 };
 
 export const addDataToDb = async (data, type) => {
   await apiRequest(urlBuilder(type), "POST", JSON.stringify(data))
 };
 
-export const updateDataInDb = async (updatedData, type, id) => {
-  await apiRequest(urlBuilder(type, id), "PUT", JSON.stringify(updatedData))
-};
-
-export const addXToY = async (updatedData, x, y, yId) => {
-  await apiRequest(urlBuilder(`${y}s`, yId, `${x}s`), "PUT", JSON.stringify(updatedData))
-};
-
-const addRecordToSetInDb = async (recordId, setId) => {
-  await apiRequest(urlBuilder(`sets`, setId, `records`, recordId), "PUT")
+export const updateDataInDb = async (updatedData, y, yId, x, xId) => {
+  await apiRequest(urlBuilder(y, yId, x, xId), "PUT", JSON.stringify(updatedData))
 };
 
 export const addRecordToDb = async (data, siteId) => {
@@ -81,10 +75,9 @@ export const addRecordToDb = async (data, siteId) => {
     delete data._set
   }
   let response = {}
-  response = await apiRequest(urlBuilder(`sites`, siteId, `records`), "PUT", JSON.stringify(data))
+  response = await apiRequest(urlBuilder(`sites`, siteId, `records`), "PUT", JSON.stringify(data)) // create Record underneath Site
 
   if (data._set !== null) {
-    await addRecordToSetInDb(response._id, data._set)
+    await updateDataInDb(undefined, "sets", data._set, "records", response._id) // update Set to also include Record
   }
-
 };
