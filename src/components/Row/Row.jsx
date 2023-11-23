@@ -20,8 +20,6 @@ const Row = ({ data, columns, type }) => {
 
   const summaryValues = createArrayOfSummaryValues(columns, data)
 
-
-
   const deleteData = async () => {
     const parentid = ((data._site) ? data._site : undefined)
     await deleteDataFromDb(type, data._id, parentid)

@@ -32,7 +32,7 @@ const EditModal = ({ isOpen, onClose, data,
     const update = async () => {
       if (!isInitialRender.current) { // ensure updateDataInDb() doesn't trigger an infinite loop
         await updateDataInDb(updatedData, type, updatedData._id)
-        navigate(`/${type}`)
+        // navigate(`/${type}`)
         location.reload()
       }
     }

@@ -32,7 +32,7 @@ const Sites = () => {
         <Button>Add Site</Button>
       </Link>
       <Suspense fallback={<h2>Loading sites.</h2>}>
-        <SummaryTable columns={keyInfo} data={sites} dataType="sites" loading={isLoading.current} />
+        <SummaryTable columns={keyInfo} data={sites} dataType="sites" loading={isLoading.current} header />
       </Suspense>
 
     </Stack>

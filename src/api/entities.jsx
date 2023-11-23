@@ -72,12 +72,15 @@ export const updateDataInDb = async (updatedData, y, yId, x, xId) => {
 
 export const addRecordToDb = async (data, siteId) => {
   if (data._set === "") {
+    console.log("no set")
     delete data._set
   }
+  console.log(data._set)
   let response = {}
   response = await apiRequest(urlBuilder(`sites`, siteId, `records`), "PUT", JSON.stringify(data)) // create Record underneath Site
 
-  if (data._set !== null) {
+  if (data._set !== undefined) {
+    console.log("set")
     await updateDataInDb(undefined, "sets", data._set, "records", response._id) // update Set to also include Record
   }
 };

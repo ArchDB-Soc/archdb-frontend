@@ -19,9 +19,9 @@ const AddSet = () => {
     const data = buildObjectFromForm(fields, responses)
     const chosenSite = sites.find(obj => obj._id === data._site)
     data.siteName = chosenSite.name // user-friendly name to use instead of site id
-    await updateDataInDb(data, "site", data._site, "set", undefined)
+    await updateDataInDb(data, "sites", data._site, "sets", undefined)
     navigate("/sets")
-    location.reload()
+    // location.reload()
   }
 
   useEffect(() => {

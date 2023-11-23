@@ -44,6 +44,11 @@ function App() {
               </Layout>
             } />
           }
+          <Route path="/sites" element={
+            <Layout showHeader>
+              <React.Suspense fallback={<h2>Loading...</h2>}><Sites /></React.Suspense>
+            </Layout>
+          } />
           <Route path="/add-site" element={
             <Layout showHeader={isLoggedIn}>
               <React.Suspense fallback={<h2>Loading...</h2>}><AddSite /></React.Suspense>
