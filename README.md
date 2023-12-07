@@ -14,3 +14,8 @@ Find the backend here: https://github.com/plabram/archdb-backend
 * Although the app normally works well on mobile, mobile-only issues are not prioritised/supported. A computer is present for most field work.
 * We used a free service (Render) for rollout, meaning initial data is slow to load. Because of this, lazy loading, memoization and other performance "tricks" need to be used to ensure the experience is as smooth as possible.
 * Due to their nature, Sets and Sites have a limited number of results (~100 max). Records have potential to have thousands (or even 10,000s) of results and should be handled with care.
+
+## Training video
+
+https://github.com/ArchDB-Soc/archdb-frontend/assets/12176574/b4fc3fd7-cb64-4465-8a7a-50bcf7bf68bc
+
