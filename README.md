@@ -11,7 +11,7 @@ Find the backend here: https://github.com/plabram/archdb-backend
 * Priority has been given to being able to create a proof of concept built quickly. Hence, React and Chakra have been used. Ideally in future we'd eliminate the need for Chakra to improve performance.
 * React Router is used to manage routes.
 * Bearer tokens are stored to local storage. This isn't the most secure approach. Moving to cookies is on the roadmap (although not in active development).
-* Although the app normally works well on mobile, mobile-only issues are not prioritised/supported. A computer is present for most field work.
+* ArchDB now supports mobile! Let us know if you have any issues on mobile browsers.
 * We used a free service (Render) for rollout, meaning initial data is slow to load. Because of this, lazy loading, memoization and other performance "tricks" need to be used to ensure the experience is as smooth as possible.
 * Due to their nature, Sets and Sites have a limited number of results (~100 max). Records have potential to have thousands (or even 10,000s) of results and should be handled with care. For example, here we used custom lazy loading.
 
